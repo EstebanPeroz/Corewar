@@ -1,0 +1,138 @@
+name: chocolatine
+
+# Controls when the workflow will run
+on:
+  push:
+    branches-ignore:
+      - ga-ignore-*
+  pull_request:
+    branches-ignore:
+      - ga-ignore-*
+
+env:
+  MIRROR_URL: "git@github.com:EpitechPGEPromo2029/B-CPE-200-NAN-2-1-corewar-esteban.peroz.git"
+  REPO_URL: "git@github.com:${{github.repository}}.git"
+  LIBRARIES: "lib/libmy.a"
+  EXECUTABLES: "corewar"
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  init_url_variables:
+    name: init_url_variables
+    runs-on: ubuntu-latest
+    outputs:
+      MirrorURL: ${{env.MIRROR_URL}}
+      RepoURL: ${{env.REPO_URL}}
+
+    steps:        
+      - uses: actions/checkout@v4
+      - name: Vars output
+        run: |
+          echo "MirrorURL=${{env.MIRROR_URL}}" >> $GITHUB_OUTPUT
+          echo "RepoURL=${{env.REPO_URL}}" >> $GITHUB_OUTPUT
+
+  check_coding_style:
+    name: check_coding_style
+    needs: init_url_variables
+    if: needs.init_url_variables.outputs.MirrorURL != needs.init_url_variables.outputs.RepoURL
+
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/epitech/coding-style-checker:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run coding coding_style
+        run:
+          check.sh $(pwd) $(pwd)
+      - name: check_coding_style_error
+        id: check_coding_style_error
+        run: |
+          is_error="false"
+          while read line; do
+          file=$(echo "$line" | cut -d ':' -f 1)
+          line_nb=$(echo "$line" | cut -d ':' -f 2 | cut -d ':' -f 1)
+          error_type=$(echo "$line" | cut -d ':' -f 4)
+          error_strength=$(echo "$line" | cut -d ':' -f 3)
+          echo "::error file=$file,line=$line_nb,title="$error_strength coding style error"::$error_type"
+          is_error="true"
+          done < "coding-style-reports.log"
+          echo "is_error=$is_error" >> $GITHUB_OUTPUT
+      - name: exit job on error
+        if: ${{ steps.check_coding_style_error.outputs.is_error == 'true' }}
+        run:
+          exit 1
+
+  check_program_compilation:
+    name: check_program_compilation
+    needs: check_coding_style
+    
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: build
+        timeout-minutes: 2
+        run: make
+      - name: clean
+        run: make clean 
+      - name: check lib files
+        shell: bash
+        run: |
+          IFS=','
+          read -ra prog <<< "${{env.LIBRARIES}}"
+          for val in "${prog[@]}";
+          do
+          if [ ! -f $val ]; then
+          echo "::error title="$val file does not exists."::$val"
+          exit 1
+          fi
+          done
+      - name: check exec files
+        shell: bash
+        run: |
+          IFS=','
+          read -ra prog <<< "${{env.EXECUTABLES}}"
+          for val in "${prog[@]}";
+          do
+          if [ ! -x $val ]; then
+          echo "::error title="$val file does not exists or can not be executed."::$val"
+          exit 1
+          fi
+          done
+
+  run_tests:
+    name: run_tests
+    needs: check_program_compilation
+    
+    runs-on: ubuntu-latest
+    container:
+      image: epitechcontent/epitest-docker:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: make tests
+        timeout-minutes: 2
+        run:
+          make tests_run
+
+
+  push_to_mirror:
+    name: push_to_mirror
+    needs: run_tests
+    if: ${{ github.event_name == 'push' }}
+
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job.
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pixta-dev/repository-mirroring-action@v1
+        with:
+          target_repo_url:
+            ${{ env.MIRROR_URL }}
+          ssh_private_key:                              # <-- use 'secrets' to pass credential information.
+            ${{ secrets.GIT_SSH_PRIVATE_KEY }}

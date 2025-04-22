@@ -1,0 +1,13 @@
+*.log
+vgcore.*
+*.cor
+*.o
+*.a
+*.json
+*.gc*
+asm
+corewar
+unit_tests
+/B-CPE-200_binaries
+/champions
+/.cache
