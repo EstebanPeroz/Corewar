@@ -5,19 +5,28 @@
 ** include corewar
 */
 
-#include "op.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <stdbool.h>
 
 #ifndef COREWAR_H
     #define COREWAR_H
 
 typedef struct parsed_args_s {
     int nb_cycles;
-    int prog_nbr;
-
+    int *prog_nbr;
+    int *load_adress;
+    char **champions;
 } parsed_args_t;
+
+typedef struct champions_s {
+    char *name;
+    int id;
+    bool is_alive;
+    int cooldown;
+    struct champions_s *next;
+} champion_t;
 
     /*Lib functions*/
 int my_strcmp(char *, char *);

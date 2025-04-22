@@ -6,10 +6,23 @@
 */
 #include "corewar.h"
 
+static int get_cycles(char **av, int ac)
+{
+    if (ac < 5 || av[2][0] == '-')
+        return -1;
+    for (int i = 0; av[2][i] != '\0'; i++) {
+        if (av[2][i] < '0' || av[2][i] > '9')
+            return -1;
+    }
+    return my_getnbr(av[2]);
+}
+
 parsed_args_t parse_args(int ac, char **av)
 {
     parsed_args_t args = {};
 
-    args.nb_cycles = 1500;
+    if (my_strcmp(av[1], "-dump") == 0) {
+        args.nb_cycles = get_cycles(av, ac);
+    }
     return args;
 }
