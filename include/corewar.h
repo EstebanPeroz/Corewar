@@ -17,7 +17,7 @@ typedef struct parsed_args_s {
     int nb_cycles;
     int *prog_nbr;
     int *load_adress;
-    char **champions;
+    char **core_files;
 } parsed_args_t;
 
 typedef struct champions_s {
