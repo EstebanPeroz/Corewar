@@ -46,4 +46,6 @@ char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 
     /*Main project functions*/
 parsed_args_t parse_args(int ac, char **av);
+int help(void);
+
 #endif // !COREWAR_H

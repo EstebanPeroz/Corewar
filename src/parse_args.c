@@ -8,7 +8,7 @@
 
 parsed_args_t parse_args(int ac, char **av)
 {
-    parsed_args_t args;
+    parsed_args_t args = {};
 
     args.nb_cycles = 1500;
     return args;

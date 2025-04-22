@@ -42,11 +42,10 @@ $(NAME): $(OBJ) lib/libmy.a
 
 unit_tests: CFLAGS += --coverage
 unit_tests: LDFLAGS += -lcriterion --coverage
-unit_tests:	$(TEST_OBJ)
+unit_tests:	$(TEST_OBJ) lib/libmy.a
 		$(CC) -o $(TEST_NAME) $(TEST_OBJ) $(LDFLAGS)
 
 tests_run:
-	make fclean
 	make unit_tests
 	./$(TEST_NAME)
 	gcovr --exclude tests
@@ -67,4 +66,4 @@ fclean: clean
 
 re: 	fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re unit_tests tests_run
