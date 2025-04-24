@@ -14,6 +14,7 @@ TEST_NAME	=	unit_tests
 SRC 		= 	src/main.c							\
 				src/parse_args.c					\
 				src/help.c							\
+				src/get_champs.c					\
 
 OBJ 		= 	$(SRC:.c=.o)
 

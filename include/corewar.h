@@ -12,21 +12,21 @@
 
 #ifndef COREWAR_H
     #define COREWAR_H
-
-typedef struct parsed_args_s {
-    int nb_cycles;
-    int *prog_nbr;
-    int *load_adress;
-    char **core_files;
-} parsed_args_t;
-
 typedef struct champions_s {
+    char *file;
     char *name;
+    int adress;
     int id;
     bool is_alive;
     int cooldown;
     struct champions_s *next;
-} champion_t;
+} champions_t;
+
+
+typedef struct parsed_args_s {
+    champions_t *champs;
+    int nb_cycles;
+} parsed_args_t;
 
     /*Lib functions*/
 int my_strcmp(char *, char *);
@@ -56,5 +56,6 @@ char *super_strncat(char *dest, char *src, int ldest, int lsrc);
     /*Main project functions*/
 parsed_args_t parse_args(int ac, char **av);
 int help(void);
+champions_t *get_champs(char **list);
 
 #endif // !COREWAR_H

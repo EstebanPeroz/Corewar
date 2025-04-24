@@ -25,10 +25,6 @@ parsed_args_t parse_args(int ac, char **av)
     if (my_strcmp(av[1], "-dump") == 0) {
         args.nb_cycles = get_cycles(&av, ac);
     }
-    args.core_files = av;
-    for (int i = 1; av[i] != NULL; i++) {
-        my_putstr(av[i]);
-        my_putchar('\n');
-    }
+    args.champs = get_champs(av);
     return args;
 }
