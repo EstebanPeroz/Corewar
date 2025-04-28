@@ -18,7 +18,6 @@ SRC = 	my_str_to_word_array.c	\
 		get_str_between.c		\
 		str_paste.c				\
 		str_contain.c			\
-		byte_manip.c			\
 		array_manip.c			\
 		my_strstrcat.c			\
 
