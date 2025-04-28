@@ -16,7 +16,7 @@ int main(int ac, char **av)
         return help();
     }
     args = parse_args(ac, av);
-    if (args.nb_cycles == -1)
+    if (args.champs == NULL || args.champs->next == NULL)
         return 84;
     return 0;
 }

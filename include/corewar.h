@@ -15,13 +15,17 @@
 typedef struct champions_s {
     char *file;
     char *name;
-    int adress;
+    int address;
     int id;
     bool is_alive;
     int cooldown;
     struct champions_s *next;
 } champions_t;
 
+typedef struct options_s {
+    int address;
+    int id;
+} options_t;
 
 typedef struct parsed_args_s {
     champions_t *champs;
@@ -52,10 +56,10 @@ int get_array_len(void **array);
 void **add_array_new_val(void **array, void *val);
 char *super_strcat(char *dest, char *src);
 char *super_strncat(char *dest, char *src, int ldest, int lsrc);
+int is_nbr(char *str);
 
     /*Main project functions*/
 parsed_args_t parse_args(int ac, char **av);
 int help(void);
 champions_t *get_champs(char **list);
-
 #endif // !COREWAR_H
