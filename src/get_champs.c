@@ -63,9 +63,5 @@ champions_t *get_champs(char **list)
             return NULL;
         add_node(&champs, list[i], &option);
     }
-    while (champs != NULL) {
-        printf("%s %d\n", champs->file, champs->address);
-        champs = champs->next;
-    }
     return champs;
 }
