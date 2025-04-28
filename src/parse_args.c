@@ -5,6 +5,7 @@
 ** Get arguments
 */
 #include "corewar.h"
+#include <string.h>
 
 int is_nbr(char *str)
 {
@@ -22,12 +23,12 @@ static int get_cycles(char ***av, int ac)
     if (!is_nbr((*av)[2]))
         return -1;
     *av += 2;
-    return atoi((*av)[2]);
+    return my_getnbr((*av)[2]);
 }
 
 parsed_args_t parse_args(int ac, char **av)
 {
-    parsed_args_t args = {};
+    parsed_args_t args;
 
     args.nb_cycles = 0;
     args.champs = NULL;

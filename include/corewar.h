@@ -14,6 +14,7 @@
     #define COREWAR_H
 typedef struct champions_s {
     char *file;
+    FILE *fd;
     char *name;
     int address;
     int id;
@@ -50,7 +51,7 @@ char *my_strncpy(char *dest, char const *src, int n);
 char *my_revstr(char *str);
 char *my_strcat(char *dest, char *src);
 char *my_strncat(char *dest, char *src, int nb);
-long long inverse_byte_order(long long nb, size_t byte_nb);
+int inverse_byte_order(int nb, size_t byte_nb);
 int char_nb(char *str, char c);
 int get_array_len(void **array);
 void **add_array_new_val(void **array, void *val);
@@ -61,5 +62,6 @@ int is_nbr(char *str);
     /*Main project functions*/
 parsed_args_t parse_args(int ac, char **av);
 int help(void);
+int is_valid_magic(FILE *fd);
 champions_t *get_champs(char **list);
 #endif // !COREWAR_H
