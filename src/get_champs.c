@@ -81,7 +81,7 @@ static int set_options(champions_t **tmp, int total_champs, int i, int *used_id)
         }
     }
     if ((*tmp)->address == -1)
-        (*tmp)->address = (MEM_SIZE / total_champs) * i;
+        (*tmp)->address = (MEM_SIZE / total_champs) * (i - 1);
     used_id[i] = (*tmp)->id;
     return 0;
 }
