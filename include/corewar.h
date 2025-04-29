@@ -95,7 +95,7 @@ char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 int is_nbr(char *str);
 
     /*Main project functions*/
-virtual_machine_t *fill_vm(int ac, char **av, virtual_machine_t *vm);
+void fill_vm(int ac, char **av, virtual_machine_t *vm);
 int help(void);
 // int free_champs(champions_t **head);
 int is_valid_magic(FILE *fd);

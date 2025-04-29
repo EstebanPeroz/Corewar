@@ -17,7 +17,7 @@ int main(int ac, char **av)
     if (my_strcmp(av[1], "-h") == 0) {
         return help();
     }
-    vm = fill_vm(ac, av, vm);
+    fill_vm(ac, av, vm);
     if (vm->champion == NULL || vm->champion->next == NULL)
         return 84;
     free_virtual_machine(vm);

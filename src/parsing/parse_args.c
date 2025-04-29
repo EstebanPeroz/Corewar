@@ -33,14 +33,13 @@ static void update_id_address(champions_t *champs)
     manage_adress(champs);
 }
 
-virtual_machine_t *fill_vm(int ac, char **av, virtual_machine_t *vm)
+void fill_vm(int ac, char **av, virtual_machine_t *vm)
 {
     if (my_strcmp(av[1], "-dump") == 0) {
         vm->cycle_to_dump = get_cycles(&av, ac);
     }
     if (vm->cycle_to_dump == -1)
-        return vm;
+        return;
     vm->champion = get_champs_with_options(av);
     update_id_address(vm->champion);
-    return vm;
 }
