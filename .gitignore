@@ -1,6 +1,5 @@
 *.log
 vgcore.*
-*.cor
 *.o
 *.a
 *.json

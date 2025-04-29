@@ -12,21 +12,26 @@
 
 #ifndef COREWAR_H
     #define COREWAR_H
-
-typedef struct parsed_args_s {
-    int nb_cycles;
-    int *prog_nbr;
-    int *load_adress;
-    char **core_files;
-} parsed_args_t;
-
 typedef struct champions_s {
+    char *file;
+    FILE *fd;
     char *name;
+    int address;
     int id;
     bool is_alive;
     int cooldown;
     struct champions_s *next;
-} champion_t;
+} champions_t;
+
+typedef struct options_s {
+    int address;
+    int id;
+} options_t;
+
+typedef struct parsed_args_s {
+    champions_t *champs;
+    int nb_cycles;
+} parsed_args_t;
 
     /*Lib functions*/
 int my_strcmp(char *, char *);
@@ -46,15 +51,17 @@ char *my_strncpy(char *dest, char const *src, int n);
 char *my_revstr(char *str);
 char *my_strcat(char *dest, char *src);
 char *my_strncat(char *dest, char *src, int nb);
-long long inverse_byte_order(long long nb, size_t byte_nb);
+int inverse_byte_order(int nb, size_t byte_nb);
 int char_nb(char *str, char c);
 int get_array_len(void **array);
 void **add_array_new_val(void **array, void *val);
 char *super_strcat(char *dest, char *src);
 char *super_strncat(char *dest, char *src, int ldest, int lsrc);
+int is_nbr(char *str);
 
     /*Main project functions*/
 parsed_args_t parse_args(int ac, char **av);
 int help(void);
-
+int is_valid_magic(FILE *fd);
+champions_t *get_champs(char **list);
 #endif // !COREWAR_H
