@@ -13,7 +13,7 @@ TEST_NAME	=	unit_tests
 
 SRC 		= 	src/main.c									\
 				src/help.c									\
-				src/struct/init_and_fill_champs.c			\
+				src/struct/create_champions.c				\
 				src/parsing/check_magic.c					\
 				src/struct/init_vm_struct.c 				\
 				src/struct/free_champions.c 				\
