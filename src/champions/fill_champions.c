@@ -37,12 +37,11 @@ static int fill_basic_info(champions_t *champ, int id, int address, char *file)
     return 0;
 }
 
-static void fill_registers(champions_t *champ, int id)
+static void fill_registers(champions_t *champ)
 {
     for (int i = 0; i < REG_NUMBER; i++) {
         champ->registers[i] = 0;
     }
-    champ->registers[0] = id;
 }
 
 static int fill_header_and_code(champions_t *champ, char *file)
@@ -85,7 +84,7 @@ int fill_struct_champions(char *file, champions_t **champ, int id, int address)
         return EXIT_FAILURE;
     }
     new_champ->fd = fopen(file, READ_FILE_ARG);
-    fill_registers(new_champ, id);
+    fill_registers(new_champ);
     push_to_end(champ, new_champ);
     return 0;
 }

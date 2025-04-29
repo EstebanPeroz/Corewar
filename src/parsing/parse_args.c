@@ -34,13 +34,17 @@ static void update_id_address(virtual_machine_t *vm)
     vm->nbr_processus = get_total_champs(&vm->champion);
 }
 
-void fill_vm(int ac, char **av, virtual_machine_t *vm)
+int fill_vm(int ac, char **av, virtual_machine_t *vm)
 {
     if (my_strcmp(av[1], "-dump") == 0) {
         vm->cycle_to_dump = get_cycles(&av, ac);
     }
     if (vm->cycle_to_dump == -1)
-        return;
+        return -1;
     vm->champion = get_champs_with_options(av);
+    if (vm->champion == NULL) {
+        return EXIT_FAILURE;
+    }
     update_id_address(vm);
+    return 0;
 }

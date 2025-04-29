@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 int get_total_champs(champions_t **head)
@@ -46,9 +47,36 @@ static int set_champs_params(champions_t **head)
     for (; tmp->next != NULL; i++) {
         if (set_options(&tmp->next, i + 1, used_id) == -1)
             return -1;
+        tmp->registers[0] = tmp->prog_id;
         tmp = tmp->next;
     }
-        return 0;
+    tmp->registers[0] = tmp->prog_id;
+    return 0;
+}
+
+static bool file_exist(char *file)
+{
+    int fd = open(file, O_RDONLY);
+
+    if (fd == -1) {
+        close(fd);
+        return false;
+    }
+    close(fd);
+    return true;
+}
+
+static bool process_champion(champions_t **champs, char **list, int *i,
+    options_t *option)
+{
+    if (handle_options(champs, list, i, option) == -1 || !file_exist(list[*i]))
+        return false;
+    if (fill_struct_champions(list[*i], champs, option->id, option->address)
+        == EXIT_FAILURE)
+        return false;
+    option->id = -1;
+    option->address = -1;
+    return true;
 }
 
 champions_t *get_champs_with_options(char **list)
@@ -57,15 +85,14 @@ champions_t *get_champs_with_options(char **list)
     options_t option = { -1, -1 };
 
     for (int i = 1; list[i] != NULL; i++) {
-        if (handle_options(&champs, list, &i, &option) == -1)
+        if (!process_champion(&champs, list, &i, &option)) {
+            free_champion(champs);
             return NULL;
-        if (fill_struct_champions(list[i], &champs, option.id, option.address)
-            == EXIT_FAILURE)
-            return NULL;
-        option.id = -1;
-        option.address = -1;
+        }
     }
-    if (set_champs_params(&champs) == -1)
+    if (set_champs_params(&champs) == -1) {
+        free_champion(champs);
         return NULL;
+    }
     return champs;
 }

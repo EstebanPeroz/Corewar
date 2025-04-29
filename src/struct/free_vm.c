@@ -9,6 +9,7 @@
 
 void free_virtual_machine(virtual_machine_t *virtual_machine)
 {
-    free_champion(virtual_machine->champion);
+    if (virtual_machine->champion)
+        free_champion(virtual_machine->champion);
     free(virtual_machine);
 }

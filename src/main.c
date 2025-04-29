@@ -17,7 +17,10 @@ int main(int ac, char **av)
     if (my_strcmp(av[1], "-h") == 0) {
         return help();
     }
-    fill_vm(ac, av, vm);
+    if (fill_vm(ac, av, vm) == EXIT_FAILURE) {
+        free_virtual_machine(vm);
+        return 84;
+    }
     if (vm->champion == NULL || vm->champion->next == NULL)
         return 84;
     free_virtual_machine(vm);
