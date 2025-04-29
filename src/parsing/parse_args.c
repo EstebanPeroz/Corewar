@@ -27,6 +27,12 @@ static int get_cycles(char ***av, int ac)
     return my_getnbr((*av)[2]);
 }
 
+static void update_id_address(champions_t *champs)
+{
+    sort_champs(&champs);
+    manage_adress(champs);
+}
+
 virtual_machine_t *fill_vm(int ac, char **av, virtual_machine_t *vm)
 {
     if (my_strcmp(av[1], "-dump") == 0) {
@@ -35,5 +41,6 @@ virtual_machine_t *fill_vm(int ac, char **av, virtual_machine_t *vm)
     if (vm->cycle_to_dump == -1)
         return vm;
     vm->champion = get_champs_with_options(av);
+    update_id_address(vm->champion);
     return vm;
 }

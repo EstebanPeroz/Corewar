@@ -9,6 +9,7 @@
     #define COREWAR_H
 
     #define READ_FILE_ARG "r"
+    #define DEFAULT_ADRESS -1
 
     #include <stdlib.h>
     #include <stdio.h>
@@ -110,5 +111,7 @@ int set_options(champions_t **tmp, int total_champs, int i,
     int *used_id);
 int handle_options(champions_t **head, char **str, int *i, options_t *options);
 void reverse_endian_header(header_t *header);
+void sort_champs(champions_t **champ);
+void manage_adress(champions_t *champ);
 
 #endif // !COREWAR_H

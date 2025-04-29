@@ -19,9 +19,11 @@ SRC 		= 	src/main.c									\
 				src/struct/init_vm_struct.c 				\
 				src/struct/free_champions.c 				\
 				src/struct/free_vm.c 						\
-				src/parsing/fill_champions.c 				\
+				src/champions/fill_champions.c 				\
 				src/parsing/handle_options.c 				\
 				src/parsing/reverse_endian.c 				\
+				src/champions/sort_champs.c 				\
+				src/champions/manage_address.c 				\
 
 OBJ 		= 	$(SRC:.c=.o)
 
