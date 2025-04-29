@@ -97,6 +97,11 @@ virtual_machine_t *init_virtual_machine(int cycle_to_tump,
 void free_virtual_machine(virtual_machine_t *virtual_machine);
 free_space_t find_largest_free_space(virtual_machine_t *vm);
 void place_all_processus(virtual_machine_t *virtual_machine);
+void place_champion(virtual_machine_t *virtual_machine,
+    champions_t *champion);
+bool is_cell_taken(champions_t *champ, int pos);
+bool compare_champ_cell(virtual_machine_t *vm, int pos);
+champions_t *get_champion_to_place(virtual_machine_t *vm);
 
 // CHAMPIONS
 champions_t *get_champs_with_options(char **list);

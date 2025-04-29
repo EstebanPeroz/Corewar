@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static bool is_cell_taken(champions_t *champ, int pos)
+bool is_cell_taken(champions_t *champ, int pos)
 {
     int champ_start = champ->address;
     int champ_end = (champ_start + champ->header.prog_size) % MEM_SIZE;
@@ -22,7 +22,7 @@ static bool is_cell_taken(champions_t *champ, int pos)
     return false;
 }
 
-static bool compare_champ_cell(virtual_machine_t *vm, int pos)
+bool compare_champ_cell(virtual_machine_t *vm, int pos)
 {
     champions_t *champ = vm->champion;
 

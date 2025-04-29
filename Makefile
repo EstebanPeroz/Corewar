@@ -30,7 +30,9 @@ SRC 		= 	src/main.c									\
 
 OBJ 		= 	$(SRC:.c=.o)
 
-TESTS =	tests/tests_error_handling.c
+TESTS   	=	tests/tests_error_handling.c 				\
+				tests/place_champions_tests.c 				\
+
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)
 TEST_GCDA	=	$(TESTS:.c=.gcda)

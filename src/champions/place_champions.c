@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static void place_champion(virtual_machine_t *virtual_machine,
+void place_champion(virtual_machine_t *virtual_machine,
     champions_t *champion)
 {
     int adress = champion->address;
@@ -31,7 +31,7 @@ static bool is_processus_with_adress(virtual_machine_t *virtual_machine)
     return false;
 }
 
-static champions_t *get_champion_to_place(virtual_machine_t *vm)
+champions_t *get_champion_to_place(virtual_machine_t *vm)
 {
     champions_t *champ = vm->champion;
 
