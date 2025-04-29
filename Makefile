@@ -19,10 +19,8 @@ SRC 		= 	src/main.c							\
 
 OBJ 		= 	$(SRC:.c=.o)
 
-TESTS =	tests/tests_error_handling.c				\
-
+TESTS =	tests/tests_error_handling.c
 TESTS += $(filter-out src/main.c, $(SRC))
-
 TEST_OBJ	=	$(TESTS:.c=.o)
 TEST_GCDA	=	$(TESTS:.c=.gcda)
 TEST_GCNO	=	$(TESTS:.c=.gcno)
@@ -41,30 +39,25 @@ lib/libmy.a:
 $(NAME): $(OBJ) lib/libmy.a
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS)
 
-
 unit_tests: CFLAGS += --coverage
 unit_tests: LDFLAGS += -lcriterion --coverage
 unit_tests:	$(TEST_OBJ) lib/libmy.a
 		$(CC) -o $(TEST_NAME) $(TEST_OBJ) $(LDFLAGS)
 
-tests_run:
-	make unit_tests
+tests_run: unit_tests
 	./$(TEST_NAME)
 	gcovr --exclude tests
 
 clean:
 	make clean -C lib
-	rm -f $(OBJ)
-	rm -rf $(TEST_OBJ)
-	rm -rf $(TEST_GCNO)
-	rm -rf $(TEST_GCDA)
+	$(RM) -rf $(TEST_OBJ)
+	$(RM) -rf $(TEST_GCNO)
+	$(RM) -rf $(TEST_GCDA)
 
 fclean: clean
 	make fclean -C lib
-	rm -f $(NAME)
-	rm -f $(TEST_NAME)
-
-##functional_test:
+	$(RM) -f $(NAME)
+	$(RM) -f $(TEST_NAME)
 
 re: 	fclean all
 

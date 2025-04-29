@@ -66,7 +66,7 @@ int handle_options(champions_t **head, char **str, int *i, options_t *options)
 }
 
 // Divided by 4 for the moment. Needs to be the number of champs in the future
-static int set_options(champions_t **tmp, int arena_size, int i, int *used_id)
+static int set_options(champions_t **tmp, int total_champs, int i, int *used_id)
 {
     if (!is_valid_magic((*tmp)->fd)) {
         my_puterr("ERROR: specified file is not a champion.\n");
@@ -81,7 +81,7 @@ static int set_options(champions_t **tmp, int arena_size, int i, int *used_id)
         }
     }
     if ((*tmp)->address == -1)
-        (*tmp)->address = (arena_size / 4) * i;
+        (*tmp)->address = (MEM_SIZE / total_champs) * i;
     used_id[i] = (*tmp)->id;
     return 0;
 }
@@ -106,17 +106,17 @@ static int get_total_champs(champions_t **head)
     return nb;
 }
 
-static int set_champs_params(champions_t **head, int arena_size)
+static int set_champs_params(champions_t **head)
 {
     champions_t *tmp = *head;
     int i = 1;
     int used_id[4] = {-1, -1, -1, -1};
+    int total_champs = get_total_champs(head);
 
-    if (get_total_champs(head) == -1 ||
-    set_options(head, arena_size, 1, used_id) == -1)
+    if (total_champs == -1 || set_options(head, total_champs, 1, used_id) == -1)
         return -1;
     for (; tmp->next != NULL; i++) {
-        if (set_options(&tmp->next, arena_size, i + 1, used_id) == -1)
+        if (set_options(&tmp->next, total_champs, i + 1, used_id) == -1)
             return -1;
         tmp = tmp->next;
     }
@@ -136,7 +136,7 @@ champions_t *get_champs(char **list)
         option.id = -1;
         option.address = -1;
     }
-    if (set_champs_params(&champs, MEM_SIZE) == -1)
+    if (set_champs_params(&champs) == -1)
         return NULL;
     return champs;
 }
