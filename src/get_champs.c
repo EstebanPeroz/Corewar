@@ -66,7 +66,8 @@ int handle_options(champions_t **head, char **str, int *i, options_t *options)
 }
 
 // Divided by 4 for the moment. Needs to be the number of champs in the future
-static int set_options(champions_t **tmp, int total_champs, int i, int *used_id)
+static int set_options(champions_t **tmp, int total_champs, int i,
+    int *used_id)
 {
     if (!is_valid_magic((*tmp)->fd)) {
         my_puterr("ERROR: specified file is not a champion.\n");
@@ -113,7 +114,8 @@ static int set_champs_params(champions_t **head)
     int used_id[4] = {-1, -1, -1, -1};
     int total_champs = get_total_champs(head);
 
-    if (total_champs == -1 || set_options(head, total_champs, 1, used_id) == -1)
+    if (total_champs == -1 ||
+    set_options(head, total_champs, 1, used_id) == -1)
         return -1;
     for (; tmp->next != NULL; i++) {
         if (set_options(&tmp->next, total_champs, i + 1, used_id) == -1)

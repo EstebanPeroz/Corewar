@@ -51,6 +51,7 @@ tests_run: unit_tests
 clean:
 	make clean -C lib
 	$(RM) -rf $(TEST_OBJ)
+	$(RM) -rf $(OBJ)
 	$(RM) -rf $(TEST_GCNO)
 	$(RM) -rf $(TEST_GCDA)
 
