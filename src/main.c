@@ -18,5 +18,6 @@ int main(int ac, char **av)
     args = parse_args(ac, av);
     if (args.champs == NULL || args.champs->next == NULL)
         return 84;
+    free_champs(&args.champs);
     return 0;
 }

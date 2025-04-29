@@ -16,6 +16,7 @@ SRC 		= 	src/main.c							\
 				src/help.c							\
 				src/get_champs.c					\
 				src/check_magic.c					\
+				src/free_champs.c					\
 
 OBJ 		= 	$(SRC:.c=.o)
 

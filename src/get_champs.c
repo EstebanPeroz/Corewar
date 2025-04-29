@@ -76,7 +76,7 @@ static int set_options(champions_t **tmp, int total_champs, int i,
     if ((*tmp)->id == -1) {
         (*tmp)->id = i;
     }
-    for (int j = 0; j <= i; j++) {
+    for (int j = 0; j < i; j++) {
         if ((*tmp)->id == used_id[j]) {
             (*tmp)->id = i + 1;
         }

@@ -15,7 +15,6 @@
 typedef struct champions_s {
     char *file;
     FILE *fd;
-    char *name;
     int address;
     int id;
     bool is_alive;
@@ -62,6 +61,8 @@ int is_nbr(char *str);
     /*Main project functions*/
 parsed_args_t parse_args(int ac, char **av);
 int help(void);
+int free_champs(champions_t **head);
 int is_valid_magic(FILE *fd);
 champions_t *get_champs(char **list);
+int print_champions(champions_t **head);
 #endif // !COREWAR_H
