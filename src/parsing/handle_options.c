@@ -18,6 +18,8 @@ int handle_options(champions_t **head, char **str, int *i, options_t *options)
         if (!is_nbr(str[*i - 1]))
             return -1;
         options->address = my_getnbr(str[*i - 1]);
+        if (options->address < 0 || options->address > MEM_SIZE)
+            return -1;
         return handle_options(head, str, i, options);
     }
     if (my_strcmp(str[*i], "-n") == 0) {
