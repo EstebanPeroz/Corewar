@@ -45,8 +45,5 @@ int set_options(champions_t **tmp, int total_champs, int i,
             (*tmp)->prog_id = i + 1;
         }
     }
-    if ((*tmp)->address == -1)
-        (*tmp)->address = (MEM_SIZE / total_champs) * (i - 1);
-    used_id[i] = (*tmp)->prog_id;
     return 0;
 }
