@@ -5,32 +5,67 @@
 ** include corewar
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdbool.h>
-
 #ifndef COREWAR_H
     #define COREWAR_H
+
+    #define READ_FILE_ARG "r"
+
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <fcntl.h>
+    #include <stdbool.h>
+
+    #include "op.h"
+
 typedef struct champions_s {
-    char *file;
+    char *name;
     FILE *fd;
     int address;
-    int id;
-    bool is_alive;
-    int cooldown;
+    int prog_id;
+    int prog_counter;
+    int cylces_to_wait;
+    int last_live;
+    bool is_placed;
+    unsigned char *code;
+    int registers[REG_NUMBER];
+    header_t header;
     struct champions_s *next;
 } champions_t;
+
+typedef struct virtual_machine_s {
+    int cycle;
+    int carry;
+    int nbr_processus;
+    int nbr_processus_to_place;
+    int cycle_to_dump;
+    int cycle_to_die;
+    int cycle_delta;
+    int nbr_live;
+    unsigned char arena[MEM_SIZE];
+    champions_t *champion;
+} virtual_machine_t;
+
+typedef struct free_space_tracker_s {
+    int best_start;
+    int best_size;
+    int current_start;
+    int current_size;
+} free_space_tracker_t;
+
+typedef struct free_space_s {
+    int start;
+    int size;
+} free_space_t;
 
 typedef struct options_s {
     int address;
     int id;
 } options_t;
 
-typedef struct parsed_args_s {
-    champions_t *champs;
-    int nb_cycles;
-} parsed_args_t;
+// typedef struct parsed_args_s {
+//     champions_t *champs;
+//     int nb_cycles;
+// } parsed_args_t;
 
     /*Lib functions*/
 int my_strcmp(char *, char *);
@@ -59,10 +94,21 @@ char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 int is_nbr(char *str);
 
     /*Main project functions*/
-parsed_args_t parse_args(int ac, char **av);
+virtual_machine_t *fill_vm(int ac, char **av, virtual_machine_t *vm);
 int help(void);
-int free_champs(champions_t **head);
+// int free_champs(champions_t **head);
 int is_valid_magic(FILE *fd);
-champions_t *get_champs(char **list);
+champions_t *get_champs_with_options(char **list);
 int print_champions(champions_t **head);
+virtual_machine_t *init_virtual_machine(int cycle_to_tump,
+    int nb_processus);
+void free_champion(champions_t *champ);
+void free_virtual_machine(virtual_machine_t *virtual_machine);
+int fill_struct_champions(char *file, champions_t **champ, int id,
+    int address);
+int set_options(champions_t **tmp, int total_champs, int i,
+    int *used_id);
+int handle_options(champions_t **head, char **str, int *i, options_t *options);
+void reverse_endian_header(header_t *header);
+
 #endif // !COREWAR_H
