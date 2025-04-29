@@ -63,11 +63,6 @@ typedef struct options_s {
     int id;
 } options_t;
 
-// typedef struct parsed_args_s {
-//     champions_t *champs;
-//     int nb_cycles;
-// } parsed_args_t;
-
     /*Lib functions*/
 int my_strcmp(char *, char *);
 int str_contain(char *str, char c);
@@ -114,5 +109,7 @@ void sort_champs(champions_t **champ);
 void manage_adress(champions_t *champ);
 int get_total_champs(champions_t **head);
 int get_cycles(char ***av, int ac);
+free_space_t find_largest_free_space(virtual_machine_t *vm);
+void place_all_processus(virtual_machine_t *virtual_machine);
 
 #endif // !COREWAR_H

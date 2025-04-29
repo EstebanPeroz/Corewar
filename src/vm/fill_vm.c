@@ -26,5 +26,6 @@ int fill_vm(int ac, char **av, virtual_machine_t *vm)
         return EXIT_FAILURE;
     }
     update_id_address(vm);
+    place_all_processus(vm);
     return 0;
 }

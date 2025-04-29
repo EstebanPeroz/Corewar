@@ -25,6 +25,8 @@ SRC 		= 	src/main.c									\
 				src/champions/manage_address.c 				\
 				src/parsing/parse_dump.c 					\
 				src/vm/fill_vm.c 							\
+				src/champions/place_champions.c				\
+				src/champions/find_largest_free_space.c		\
 
 OBJ 		= 	$(SRC:.c=.o)
 
