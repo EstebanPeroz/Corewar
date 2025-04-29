@@ -14,7 +14,7 @@ TEST_NAME	=	unit_tests
 SRC 		= 	src/main.c									\
 				src/parsing/parse_args.c					\
 				src/help.c									\
-				src/struct/init_champs_struct.c				\
+				src/struct/init_and_fill_champs.c			\
 				src/parsing/check_magic.c					\
 				src/struct/init_vm_struct.c 				\
 				src/struct/free_champions.c 				\
