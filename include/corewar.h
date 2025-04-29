@@ -113,5 +113,6 @@ void reverse_endian_header(header_t *header);
 void sort_champs(champions_t **champ);
 void manage_adress(champions_t *champ);
 int get_total_champs(champions_t **head);
+int get_cycles(char ***av, int ac);
 
 #endif // !COREWAR_H
