@@ -65,34 +65,62 @@ int handle_options(champions_t **head, char **str, int *i, options_t *options)
     return 0;
 }
 
-static void set_options(champions_t **tmp, int arena_size, int i)
+// Divided by 4 for the moment. Needs to be the number of champs in the future
+static int set_options(champions_t **tmp, int arena_size, int i, int *used_id)
 {
-    if ((*tmp)->id == -1)
+    if (!is_valid_magic((*tmp)->fd)) {
+        my_puterr("ERROR: specified file is not a champion.\n");
+        return -1;
+    }
+    if ((*tmp)->id == -1) {
         (*tmp)->id = i;
+    }
+    for (int j = 0; j <= i; j++) {
+        if ((*tmp)->id == used_id[j]) {
+            (*tmp)->id = i + 1;
+        }
+    }
     if ((*tmp)->address == -1)
-        (*tmp)->address = arena_size / 4 * (i - 1);
+        (*tmp)->address = (arena_size / 4) * i;
+    used_id[i] = (*tmp)->id;
+    return 0;
+}
+
+static int get_total_champs(champions_t **head)
+{
+    int nb = 0;
+    champions_t *tmp = *head;
+
+    while (tmp != NULL) {
+        nb++;
+        tmp = tmp->next;
+    }
+    if (nb < 2) {
+        my_puterr("ERROR: missing champs.\n");
+        return -1;
+    }
+    if (nb > 4) {
+        my_puterr("ERROR: too many champs.\n");
+        return -1;
+    }
+    return nb;
 }
 
 static int set_champs_params(champions_t **head, int arena_size)
 {
     champions_t *tmp = *head;
     int i = 1;
+    int used_id[4] = {-1, -1, -1, -1};
 
+    if (get_total_champs(head) == -1 ||
+    set_options(head, arena_size, 1, used_id) == -1)
+        return -1;
     for (; tmp->next != NULL; i++) {
-        if (i >= 4) {
-            my_puterr("ERROR: too many champs.\n");
+        if (set_options(&tmp->next, arena_size, i + 1, used_id) == -1)
             return -1;
-        }
-        if (!is_valid_magic(tmp->next->fd))
-            return -1;
-        set_options(&tmp->next, arena_size, i);
         tmp = tmp->next;
     }
-    if (i == 1) {
-        my_puterr("ERROR: missing champs.\n");
-        return -1;
-    }
-    return 0;
+        return 0;
 }
 
 champions_t *get_champs(char **list)
