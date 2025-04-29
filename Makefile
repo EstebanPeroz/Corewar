@@ -11,12 +11,17 @@ NAME 		=	corewar
 
 TEST_NAME	=	unit_tests
 
-SRC 		= 	src/main.c							\
-				src/parse_args.c					\
-				src/help.c							\
-				src/get_champs.c					\
-				src/check_magic.c					\
-				src/free_champs.c					\
+SRC 		= 	src/main.c									\
+				src/parsing/parse_args.c					\
+				src/help.c									\
+				src/struct/init_champs_struct.c				\
+				src/parsing/check_magic.c					\
+				src/struct/init_vm_struct.c 				\
+				src/struct/free_champions.c 				\
+				src/struct/free_vm.c 						\
+				src/parsing/fill_champions.c 				\
+				src/parsing/handle_options.c 				\
+				src/parsing/reverse_endian.c 				\
 
 OBJ 		= 	$(SRC:.c=.o)
 

@@ -51,41 +51,6 @@ static int set_champs_params(champions_t **head)
         return 0;
 }
 
-static void display_header(header_t *header)
-{
-    printf("Magic: %x\n", header->magic);
-    printf("Name: %s\n", header->prog_name);
-    printf("Size: %d\n", header->prog_size);
-    printf("Comment: %s\n", header->comment);
-}
-
-static void display_champion(champions_t *champ)
-{
-    champions_t *current = champ;
-
-    while (current != NULL) {
-        printf("-------- Champion ID: %d --------------------\n",
-            current->prog_id);
-        printf("Champion Name: %s\n", current->name);
-        printf("Champion Address: %d\n", current->address);
-        printf("Champion Program Counter: %d\n", current->prog_counter);
-        printf("Champion Cycles to Wait: %d\n", current->cylces_to_wait);
-        printf("Champion Last Live: %d\n", current->last_live);
-        printf("Champion Registers: ");
-        for (int i = 0; i < REG_NUMBER; i++) {
-            printf("%d ", current->registers[i]);
-        }
-        printf("\n");
-        printf("Champion Code: ");
-        for (int i = 0; i < current->header.prog_size; i++) {
-            printf("%02x ", current->code[i]);
-        }
-        printf("\n");
-        display_header(&current->header);
-        current = current->next;
-    }
-}
-
 champions_t *get_champs_with_options(char **list)
 {
     champions_t *champs = NULL;
@@ -94,13 +59,13 @@ champions_t *get_champs_with_options(char **list)
     for (int i = 1; list[i] != NULL; i++) {
         if (handle_options(&champs, list, &i, &option) == -1)
             return NULL;
-        if (fill_struct_champions(list[i], &champs, option.id, option.address) == EXIT_FAILURE)
+        if (fill_struct_champions(list[i], &champs, option.id, option.address)
+            == EXIT_FAILURE)
             return NULL;
         option.id = -1;
         option.address = -1;
     }
     if (set_champs_params(&champs) == -1)
         return NULL;
-    display_champion(champs);
     return champs;
 }

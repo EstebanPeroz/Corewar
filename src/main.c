@@ -8,7 +8,6 @@
 
 int main(int ac, char **av)
 {
-    // parsed_args_t args;
     virtual_machine_t *vm = init_virtual_machine(0, 0);
 
     if (vm == NULL)

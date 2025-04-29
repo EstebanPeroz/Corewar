@@ -29,8 +29,6 @@ static int get_cycles(char ***av, int ac)
 
 virtual_machine_t *fill_vm(int ac, char **av, virtual_machine_t *vm)
 {
-    // args.nb_cycles = 0;
-    // args.champs = NULL;
     if (my_strcmp(av[1], "-dump") == 0) {
         vm->cycle_to_dump = get_cycles(&av, ac);
     }
