@@ -20,7 +20,7 @@ Test(corewar, basic_parsing)
     cr_assert_not_null(args.champs);
 }
 
-Test(amazed, parsing_unvalid_file)
+Test(corewar, parsing_unvalid_file)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "Non file", NULL};
     parsed_args_t args;
@@ -29,7 +29,7 @@ Test(amazed, parsing_unvalid_file)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_unvalid_file2)
+Test(corewar, parsing_unvalid_file2)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "tests/pdd.s", NULL};
     parsed_args_t args;
@@ -38,7 +38,7 @@ Test(amazed, parsing_unvalid_file2)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_directory)
+Test(corewar, parsing_directory)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "tests", NULL};
     parsed_args_t args;
@@ -47,7 +47,7 @@ Test(amazed, parsing_directory)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_options_n)
+Test(corewar, parsing_options_n)
 {
     char *av[] = {"./corewar", "-n", "4", "tests/pdd.cor", "tests/abel.cor", NULL};
     parsed_args_t args;
@@ -56,7 +56,7 @@ Test(amazed, parsing_options_n)
     cr_assert_not_null(args.champs);
 }
 
-Test(amazed, parsing_options_a)
+Test(corewar, parsing_options_a)
 {
     char *av[] = {"./corewar", "-n", "4", "tests/pdd.cor", "-a", "200", "tests/abel.cor", NULL};
     parsed_args_t args;
@@ -65,7 +65,7 @@ Test(amazed, parsing_options_a)
     cr_assert_not_null(args.champs);
 }
 
-Test(amazed, parsing_invalid_option)
+Test(corewar, parsing_invalid_option)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "-a", "200", "-n", "-2", "tests/abel.cor", NULL};
     parsed_args_t args;
@@ -75,7 +75,7 @@ Test(amazed, parsing_invalid_option)
 }
 
 
-Test(amazed, parsing_invalid_option2)
+Test(corewar, parsing_invalid_option2)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "-a", "-200", "-n", "2", "tests/abel.cor", NULL};
     parsed_args_t args;
@@ -84,7 +84,7 @@ Test(amazed, parsing_invalid_option2)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_option_missing_datas)
+Test(corewar, parsing_option_missing_datas)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", "-a", "200", NULL};
     parsed_args_t args;
@@ -93,7 +93,7 @@ Test(amazed, parsing_option_missing_datas)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_option_missing_datas2)
+Test(corewar, parsing_option_missing_datas2)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", "-a", NULL};
     parsed_args_t args;
@@ -102,7 +102,7 @@ Test(amazed, parsing_option_missing_datas2)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_option_missing_datas3)
+Test(corewar, parsing_option_missing_datas3)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", "-a", "tests/pdd.cor", NULL};
     parsed_args_t args;
@@ -111,7 +111,7 @@ Test(amazed, parsing_option_missing_datas3)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_options_an)
+Test(corewar, parsing_options_an)
 {
     char *av[] = {"./corewar", "-n", "4", "-a", "400", "tests/pdd.cor", "-a", "200", "-n", "0", "tests/abel.cor", NULL};
     parsed_args_t args;
@@ -121,7 +121,7 @@ Test(amazed, parsing_options_an)
 }
 
 
-Test(amazed, parsing_basic_dump)
+Test(corewar, parsing_basic_dump)
 {
     char *av[] = {"./corewar", "-dump", "500", "-n", "4", "-a", "400", "tests/pdd.cor", "-a", "200", "-n", "0", "tests/abel.cor", NULL};
     parsed_args_t args;
@@ -130,7 +130,7 @@ Test(amazed, parsing_basic_dump)
     cr_assert_not_null(args.champs);
 }
 
-Test(amazed, parsing_dump_missing_data)
+Test(corewar, parsing_dump_missing_data)
 {
     char *av[] = {"./corewar", "-dump", "-n", "4", "-a", "400", "tests/pdd.cor", "-a", "200", "-n", "0", "tests/abel.cor", NULL};
     parsed_args_t args;
@@ -139,7 +139,7 @@ Test(amazed, parsing_dump_missing_data)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, parsing_dumpd_missing_champ)
+Test(corewar, parsing_dump_missing_champ)
 {
     char *av[] = {"./corewar", "-dump", "200", "-n", "4", "-a", "400", "tests/pdd.cor", NULL};
     parsed_args_t args;
@@ -148,7 +148,26 @@ Test(amazed, parsing_dumpd_missing_champ)
     cr_assert_null(args.champs);
 }
 
-Test(amazed, help)
+Test(corewar, parsing_too_many_champs)
+{
+    char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", "-n", "4", "tests/tyron.cor", "tests/pdd.cor", "tests/pdd.cor", NULL};
+    parsed_args_t args;
+    
+    args = parse_args(8, av);
+    cr_assert_null(args.champs);
+}
+
+Test(corewar, parsing_enought_champs)
+{
+    char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", "-n", "4", "tests/tyron.cor", "tests/pdd.cor", NULL};
+    parsed_args_t args;
+    
+    args = parse_args(7, av);
+    cr_assert_not_null(args.champs);
+}
+
+
+Test(corewar, help)
 {
     int ret = help();
 
