@@ -30,7 +30,7 @@ int handle_options(champions_t **head, char **str, int *i, options_t *options)
     return 0;
 }
 
-int set_options(champions_t **tmp, int total_champs, int i,
+int set_options(champions_t **tmp, int i,
     int *used_id)
 {
     if (!is_valid_magic((*tmp)->fd)) {

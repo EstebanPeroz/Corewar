@@ -107,11 +107,11 @@ void free_champion(champions_t *champ);
 void free_virtual_machine(virtual_machine_t *virtual_machine);
 int fill_struct_champions(char *file, champions_t **champ, int id,
     int address);
-int set_options(champions_t **tmp, int total_champs, int i,
-    int *used_id);
+int set_options(champions_t **tmp, int i, int *used_id);
 int handle_options(champions_t **head, char **str, int *i, options_t *options);
 void reverse_endian_header(header_t *header);
 void sort_champs(champions_t **champ);
 void manage_adress(champions_t *champ);
+int get_total_champs(champions_t **head);
 
 #endif // !COREWAR_H

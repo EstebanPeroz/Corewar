@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int get_total_champs(champions_t **head)
+int get_total_champs(champions_t **head)
 {
     int nb = 0;
     champions_t *tmp = *head;
@@ -41,10 +41,10 @@ static int set_champs_params(champions_t **head)
     int total_champs = get_total_champs(head);
 
     if (total_champs == -1 ||
-    set_options(head, total_champs, 1, used_id) == -1)
+    set_options(head, 1, used_id) == -1)
         return -1;
     for (; tmp->next != NULL; i++) {
-        if (set_options(&tmp->next, total_champs, i + 1, used_id) == -1)
+        if (set_options(&tmp->next, i + 1, used_id) == -1)
             return -1;
         tmp = tmp->next;
     }

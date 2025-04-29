@@ -27,10 +27,11 @@ static int get_cycles(char ***av, int ac)
     return my_getnbr((*av)[2]);
 }
 
-static void update_id_address(champions_t *champs)
+static void update_id_address(virtual_machine_t *vm)
 {
-    sort_champs(&champs);
-    manage_adress(champs);
+    sort_champs(&vm->champion);
+    manage_adress(vm->champion);
+    vm->nbr_processus = get_total_champs(&vm->champion);
 }
 
 void fill_vm(int ac, char **av, virtual_machine_t *vm)
@@ -41,5 +42,5 @@ void fill_vm(int ac, char **av, virtual_machine_t *vm)
     if (vm->cycle_to_dump == -1)
         return;
     vm->champion = get_champs_with_options(av);
-    update_id_address(vm->champion);
+    update_id_address(vm);
 }
