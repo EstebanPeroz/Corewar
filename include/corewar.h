@@ -89,27 +89,33 @@ char *super_strcat(char *dest, char *src);
 char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 int is_nbr(char *str);
 
-    /*Main project functions*/
+
+// VM
 int fill_vm(int ac, char **av, virtual_machine_t *vm);
-int help(void);
-// int free_champs(champions_t **head);
-int is_valid_magic(FILE *fd);
-champions_t *get_champs_with_options(char **list);
-int print_champions(champions_t **head);
 virtual_machine_t *init_virtual_machine(int cycle_to_tump,
     int nb_processus);
-void free_champion(champions_t *champ);
 void free_virtual_machine(virtual_machine_t *virtual_machine);
+free_space_t find_largest_free_space(virtual_machine_t *vm);
+void place_all_processus(virtual_machine_t *virtual_machine);
+
+// CHAMPIONS
+champions_t *get_champs_with_options(char **list);
+int print_champions(champions_t **head);
+void free_champion(champions_t *champ);
 int fill_struct_champions(char *file, champions_t **champ, int id,
     int address);
-int set_options(champions_t **tmp, int i, int *used_id);
-int handle_options(champions_t **head, char **str, int *i, options_t *options);
-void reverse_endian_header(header_t *header);
 void sort_champs(champions_t **champ);
 void manage_adress(champions_t *champ);
 int get_total_champs(champions_t **head);
+
+// PARSING
+int is_valid_magic(FILE *fd);
+int set_options(champions_t **tmp, int i, int *used_id);
+int handle_options(champions_t **head, char **str, int *i, options_t *options);
+void reverse_endian_header(header_t *header);
 int get_cycles(char ***av, int ac);
-free_space_t find_largest_free_space(virtual_machine_t *vm);
-void place_all_processus(virtual_machine_t *virtual_machine);
+
+// OTHERS
+int help(void);
 
 #endif // !COREWAR_H
