@@ -12,7 +12,8 @@ int print_champions(champions_t **head)
     champions_t *tmp = *head;
 
     while (tmp != NULL) {
-        printf("File: %s, id: %i, address: %i\n", tmp->file, tmp->id, tmp->address);
+        printf("File: %s, id: %i, address: %i\n", tmp->name,
+            tmp->prog_id, tmp->address);
         tmp = tmp->next;
     }
     return 0;

@@ -11,16 +11,28 @@ NAME 		=	corewar
 
 TEST_NAME	=	unit_tests
 
-SRC 		= 	src/main.c							\
-				src/parse_args.c					\
-				src/help.c							\
-				src/get_champs.c					\
-				src/check_magic.c					\
-				src/free_champs.c					\
+SRC 		= 	src/main.c									\
+				src/help.c									\
+				src/struct/create_champions.c				\
+				src/parsing/check_magic.c					\
+				src/struct/init_vm_struct.c 				\
+				src/struct/free_champions.c 				\
+				src/struct/free_vm.c 						\
+				src/champions/fill_champions.c 				\
+				src/parsing/handle_options.c 				\
+				src/parsing/reverse_endian.c 				\
+				src/champions/sort_champs.c 				\
+				src/champions/manage_address.c 				\
+				src/parsing/parse_dump.c 					\
+				src/vm/fill_vm.c 							\
+				src/champions/place_champions.c				\
+				src/champions/find_largest_free_space.c		\
 
 OBJ 		= 	$(SRC:.c=.o)
 
-TESTS =	tests/tests_error_handling.c
+TESTS   	=	tests/tests_error_handling.c 				\
+				tests/place_champions_tests.c 				\
+
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)
 TEST_GCDA	=	$(TESTS:.c=.gcda)
