@@ -28,6 +28,8 @@ SRC 		= 	src/main.c									\
 				src/vm/vm_loop.c 							\
 				src/champions/place_champions.c				\
 				src/champions/find_largest_free_space.c		\
+				src/op.c									\
+				src/instructions/handle_live.c				\
 
 OBJ 		= 	$(SRC:.c=.o)
 
