@@ -5,9 +5,37 @@
 ** Handle the live instruction
 */
 #include "corewar.h"
+#include "op.h"
 #include "structs.h"
 
-int handle_live(virtual_machine_t *vm, int cycles)
+// CHANGE THE PUTCHAR !!!!!!
+static void print_live_message(champions_t *champ)
 {
-    return 0;
+    my_putstr("The player ");
+    my_putchar(champ->prog_id + 48);
+    my_putchar('(');
+    my_putstr(champ->header.prog_name);
+    my_putchar(')');
+    my_putstr("is alive.\n");
+}
+
+int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter)
+{
+    champions_t *cur = vm->champion;
+    int param;
+
+    *prog_counter += 1;
+    param = bytes_to_int(vm->arena + *prog_counter);
+    if (param == -1)
+        return 0;
+    while (cur != NULL) {
+        if (param == cur->prog_id) {
+            cur->last_live = cycles;
+            print_live_message(cur);
+            *prog_counter += op_tab[0].type[0];
+            cur->cylces_to_wait = op_tab[0].nbr_cycles;
+        }
+        cur = cur->next;
+    }
+    return 1;
 }

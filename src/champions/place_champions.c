@@ -52,6 +52,7 @@ static void place_processus_auto(virtual_machine_t *virtual_machine)
 
     while (current != NULL) {
         current->address = auto_adress;
+        current->prog_counter = auto_adress;
         auto_adress += distance;
         place_champion(virtual_machine, current);
         current = current->next;
