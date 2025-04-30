@@ -24,5 +24,5 @@ int get_cycles(char ***av, int ac)
     if (!is_nbr((*av)[2]))
         return -1;
     *av += 2;
-    return my_getnbr((*av)[2]);
+    return my_getnbr((*av)[0]);
 }

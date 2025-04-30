@@ -21,6 +21,7 @@ int main(int ac, char **av)
     }
     if (vm->champion == NULL || vm->champion->next == NULL)
         return 84;
+    vm_loop(vm);
     free_virtual_machine(vm);
     return 0;
 }
