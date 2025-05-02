@@ -5,6 +5,7 @@
 ** Test the loop
 */
 #include "corewar.h"
+#include "structs.h"
 #include <criterion/criterion.h>
 #include <criterion/redirect.h>
 #include <criterion/internal/assert.h>
@@ -106,6 +107,8 @@ Test(corewar, test_find_living_champs_no_handle_instructions, .init = redirect_a
     fill_vm(7, av, vm);
     handle_live(vm, 1, &vm->champion->prog_counter);
     handle_live(vm, 1, &vm->champion->next->prog_counter);
+    cr_assert_eq(vm->champion->cylces_to_wait, 10);
+    cr_assert_eq(vm->champion->next->cylces_to_wait, 10);
     cr_assert_stdout_eq_str("The player 1(Mine)is alive.\nThe player 2(Mine2)is alive.\n");
 }
 
@@ -120,4 +123,30 @@ Test(corewar, test_find_living_champs3, .init = redirect_all_std)
     vm->champion->next->prog_counter += 1;
     handle_instructions(vm, cycles);
     cr_assert_stdout_eq_str("");
+}
+
+Test(corewar, test_cooldown_verif_no_cooldown, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    int verif = 1;
+    
+    fill_vm(7, av, vm);
+    verif = is_cooldown(&vm->champion);
+    cr_assert_eq(verif, 0);
+}
+
+Test(corewar, test_cooldown_verif_with_cooldown, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    int verif = 1;
+    champions_t *champ;
+    
+    fill_vm(7, av, vm);
+    champ = vm->champion;
+    champ->cylces_to_wait = 10;
+    verif = is_cooldown(&champ);
+    cr_assert_str_eq(champ->header.prog_name, "Mine2");
+    cr_assert_eq(verif, 1);
 }

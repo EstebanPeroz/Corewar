@@ -26,6 +26,7 @@ SRC 		= 	src/main.c									\
 				src/parsing/parse_dump.c 					\
 				src/vm/fill_vm.c 							\
 				src/vm/vm_loop.c 							\
+				src/vm/check_cooldown.c						\
 				src/vm/get_alive_champs.c 					\
 				src/vm/get_winner.c							\
 				src/champions/place_champions.c				\
@@ -63,7 +64,7 @@ unit_tests: LDFLAGS += -lcriterion --coverage
 unit_tests:	$(TEST_OBJ) lib/libmy.a
 		$(CC) -o $(TEST_NAME) $(TEST_OBJ) $(LDFLAGS)
 
-tests_run: unit_tests
+tests_run: fclean unit_tests
 	./$(TEST_NAME)
 	gcovr --exclude tests
 

@@ -28,11 +28,8 @@ int handle_instructions(virtual_machine_t *vm, int cycles)
 
     while (current != NULL) {
         instruction = vm->arena[current->prog_counter];
-        if (current->cylces_to_wait > 0) {
-            current->cylces_to_wait--;
-            current = current->next;
+        if (is_cooldown(&current))
             continue;
-        }
         call_instruction_functions(vm,
         cycles, &(current->prog_counter), instruction);
         current = current->next;

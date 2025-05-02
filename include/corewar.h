@@ -19,7 +19,9 @@
 // VM
 
 int get_alive_champions(virtual_machine_t *vm, int cycles);
+int is_cooldown(champions_t **current);
 void print_live_and_win_message(champions_t *champ);
+int check_cooldown(champions_t **champ);
 int handle_instructions(virtual_machine_t *vm, int cycles);
 int get_winner(virtual_machine_t *vm);
 int reset_cycles(virtual_machine_t *vm, int *cycles);
