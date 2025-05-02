@@ -62,3 +62,49 @@ Test(corewar, test_find_winner_no_live_calls, .init = redirect_all_std)
     get_winner(vm);
     cr_assert_stdout_eq_str("The player 56(pdd)has won.\n");
 }
+
+Test(corewar, test_get_alive_champs, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    
+    fill_vm(7, av, vm);
+    handle_instructions(vm, 1);
+    get_alive_champions(vm, vm->cycle_to_die - 1);
+    cr_assert_eq(vm->alive_champions, 2);
+}
+
+Test(corewar, test_find_living_champs, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/abel.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    int cycles = 1;
+    
+    fill_vm(7, av, vm);
+    handle_instructions(vm, cycles);
+    cr_assert_stdout_eq_str("The player 1(Mine)is alive.\n");
+}
+
+Test(corewar, test_find_living_champs2, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    int cycles = 1;
+    
+    fill_vm(7, av, vm);
+    handle_instructions(vm, cycles);
+    cr_assert_stdout_eq_str("The player 1(Mine)is alive.\nThe player 2(Mine2)is alive.\n");
+}
+
+Test(corewar, test_find_living_champs3, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    int cycles = 1;
+    
+    fill_vm(7, av, vm);
+    vm->champion->prog_counter += 1;
+    vm->champion->next->prog_counter += 1;
+    handle_instructions(vm, cycles);
+    cr_assert_stdout_eq_str("");
+}
