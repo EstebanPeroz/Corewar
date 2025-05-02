@@ -17,7 +17,9 @@
 
 // VM
 
-int get_alive_champions(virtual_machine_t *vm);
+int get_alive_champions(virtual_machine_t *vm, int cycles);
+void print_live_and_win_message(champions_t *champ);
+int get_winner(virtual_machine_t *vm);
 int reset_cycles(virtual_machine_t *vm, int *cycles);
 int fill_vm(int ac, char **av, virtual_machine_t *vm);
 int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter);

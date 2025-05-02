@@ -27,6 +27,7 @@ SRC 		= 	src/main.c									\
 				src/vm/fill_vm.c 							\
 				src/vm/vm_loop.c 							\
 				src/vm/get_alive_champs.c 					\
+				src/vm/get_winner.c							\
 				src/champions/place_champions.c				\
 				src/champions/find_largest_free_space.c		\
 				src/op.c									\

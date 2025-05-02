@@ -9,14 +9,13 @@
 #include "structs.h"
 
 // CHANGE THE PUTCHAR !!!!!!
-static void print_live_message(champions_t *champ)
+void print_live_and_win_message(champions_t *champ)
 {
     my_putstr("The player ");
     my_putchar(champ->prog_id + 48);
     my_putchar('(');
     my_putstr(champ->header.prog_name);
     my_putchar(')');
-    my_putstr("is alive.\n");
 }
 
 int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter)
@@ -31,7 +30,8 @@ int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter)
     while (cur != NULL) {
         if (param == cur->prog_id) {
             cur->last_live = cycles;
-            print_live_message(cur);
+            print_live_and_win_message(cur);
+            my_putstr("is alive.\n");
             *prog_counter += op_tab[0].type[0];
             cur->cylces_to_wait = op_tab[0].nbr_cycles;
         }

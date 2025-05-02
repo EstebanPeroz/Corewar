@@ -26,7 +26,7 @@ static int fill_basic_info(champions_t *champ, int id, int address, char *file)
     champ->prog_id = id;
     champ->prog_counter = address;
     champ->cylces_to_wait = 0;
-    champ->last_live = 0;
+    champ->last_live = -1;
     champ->address = address;
     champ->next = NULL;
     champ->is_placed = false;
