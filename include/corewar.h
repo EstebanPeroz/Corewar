@@ -82,7 +82,7 @@ void **add_array_new_val(void **array, void *val);
 char *super_strcat(char *dest, char *src);
 char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 int is_nbr(char *str);
-int bytes_to_int(unsigned char *bytes);
+int bytes_to_int(char *bytes);
 int my_put_nbr(int);
 
 // OTHERS
