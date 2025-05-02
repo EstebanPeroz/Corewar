@@ -53,6 +53,7 @@ void reverse_endian_header(header_t *header);
 int get_cycles(char ***av, int ac);
 
     /*Lib functions*/
+int my_getnbr(char *);
 int my_strcmp(char *, char *);
 int str_contain(char *str, char c);
 int my_put_map(char **map);
@@ -78,6 +79,7 @@ char *super_strcat(char *dest, char *src);
 char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 int is_nbr(char *str);
 int bytes_to_int(unsigned char *bytes);
+int my_put_nbr(int);
 
 // OTHERS
 int help(void);

@@ -8,11 +8,10 @@
 #include "op.h"
 #include "structs.h"
 
-// CHANGE THE PUTCHAR !!!!!!
 void print_live_and_win_message(champions_t *champ)
 {
     my_putstr("The player ");
-    my_putchar(champ->prog_id + 48);
+    my_put_nbr(champ->prog_id);
     my_putchar('(');
     my_putstr(champ->header.prog_name);
     my_putchar(')');

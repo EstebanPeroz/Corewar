@@ -18,9 +18,7 @@ int get_winner(virtual_machine_t *vm)
         }
         current = current->next;
     }
-    if (winner.last_live != -1) {
-        print_live_and_win_message(&winner);
-        my_putstr("has won.\n");
-    }
+    print_live_and_win_message(&winner);
+    my_putstr("has won.\n");
     return 0;
 }
