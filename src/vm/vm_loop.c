@@ -5,11 +5,22 @@
 ** Vm loop
 */
 #include "corewar.h"
-#include "op.h"
 #include "structs.h"
 #include <stdio.h>
 
-// Needs to change the if instruction == 1 by the function pointer
+int (* const funcs[INSTRUCTIONS_NB]) (virtual_machine_t *, int, int *) = {
+    handle_live };
+
+static void call_instruction_functions(virtual_machine_t *vm,
+    int cycles, int *prog_counter, int instruction)
+{
+    for (int i = 0; i < INSTRUCTIONS_NB; i++) {
+        if (instruction == i + 1) {
+            funcs[i](vm, cycles, prog_counter);
+        }
+    }
+}
+
 int handle_instructions(virtual_machine_t *vm, int cycles)
 {
     champions_t *current = vm->champion;
@@ -22,8 +33,8 @@ int handle_instructions(virtual_machine_t *vm, int cycles)
             current = current->next;
             continue;
         }
-        if (instruction == 1)
-            handle_live(vm, cycles, &(current->prog_counter));
+        call_instruction_functions(vm,
+        cycles, &(current->prog_counter), instruction);
         current = current->next;
     }
     return 0;

@@ -10,6 +10,7 @@
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
+    #define INSTRUCTIONS_NB 1
 
     #include <stdlib.h>
 
