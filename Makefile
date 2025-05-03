@@ -40,6 +40,7 @@ OBJ 		= 	$(SRC:.c=.o)
 TESTS   	=	tests/tests_error_handling.c 				\
 				tests/place_champions_tests.c 				\
 				tests/test_loop.c 							\
+				tests/test_dump.c 							\
 				tests/tests_byte_manips.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))
