@@ -39,12 +39,15 @@ int handle_instructions(virtual_machine_t *vm, int cycles)
 
 int vm_loop(virtual_machine_t *vm)
 {
-    for (int cycles = 1; cycles < vm->cycle_to_die ||
+    int last_dump = 1;
+
+    for (int cycles = 1; cycles <= vm->cycle_to_die ||
     vm->alive_champions > 1; cycles++) {
-        if (cycles == vm->cycle_to_die)
+        if (cycles > vm->cycle_to_die)
             reset_cycles(vm, &cycles);
         handle_instructions(vm, cycles);
         get_alive_champions(vm, cycles);
+        handle_dump(vm, &last_dump);
     }
     get_winner(vm);
     return 0;

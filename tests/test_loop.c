@@ -72,7 +72,7 @@ Test(corewar, test_get_alive_champs, .init = redirect_all_std)
     fill_vm(7, av, vm);
     vm->champion->last_live = 1;
     vm->champion->next->last_live = 24;
-    get_alive_champions(vm, vm->cycle_to_die - 1);
+    get_alive_champions(vm, vm->cycle_to_die);
     cr_assert_eq(vm->alive_champions, 2);
 }
 

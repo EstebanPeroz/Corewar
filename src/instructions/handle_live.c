@@ -23,7 +23,7 @@ int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter)
     int param;
 
     *prog_counter += 1;
-    param = bytes_to_int(vm->arena + *prog_counter);
+    param = bytes_to_int((char *)vm->arena + *prog_counter);
     if (param == -1)
         return 0;
     while (cur != NULL) {

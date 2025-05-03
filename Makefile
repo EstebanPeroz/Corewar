@@ -25,6 +25,7 @@ SRC 		= 	src/main.c									\
 				src/champions/manage_address.c 				\
 				src/parsing/parse_dump.c 					\
 				src/vm/fill_vm.c 							\
+				src/vm/dump.c								\
 				src/vm/vm_loop.c 							\
 				src/vm/check_cooldown.c						\
 				src/vm/get_alive_champs.c 					\

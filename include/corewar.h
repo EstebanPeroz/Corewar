@@ -11,6 +11,10 @@
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
     #define INSTRUCTIONS_NB 1
+// The printed line length is equal to 65
+// 32 bytes = 64 (2 chars for hexadecimal) + 1 for \n
+    #define LINE_LENGTH     65
+    #define BYTES_PER_LINE     32
 
     #include <stdlib.h>
 
@@ -21,6 +25,7 @@
 int get_alive_champions(virtual_machine_t *vm, int cycles);
 int is_cooldown(champions_t **current);
 void print_live_and_win_message(champions_t *champ);
+int handle_dump(virtual_machine_t *vm, int *last);
 int check_cooldown(champions_t **champ);
 int handle_instructions(virtual_machine_t *vm, int cycles);
 int get_winner(virtual_machine_t *vm);
