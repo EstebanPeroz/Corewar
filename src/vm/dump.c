@@ -34,7 +34,7 @@ int handle_dump(virtual_machine_t *vm, int *last_dump)
 {
     if (vm->cycle_to_dump == *last_dump) {
         print_dump(vm);
-        *last_dump = 0;
+        *last_dump = 1;
         return 1;
     }
     (*last_dump)++;
