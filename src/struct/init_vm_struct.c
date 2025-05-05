@@ -15,7 +15,6 @@ virtual_machine_t *init_virtual_machine(int cycle_to_tump,
     if (virtual_machine == NULL)
         return NULL;
     virtual_machine->cycle = 0;
-    virtual_machine->carry = 0;
     virtual_machine->nbr_processus = nb_processus;
     virtual_machine->nbr_processus_to_place = nb_processus;
     virtual_machine->cycle_to_dump = cycle_to_tump;

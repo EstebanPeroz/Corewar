@@ -17,6 +17,7 @@
 typedef struct champions_s {
     char *name;
     FILE *fd;
+    int carry;
     int address;
     int prog_id;
     int prog_counter;
@@ -31,7 +32,6 @@ typedef struct champions_s {
 
 typedef struct virtual_machine_s {
     int cycle;
-    int carry;
     int nbr_processus;
     int nbr_processus_to_place;
     int cycle_to_dump;

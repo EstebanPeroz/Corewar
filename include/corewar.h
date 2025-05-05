@@ -28,6 +28,7 @@ int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter);
 
 int get_alive_champions(virtual_machine_t *vm, int cycles);
 int decrease_cycle_to_die(virtual_machine_t *vm);
+int reset_carry(champions_t *champ);
 void byte_to_hex(unsigned char byte, char *out);
 int is_cooldown(champions_t **current);
 void print_live_and_win_message(champions_t *champ);
