@@ -7,6 +7,7 @@
 #include "corewar.h"
 #include "structs.h"
 #include <criterion/criterion.h>
+#include <criterion/internal/test.h>
 #include <criterion/redirect.h>
 #include <criterion/internal/assert.h>
 #include <criterion/internal/redirect.h>
@@ -31,4 +32,24 @@ Test(corewar, test_dump, .init = redirect_all_std)
     ret = handle_dump(vm, &last);
     cr_assert_eq(ret, 1);
     cr_assert_stdout_neq_str("");
+}
+
+Test(corewar, test_byte_to_hex)
+{
+    unsigned char byte = 18;
+    char result[3];
+
+    byte_to_hex(byte, result);
+    result[2] = '\0';
+    cr_assert_str_eq(result, "12");
+}
+
+Test(corewar, test_byte_to_hex2)
+{
+    unsigned char byte = 210;
+    char result[3];
+
+    byte_to_hex(byte, result);
+    result[2] = '\0';
+    cr_assert_str_eq(result, "D2");
 }

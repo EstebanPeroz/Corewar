@@ -23,6 +23,7 @@
 // VM
 
 int get_alive_champions(virtual_machine_t *vm, int cycles);
+void byte_to_hex(unsigned char byte, char *out);
 int is_cooldown(champions_t **current);
 void print_live_and_win_message(champions_t *champ);
 int handle_dump(virtual_machine_t *vm, int *last);

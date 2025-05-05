@@ -9,7 +9,7 @@
 #include "structs.h"
 #include <unistd.h>
 
-static void byte_to_hex(unsigned char byte, char *out)
+void byte_to_hex(unsigned char byte, char *out)
 {
     const char *hex = "0123456789ABCDEF";
 
