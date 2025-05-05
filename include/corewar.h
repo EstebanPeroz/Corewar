@@ -20,9 +20,14 @@
 
     #include "structs.h"
 
+// Instructions
+
+int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter);
+
 // VM
 
 int get_alive_champions(virtual_machine_t *vm, int cycles);
+int decrease_cycle_to_die(virtual_machine_t *vm);
 void byte_to_hex(unsigned char byte, char *out);
 int is_cooldown(champions_t **current);
 void print_live_and_win_message(champions_t *champ);
@@ -32,7 +37,6 @@ int handle_instructions(virtual_machine_t *vm, int cycles);
 int get_winner(virtual_machine_t *vm);
 int reset_cycles(virtual_machine_t *vm, int *cycles);
 int fill_vm(int ac, char **av, virtual_machine_t *vm);
-int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter);
 virtual_machine_t *init_virtual_machine(int cycle_to_tump,
     int nb_processus);
 void free_virtual_machine(virtual_machine_t *virtual_machine);
@@ -92,6 +96,7 @@ int bytes_to_int(char *bytes);
 int my_put_nbr(int);
 
 // OTHERS
+int start_corewar(int ac, char **av);
 int help(void);
 
 #endif // !COREWAR_H

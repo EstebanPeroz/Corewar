@@ -84,6 +84,7 @@ Test(corewar, test_find_living_champs, .init = redirect_all_std)
     
     fill_vm(7, av, vm);
     handle_instructions(vm, cycles);
+    cr_assert_eq(vm->nbr_live, 39);
     cr_assert_stdout_eq_str("The player 1(Mine)is alive.\n");
 }
 

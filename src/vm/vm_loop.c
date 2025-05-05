@@ -48,6 +48,7 @@ int vm_loop(virtual_machine_t *vm)
         handle_instructions(vm, cycles);
         get_alive_champions(vm, cycles);
         handle_dump(vm, &last_dump);
+        decrease_cycle_to_die(vm);
     }
     get_winner(vm);
     return 0;

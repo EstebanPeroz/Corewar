@@ -29,6 +29,7 @@ int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter)
     while (cur != NULL) {
         if (param == cur->prog_id) {
             cur->last_live = cycles;
+            vm->nbr_live--;
             print_live_and_win_message(cur);
             my_putstr("is alive.\n");
             *prog_counter += op_tab[0].type[0];

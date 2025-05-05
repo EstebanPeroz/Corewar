@@ -12,6 +12,7 @@ NAME 		=	corewar
 TEST_NAME	=	unit_tests
 
 SRC 		= 	src/main.c									\
+				src/corewar.c								\
 				src/help.c									\
 				src/struct/create_champions.c				\
 				src/parsing/check_magic.c					\
