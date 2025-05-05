@@ -10,60 +10,65 @@
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
+    #define INSTRUCTIONS_NB 1
+// The printed line length is equal to 65
+// 32 bytes = 64 (2 chars for hexadecimal) + 1 for \n
+    #define LINE_LENGTH     65
+    #define BYTES_PER_LINE     32
 
     #include <stdlib.h>
-    #include <stdio.h>
-    #include <fcntl.h>
-    #include <stdbool.h>
 
-    #include "op.h"
+    #include "structs.h"
 
-typedef struct champions_s {
-    char *name;
-    FILE *fd;
-    int address;
-    int prog_id;
-    int prog_counter;
-    int cylces_to_wait;
-    int last_live;
-    bool is_placed;
-    unsigned char *code;
-    int registers[REG_NUMBER];
-    header_t header;
-    struct champions_s *next;
-} champions_t;
+// Instructions
 
-typedef struct virtual_machine_s {
-    int cycle;
-    int carry;
-    int nbr_processus;
-    int nbr_processus_to_place;
-    int cycle_to_dump;
-    int cycle_to_die;
-    int cycle_delta;
-    int nbr_live;
-    unsigned char arena[MEM_SIZE];
-    champions_t *champion;
-} virtual_machine_t;
+int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter);
 
-typedef struct free_space_tracker_s {
-    int best_start;
-    int best_size;
-    int current_start;
-    int current_size;
-} free_space_tracker_t;
+// VM
 
-typedef struct free_space_s {
-    int start;
-    int size;
-} free_space_t;
+int get_alive_champions(virtual_machine_t *vm, int cycles);
+int decrease_cycle_to_die(virtual_machine_t *vm);
+int reset_carry(champions_t *champ);
+void byte_to_hex(unsigned char byte, char *out);
+int is_cooldown(champions_t **current);
+void print_live_and_win_message(champions_t *champ);
+int handle_dump(virtual_machine_t *vm, int *last);
+int check_cooldown(champions_t **champ);
+int handle_instructions(virtual_machine_t *vm, int cycles);
+int get_winner(virtual_machine_t *vm);
+int reset_cycles(virtual_machine_t *vm, int *cycles);
+int fill_vm(int ac, char **av, virtual_machine_t *vm);
+virtual_machine_t *init_virtual_machine(int cycle_to_tump,
+    int nb_processus);
+void free_virtual_machine(virtual_machine_t *virtual_machine);
+free_space_t find_largest_free_space(virtual_machine_t *vm);
+void place_all_processus(virtual_machine_t *virtual_machine);
+void place_champion(virtual_machine_t *virtual_machine,
+    champions_t *champion);
+bool is_cell_taken(champions_t *champ, int pos);
+bool compare_champ_cell(virtual_machine_t *vm, int pos);
+champions_t *get_champion_to_place(virtual_machine_t *vm);
+int vm_loop(virtual_machine_t *vm);
 
-typedef struct options_s {
-    int address;
-    int id;
-} options_t;
+// CHAMPIONS
+champions_t *get_champs_with_options(char **list);
+int print_champions(champions_t **head);
+void free_champion(champions_t *champ);
+int fill_struct_champions(char *file, champions_t **champ, int id,
+    int address);
+void sort_champs(champions_t **champ);
+void manage_adress(champions_t *champ);
+int get_total_champs(champions_t **head);
+
+// PARSING
+int is_valid_magic(FILE *fd);
+int set_options(champions_t **tmp, int i, int *used_id);
+int handle_options(champions_t **head, char **str, int *i, options_t *options);
+void reverse_endian_header(header_t *header);
+int get_cycles(char ***av, int ac);
 
     /*Lib functions*/
+int my_getnbr(char *);
 int my_strcmp(char *, char *);
 int str_contain(char *str, char c);
 int my_put_map(char **map);
@@ -88,39 +93,11 @@ void **add_array_new_val(void **array, void *val);
 char *super_strcat(char *dest, char *src);
 char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 int is_nbr(char *str);
-
-
-// VM
-int fill_vm(int ac, char **av, virtual_machine_t *vm);
-virtual_machine_t *init_virtual_machine(int cycle_to_tump,
-    int nb_processus);
-void free_virtual_machine(virtual_machine_t *virtual_machine);
-free_space_t find_largest_free_space(virtual_machine_t *vm);
-void place_all_processus(virtual_machine_t *virtual_machine);
-void place_champion(virtual_machine_t *virtual_machine,
-    champions_t *champion);
-bool is_cell_taken(champions_t *champ, int pos);
-bool compare_champ_cell(virtual_machine_t *vm, int pos);
-champions_t *get_champion_to_place(virtual_machine_t *vm);
-
-// CHAMPIONS
-champions_t *get_champs_with_options(char **list);
-int print_champions(champions_t **head);
-void free_champion(champions_t *champ);
-int fill_struct_champions(char *file, champions_t **champ, int id,
-    int address);
-void sort_champs(champions_t **champ);
-void manage_adress(champions_t *champ);
-int get_total_champs(champions_t **head);
-
-// PARSING
-int is_valid_magic(FILE *fd);
-int set_options(champions_t **tmp, int i, int *used_id);
-int handle_options(champions_t **head, char **str, int *i, options_t *options);
-void reverse_endian_header(header_t *header);
-int get_cycles(char ***av, int ac);
+int bytes_to_int(char *bytes);
+int my_put_nbr(int);
 
 // OTHERS
+int start_corewar(int ac, char **av);
 int help(void);
 
 #endif // !COREWAR_H

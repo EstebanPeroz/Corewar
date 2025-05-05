@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+#include "op.h"
 
 static void update_id_address(virtual_machine_t *vm)
 {
@@ -25,6 +26,8 @@ int fill_vm(int ac, char **av, virtual_machine_t *vm)
     if (vm->champion == NULL) {
         return EXIT_FAILURE;
     }
+    vm->alive_champions = 0;
+    vm->cycle_to_die = CYCLE_TO_DIE;
     update_id_address(vm);
     place_all_processus(vm);
     return 0;

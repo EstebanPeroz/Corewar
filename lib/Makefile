@@ -20,6 +20,8 @@ SRC = 	my_str_to_word_array.c	\
 		str_contain.c			\
 		array_manip.c			\
 		my_strstrcat.c			\
+		bytes_to_int.c			\
+		my_put_nbr.c			\
 
 NAME	=	libmy.a
 

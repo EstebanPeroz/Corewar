@@ -12,6 +12,7 @@ NAME 		=	corewar
 TEST_NAME	=	unit_tests
 
 SRC 		= 	src/main.c									\
+				src/corewar.c								\
 				src/help.c									\
 				src/struct/create_champions.c				\
 				src/parsing/check_magic.c					\
@@ -25,13 +26,24 @@ SRC 		= 	src/main.c									\
 				src/champions/manage_address.c 				\
 				src/parsing/parse_dump.c 					\
 				src/vm/fill_vm.c 							\
+				src/vm/dump.c								\
+				src/vm/vm_loop.c 							\
+				src/vm/check_cooldown.c						\
+				src/vm/get_alive_champs.c 					\
+				src/vm/get_winner.c							\
 				src/champions/place_champions.c				\
 				src/champions/find_largest_free_space.c		\
+				src/op.c									\
+				src/instructions/handle_live.c				\
 
 OBJ 		= 	$(SRC:.c=.o)
 
 TESTS   	=	tests/tests_error_handling.c 				\
 				tests/place_champions_tests.c 				\
+				tests/test_loop.c 							\
+				tests/func_tests.c 							\
+				tests/test_dump.c 							\
+				tests/tests_byte_manips.c 					\
 
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)
@@ -57,7 +69,7 @@ unit_tests: LDFLAGS += -lcriterion --coverage
 unit_tests:	$(TEST_OBJ) lib/libmy.a
 		$(CC) -o $(TEST_NAME) $(TEST_OBJ) $(LDFLAGS)
 
-tests_run: unit_tests
+tests_run: fclean unit_tests
 	./$(TEST_NAME)
 	gcovr --exclude tests
 
