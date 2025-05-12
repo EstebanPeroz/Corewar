@@ -45,6 +45,7 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/func_tests.c 							\
 				tests/test_dump.c 							\
 				tests/tests_byte_manips.c 					\
+				tests/test_zjmp.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)

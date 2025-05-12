@@ -31,8 +31,7 @@ int handle_live(instructions_params_t *params)
     champions_t *cur = params->vm->champion;
     int champ_id;
 
-    params->champ->prog_counter += 1;
-    champ_id = bytes_to_int((char *)params->vm->arena +
+    champ_id = bytes_to_int(params->vm->arena +
         params->champ->prog_counter);
     if (champ_id == -1)
         return -1;

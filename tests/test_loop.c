@@ -107,6 +107,8 @@ Test(corewar, test_handle_live, .init = redirect_all_std)
     
     fill_vm(7, av, vm);
     instructions_params_t params = { vm, 1, vm->champion };
+    vm->champion->prog_counter += 1;
+    vm->champion->next->prog_counter += 1;
     handle_live(&params);
     params.champ = vm->champion->next;
     handle_live(&params);
