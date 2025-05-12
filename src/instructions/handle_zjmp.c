@@ -14,6 +14,7 @@ int handle_zjmp(instructions_params_t *params)
 
     if (params->champ->carry != 1) {
         params->champ->cylces_to_wait = op_tab[ZJMP_ID].nbr_cycles;
+        params->champ->prog_counter += IND_SIZE;
         return 0;
     }
     index = bytes_to_short(params->vm->arena +

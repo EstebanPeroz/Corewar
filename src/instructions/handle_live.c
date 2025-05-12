@@ -22,6 +22,7 @@ static void change_variables(champions_t *cur, virtual_machine_t *vm,
 {
     vm->nbr_live--;
     cur->last_live = cycles;
+    cur->prog_counter += DIR_SIZE;
     cur->cylces_to_wait = op_tab[LIVE_ID].nbr_cycles;
 }
 

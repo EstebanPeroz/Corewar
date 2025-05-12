@@ -25,7 +25,7 @@ Test(corewar, test_handle_zjmp_no_carry)
     handle_zjmp(&params);
     cr_assert_eq(vm->champion->next->cylces_to_wait, 20);
     cr_assert_eq(vm->champion->next->carry, 0);
-    cr_assert_eq(vm->champion->next->prog_counter, first_PC);
+    cr_assert_eq(vm->champion->next->prog_counter, first_PC + IND_SIZE);
 }
 
 Test(corewar, test_handle_zjmp)
