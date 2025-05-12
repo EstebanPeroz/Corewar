@@ -8,15 +8,17 @@
 #include "structs.h"
 #include <stdio.h>
 
-int (* const funcs[INSTRUCTIONS_NB]) (virtual_machine_t *, int, int *) = {
-    handle_live };
+int (* const funcs[INSTRUCTIONS_NB])
+(virtual_machine_t *, int, champions_t *) = {
+    handle_live, handle_zjmp
+};
 
 static void call_instruction_functions(virtual_machine_t *vm,
-    int cycles, int *prog_counter, int instruction)
+    int cycles, champions_t *champ, int instruction)
 {
     for (int i = 0; i < INSTRUCTIONS_NB; i++) {
         if (instruction == i + 1) {
-            funcs[i](vm, cycles, prog_counter);
+            funcs[i](vm, cycles, champ);
         }
     }
 }
@@ -31,7 +33,7 @@ int handle_instructions(virtual_machine_t *vm, int cycles)
         if (is_cooldown(&current))
             continue;
         call_instruction_functions(vm,
-        cycles, &(current->prog_counter), instruction);
+        cycles, current, instruction);
         current = current->next;
     }
     return 0;

@@ -26,20 +26,20 @@ static void change_variables(champions_t *cur, virtual_machine_t *vm,
     cur->cylces_to_wait = op_tab[0].nbr_cycles;
 }
 
-int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter)
+int handle_live(virtual_machine_t *vm, int cycles, champions_t *champ)
 {
     champions_t *cur = vm->champion;
     int param;
 
-    *prog_counter += 1;
-    param = bytes_to_int((char *)vm->arena + *prog_counter);
+    champ->prog_counter += 1;
+    param = bytes_to_int((char *)vm->arena + champ->prog_counter);
     if (param == -1)
         return -1;
     while (cur != NULL) {
         if (param == cur->prog_id) {
             print_live_and_win_message(cur);
             my_putstr("is alive.\n");
-            change_variables(cur, vm, prog_counter, cycles);
+            change_variables(cur, vm, &champ->prog_counter, cycles);
             return 1;
         }
         cur = cur->next;

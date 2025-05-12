@@ -35,6 +35,7 @@ SRC 		= 	src/main.c									\
 				src/champions/find_largest_free_space.c		\
 				src/op.c									\
 				src/instructions/handle_live.c				\
+				src/instructions/handle_zjmp.c				\
 
 OBJ 		= 	$(SRC:.c=.o)
 
