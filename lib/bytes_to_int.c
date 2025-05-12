@@ -6,7 +6,7 @@
 */
 #include "corewar.h"
 
-// Works for big endian indexs
+// Works for big endian directs
 int bytes_to_int(unsigned char *bytes)
 {
     int to_ret;
@@ -17,6 +17,7 @@ int bytes_to_int(unsigned char *bytes)
     return to_ret;
 }
 
+// Works for big endian indexs or indirects
 short bytes_to_short(unsigned char *bytes)
 {
     short to_ret;

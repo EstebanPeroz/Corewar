@@ -35,10 +35,10 @@ int handle_instructions(virtual_machine_t *vm, int cycles)
         instruction = vm->arena[current->prog_counter];
         if (is_cooldown(&current))
             continue;
-        current->prog_counter += 1;
-        current->prog_counter %= MEM_SIZE;
         call_instruction_functions(vm,
         cycles, current, instruction);
+        current->prog_counter += 1;
+        current->prog_counter %= MEM_SIZE;
         current = current->next;
     }
     return 0;

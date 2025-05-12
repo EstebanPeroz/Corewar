@@ -11,7 +11,7 @@ int start_corewar(int ac, char **av)
 {
     virtual_machine_t *vm = init_virtual_machine(0, 0);
 
-    if (my_strcmp(av[1], "-h") == 0)
+    if (ac == 2 && my_strcmp(av[1], "-h") == 0)
         return help();
     vm = init_virtual_machine(0, 0);
     if (ac < 3 || vm == NULL)

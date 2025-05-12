@@ -18,9 +18,8 @@ void print_live_and_win_message(champions_t *champ)
 }
 
 static void change_variables(champions_t *cur, virtual_machine_t *vm,
-    int *prog_counter, int cycles)
+    int cycles)
 {
-    *prog_counter += op_tab[LIVE_ID].type[0];
     vm->nbr_live--;
     cur->last_live = cycles;
     cur->cylces_to_wait = op_tab[LIVE_ID].nbr_cycles;
@@ -32,7 +31,7 @@ int handle_live(instructions_params_t *params)
     int champ_id;
 
     champ_id = bytes_to_int(params->vm->arena +
-        params->champ->prog_counter);
+        params->champ->prog_counter + 1);
     if (champ_id == -1)
         return -1;
     while (cur != NULL) {
@@ -40,7 +39,7 @@ int handle_live(instructions_params_t *params)
             print_live_and_win_message(cur);
             my_putstr("is alive.\n");
             change_variables(cur, params->vm,
-                &params->champ->prog_counter, params->cycles);
+                params->cycles);
             return 1;
         }
         cur = cur->next;
