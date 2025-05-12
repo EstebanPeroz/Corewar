@@ -8,6 +8,10 @@
 #ifndef COREWAR_H
     #define COREWAR_H
 
+// Instructions ids
+    #define LIVE_ID 0
+    #define ZJMP_ID 8
+
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
     #define INSTRUCTIONS_NB 2
@@ -22,8 +26,8 @@
 
 // Instructions
 
-int handle_live(virtual_machine_t *vm, int cycles, champions_t *cur);
-int handle_zjmp(virtual_machine_t *vm, int cycles, champions_t *cur);
+int handle_live(instructions_params_t *params);
+int handle_zjmp(instructions_params_t *params);
 
 // VM
 

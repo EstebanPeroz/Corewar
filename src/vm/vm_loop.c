@@ -9,16 +9,18 @@
 #include <stdio.h>
 
 int (* const funcs[INSTRUCTIONS_NB])
-(virtual_machine_t *, int, champions_t *) = {
+(instructions_params_t *) = {
     handle_live, handle_zjmp
 };
 
 static void call_instruction_functions(virtual_machine_t *vm,
     int cycles, champions_t *champ, int instruction)
 {
+    instructions_params_t params = { vm, cycles, champ };
+
     for (int i = 0; i < INSTRUCTIONS_NB; i++) {
         if (instruction == i + 1) {
-            funcs[i](vm, cycles, champ);
+            funcs[i](&params);
         }
     }
 }
