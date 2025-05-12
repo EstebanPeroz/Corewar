@@ -8,9 +8,13 @@
 #ifndef COREWAR_H
     #define COREWAR_H
 
+// Instructions ids
+    #define LIVE_ID 0
+    #define ZJMP_ID 8
+
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
-    #define INSTRUCTIONS_NB 1
+    #define INSTRUCTIONS_NB 2
 // The printed line length is equal to 65
 // 32 bytes = 64 (2 chars for hexadecimal) + 1 for \n
     #define LINE_LENGTH     65
@@ -22,7 +26,8 @@
 
 // Instructions
 
-int handle_live(virtual_machine_t *vm, int cycles, int *prog_counter);
+int handle_live(instructions_params_t *params);
+int handle_zjmp(instructions_params_t *params);
 
 // VM
 
@@ -93,7 +98,8 @@ void **add_array_new_val(void **array, void *val);
 char *super_strcat(char *dest, char *src);
 char *super_strncat(char *dest, char *src, int ldest, int lsrc);
 int is_nbr(char *str);
-int bytes_to_int(char *bytes);
+int bytes_to_int(unsigned char *bytes);
+short bytes_to_short(unsigned char *bytes);
 int my_put_nbr(int);
 
 // OTHERS

@@ -100,15 +100,18 @@ Test(corewar, test_find_living_champs2, .init = redirect_all_std)
 }
 
 
-Test(corewar, test_find_living_champs_no_handle_instructions, .init = redirect_all_std)
+Test(corewar, test_handle_live, .init = redirect_all_std)
 {
     char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(7, av, vm);
-    handle_live(vm, 1, &vm->champion->prog_counter);
-    handle_live(vm, 1, &vm->champion->next->prog_counter);
+    instructions_params_t params = { vm, 1, vm->champion };
+    handle_live(&params);
+    params.champ = vm->champion->next;
+    handle_live(&params);
     cr_assert_eq(vm->champion->cylces_to_wait, 10);
+    cr_assert_eq(vm->champion->prog_counter, 4);
     cr_assert_eq(vm->champion->next->cylces_to_wait, 10);
     cr_assert_stdout_eq_str("The player 1(Mine)is alive.\nThe player 2(Mine2)is alive.\n");
 }

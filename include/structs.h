@@ -55,6 +55,12 @@ typedef struct free_space_s {
     int size;
 } free_space_t;
 
+typedef struct instructions_params {
+    virtual_machine_t *vm;
+    int cycles;
+    champions_t *champ;
+} instructions_params_t;
+
 typedef struct options_s {
     int address;
     int id;
