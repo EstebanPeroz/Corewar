@@ -36,6 +36,8 @@
 
     #define NB_INSTRUCTIONS 16
 
+    #define MAX_BIN_BYTES 0b11
+
     #include <stdlib.h>
 
     #include "structs.h"
@@ -75,10 +77,12 @@ champions_t *get_champion_to_place(virtual_machine_t *vm);
 int vm_loop(virtual_machine_t *vm);
 const op_t *get_instruction(int opcode);
 instructions_params_t *init_instruction_params(
-    virtual_machine_t *vm, int cycles, champions_t *champ);
+    virtual_machine_t *vm, int cycles, champions_t *champ, int opcode);
 void free_instruction_params(instructions_params_t *params);
 int update_prog_counter(virtual_machine_t *vm,
     champions_t *champ, const op_t *op);
+unsigned char get_coding_byte(virtual_machine_t *vm, int pc);
+int get_params_size(int params, const op_t *op);
 
 // CHAMPIONS
 champions_t *get_champs_with_options(char **list);
