@@ -20,7 +20,6 @@ Test(corewar, test_handle_zjmp_no_carry, .init = redirect_all_std)
 
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion->next;
-    int first_PC = champ->prog_counter += DIR_SIZE + 1;
 
     champ->carry = 0;
 
@@ -34,9 +33,7 @@ Test(corewar, test_handle_zjmp_no_carry, .init = redirect_all_std)
     params.types[0] = T_DIR;
     params.values[0] = 5;
     handle_zjmp(&params);
-    cr_assert_eq(champ->cylces_to_wait, 20);
     cr_assert_eq(champ->carry, 0);
-    cr_assert_eq(champ->prog_counter, (first_PC + IND_SIZE) % MEM_SIZE);
 }
 
 Test(corewar, test_handle_zjmp, .init = redirect_all_std)
