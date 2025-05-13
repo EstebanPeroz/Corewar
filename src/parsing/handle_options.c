@@ -47,5 +47,6 @@ int set_options(champions_t **tmp, int i,
             (*tmp)->prog_id = i + 1;
         }
     }
+    used_id[i] = (*tmp)->prog_id;
     return 0;
 }
