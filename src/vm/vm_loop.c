@@ -2,43 +2,58 @@
 ** EPITECH PROJECT, 2025
 ** Corewar
 ** File description:
-** Vm loop
+** Vm loop with cooldown and parameter decoding + debug
 */
 #include "corewar.h"
 #include "op.h"
 #include "structs.h"
 #include <stdio.h>
+#include <string.h>
 
-int (* const funcs[INSTRUCTIONS_NB])
-(instructions_params_t *) = {
-    handle_live, handle_zjmp, handle_fork, handle_lfork,
+int (* const funcs[INSTRUCTIONS_NB])(instructions_params_t *) = {
+    handle_live
 };
 
 static void call_instruction_functions(virtual_machine_t *vm,
-    int cycles, champions_t *champ, int instruction)
+    int cycles, champions_t *champ, int opcode)
 {
-    instructions_params_t params = { vm, cycles, champ };
+    const op_t *op = get_instruction(opcode);
+    instructions_params_t *params = NULL;
 
-    for (int i = 0; i < INSTRUCTIONS_NB; i++) {
-        if (instruction == i + 1) {
-            funcs[i](&params);
-        }
+    if (!op)
+        return;
+    params = init_instruction_params(vm, cycles, champ);
+    if (!params)
+        return;
+    funcs[opcode - 1](params);
+    free_instruction_params(params);
+}
+
+static void handle_champion_instruction(virtual_machine_t *vm,
+    champions_t *champ, int cycles)
+{
+    unsigned char opcode = vm->arena[champ->prog_counter % MEM_SIZE];
+    const op_t *op = get_instruction(opcode);
+    int new_offset = 0;
+
+    if (is_cooldown(&champ))
+        return;
+    if (!op) {
+        champ->prog_counter = (champ->prog_counter + 1) % MEM_SIZE;
+        return;
     }
+    call_instruction_functions(vm, cycles, champ, opcode);
+    new_offset = update_prog_counter(vm, champ, op);
+    champ->prog_counter = (champ->prog_counter + new_offset) % MEM_SIZE;
+    champ->cylces_to_wait = op->nbr_cycles;
 }
 
 int handle_instructions(virtual_machine_t *vm, int cycles)
 {
     champions_t *current = vm->champion;
-    char instruction;
 
     while (current != NULL) {
-        instruction = vm->arena[current->prog_counter];
-        if (is_cooldown(&current))
-            continue;
-        call_instruction_functions(vm,
-        cycles, current, instruction);
-        current->prog_counter += 1;
-        current->prog_counter %= MEM_SIZE;
+        handle_champion_instruction(vm, current, cycles);
         current = current->next;
     }
     return 0;
@@ -48,8 +63,8 @@ int vm_loop(virtual_machine_t *vm)
 {
     int last_dump = 1;
 
-    for (int cycles = 1; cycles <= vm->cycle_to_die ||
-    vm->alive_champions > 1; cycles++) {
+    for (int cycles = 1; cycles <= vm->cycle_to_die
+        || vm->alive_champions > 1; cycles++) {
         if (cycles > vm->cycle_to_die)
             reset_cycles(vm, &cycles);
         handle_instructions(vm, cycles);

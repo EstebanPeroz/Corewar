@@ -22,6 +22,7 @@ int start_corewar(int ac, char **av)
     }
     if (vm->champion == NULL || vm->champion->next == NULL)
         return 84;
+    update_champs_cycle_to_wait(vm);
     vm_loop(vm);
     free_virtual_machine(vm);
     return 0;
