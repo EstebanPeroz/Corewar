@@ -24,7 +24,7 @@
     #define LLD_ID 12
     #define LLDI_ID 13
     #define LFORK_ID 14
-    #define AFF_ID 14
+    #define AFF_ID 15
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
