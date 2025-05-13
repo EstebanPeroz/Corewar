@@ -85,6 +85,7 @@ int fill_struct_champions(char *file, champions_t **champ, int id, int address)
         return EXIT_FAILURE;
     }
     new_champ->fd = fopen(file, READ_FILE_ARG);
+    new_champ->file = file;
     fill_registers(new_champ);
     push_to_end(champ, new_champ);
     return 0;

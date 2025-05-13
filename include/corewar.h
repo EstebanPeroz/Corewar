@@ -27,6 +27,7 @@
 // Instructions
 
 int handle_live(instructions_params_t *params);
+int handle_ld(instructions_params_t *params);
 int handle_zjmp(instructions_params_t *params);
 
 // VM
