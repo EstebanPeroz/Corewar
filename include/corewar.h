@@ -10,7 +10,21 @@
 
 // Instructions ids
     #define LIVE_ID 0
+    #define LD_ID 1
+    #define ST_ID 2
+    #define ADD_ID 3
+    #define SUB_ID 4
+    #define AND_ID 5
+    #define OR_ID 6
+    #define XOR_ID 7
     #define ZJMP_ID 8
+    #define LDI_ID 9
+    #define STI_ID 10
+    #define FORK_ID 11
+    #define LLD_ID 12
+    #define LLDI_ID 13
+    #define LFORK_ID 14
+    #define AFF_ID 15
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
@@ -29,7 +43,10 @@
 // Instructions
 
 int handle_live(instructions_params_t *params);
+int handle_ld(instructions_params_t *params);
 int handle_zjmp(instructions_params_t *params);
+int handle_fork(instructions_params_t *params);
+int handle_lfork(instructions_params_t *params);
 
 // VM
 

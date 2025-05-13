@@ -16,6 +16,7 @@
 
 typedef struct champions_s {
     char *name;
+    char *file;
     FILE *fd;
     int carry;
     int address;

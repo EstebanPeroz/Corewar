@@ -35,7 +35,10 @@ SRC 		= 	src/main.c									\
 				src/champions/find_largest_free_space.c		\
 				src/op.c									\
 				src/instructions/handle_live.c				\
+				src/instructions/handle_fork.c				\
+				src/instructions/handle_lfork.c				\
 				src/instructions/handle_zjmp.c				\
+				src/instructions/handle_ld.c				\
 				src/champions/set_cycle_to_wait.c			\
 				src/vm/get_instructions.c 					\
 				src/struct/instructions_struct_process.c	\
@@ -50,6 +53,7 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/test_dump.c 							\
 				tests/tests_byte_manips.c 					\
 				tests/test_zjmp.c 							\
+				tests/test_fork.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)
