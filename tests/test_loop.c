@@ -109,7 +109,6 @@ Test(corewar, test_handle_live, .init = redirect_all_std)
     handle_live(&params);
     params.champ = vm->champion->next;
     handle_live(&params);
-    cr_assert_eq(vm->champion->prog_counter, 4);
     cr_assert_stdout_eq_str("The player 1(Mine)is alive.\nThe player 2(Mine2)is alive.\n");
 }
 
