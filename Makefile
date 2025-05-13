@@ -36,6 +36,7 @@ SRC 		= 	src/main.c									\
 				src/op.c									\
 				src/instructions/handle_live.c				\
 				src/instructions/handle_fork.c				\
+				src/instructions/handle_lfork.c				\
 				src/instructions/handle_zjmp.c				\
 				src/instructions/handle_ld.c				\
 
