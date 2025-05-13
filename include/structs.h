@@ -59,7 +59,12 @@ typedef struct instructions_params {
     virtual_machine_t *vm;
     int cycles;
     champions_t *champ;
+    int instruction;
+    int nb_params;
+    int types[MAX_ARGS_NUMBER];
+    int values[MAX_ARGS_NUMBER];
 } instructions_params_t;
+
 
 typedef struct options_s {
     int address;
