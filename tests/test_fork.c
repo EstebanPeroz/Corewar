@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2025
 ** Corewar
 ** File description:
-** Test zjmp
+** Test fork
 */
 #include "corewar.h"
 #include "op.h"
