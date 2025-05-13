@@ -9,22 +9,22 @@
     #define COREWAR_H
 
 // Instructions ids
-    #define LIVE_ID 0
-    #define LD_ID 1
-    #define ST_ID 2
-    #define ADD_ID 3
-    #define SUB_ID 4
-    #define AND_ID 5
-    #define OR_ID 6
-    #define XOR_ID 7
-    #define ZJMP_ID 8
-    #define LDI_ID 9
-    #define STI_ID 10
-    #define FORK_ID 11
-    #define LLD_ID 12
-    #define LLDI_ID 13
-    #define LFORK_ID 14
-    #define AFF_ID 15
+    #define LIVE_ID 1
+    #define LD_ID 2
+    #define ST_ID 3
+    #define ADD_ID 4
+    #define SUB_ID 5
+    #define AND_ID 6
+    #define OR_ID 7
+    #define XOR_ID 8
+    #define ZJMP_ID 9
+    #define LDI_ID 10
+    #define STI_ID 11
+    #define FORK_ID 12
+    #define LLD_ID 13
+    #define LLDI_ID 14
+    #define LFORK_ID 15
+    #define AFF_ID 16
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
@@ -35,6 +35,8 @@
     #define BYTES_PER_LINE     32
 
     #define NB_INSTRUCTIONS 16
+
+    #define MAX_BIN_BYTES 0b11
 
     #include <stdlib.h>
 
@@ -75,10 +77,12 @@ champions_t *get_champion_to_place(virtual_machine_t *vm);
 int vm_loop(virtual_machine_t *vm);
 const op_t *get_instruction(int opcode);
 instructions_params_t *init_instruction_params(
-    virtual_machine_t *vm, int cycles, champions_t *champ);
+    virtual_machine_t *vm, int cycles, champions_t *champ, int opcode);
 void free_instruction_params(instructions_params_t *params);
 int update_prog_counter(virtual_machine_t *vm,
     champions_t *champ, const op_t *op);
+unsigned char get_coding_byte(virtual_machine_t *vm, int pc);
+int get_params_size(int params, const op_t *op);
 
 // CHAMPIONS
 champions_t *get_champs_with_options(char **list);
