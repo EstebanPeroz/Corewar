@@ -28,7 +28,7 @@
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
-    #define INSTRUCTIONS_NB 1
+    #define INSTRUCTIONS_NB 2
 // The printed line length is equal to 65
 // 32 bytes = 64 (2 chars for hexadecimal) + 1 for \n
     #define LINE_LENGTH     65
