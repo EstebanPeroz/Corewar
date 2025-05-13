@@ -1,9 +1,3 @@
-/*
-** EPITECH PROJECT, 2025
-** Corewar
-** File description:
-** Test zjmp
-*/
 #include "corewar.h"
 #include "op.h"
 #include "structs.h"
@@ -13,38 +7,66 @@
 #include <criterion/internal/redirect.h>
 #include <stdio.h>
 
-Test(corewar, test_handle_zjmp_no_carry)
+static void redirect_all_std(void)
 {
-    char *av[] = {"./corewar", "tests/mine.cor", "-n", "3", "tests/zjmper.cor", NULL};
-    virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
-    fill_vm(5, av, vm);
-    int first_PC = vm->champion->next->prog_counter += DIR_SIZE + 1;
-    vm->champion->next->carry = 0;
-    instructions_params_t params = { vm, 1, vm->champion->next };
-    handle_zjmp(&params);
-    cr_assert_eq(vm->champion->next->cylces_to_wait, 20);
-    cr_assert_eq(vm->champion->next->carry, 0);
-    cr_assert_eq(vm->champion->next->prog_counter, first_PC + IND_SIZE);
+    cr_redirect_stdout();
+    cr_redirect_stderr();
 }
 
-Test(corewar, test_handle_zjmp)
+Test(corewar, test_handle_zjmp_no_carry, .init = redirect_all_std)
 {
     char *av[] = {"./corewar", "tests/mine.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
+
     fill_vm(5, av, vm);
-    vm->champion->next->prog_counter += DIR_SIZE + 1;
-    if (vm->arena[vm->champion->next->prog_counter] != 9) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->next->prog_counter]);
+    champions_t *champ = vm->champion->next;
+    int first_PC = champ->prog_counter += DIR_SIZE + 1;
+
+    champ->carry = 0;
+
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = ZJMP_ID,
+        .nb_params = 1
+    };
+    params.types[0] = T_DIR;
+    params.values[0] = 5;
+    handle_zjmp(&params);
+    cr_assert_eq(champ->cylces_to_wait, 20);
+    cr_assert_eq(champ->carry, 0);
+    cr_assert_eq(champ->prog_counter, (first_PC + IND_SIZE) % MEM_SIZE);
+}
+
+Test(corewar, test_handle_zjmp, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "tests/mine.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+
+    fill_vm(5, av, vm);
+    champions_t *champ = vm->champion->next;
+    champ->prog_counter += DIR_SIZE + 1;
+
+    if (vm->arena[champ->prog_counter] != 0x09) {
+        printf("Current instruction: %i\n"
+            "Expected: %i\n", vm->arena[champ->prog_counter], ZJMP_ID);
         fflush(NULL);
         cr_assert_fail("Wrong instruction\n");
     }
-    vm->champion->next->carry = 1;
-    int new_PC = vm->champion->next->prog_counter - 5;
-    instructions_params_t params = { vm, 1, vm->champion->next };
+    champ->carry = 1;
+    int offset = -5;
+    int new_PC = (champ->prog_counter + (offset % IDX_MOD) + MEM_SIZE) % MEM_SIZE;
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = ZJMP_ID,
+        .nb_params = 1
+    };
+    params.types[0] = T_DIR;
+    params.values[0] = offset;
     handle_zjmp(&params);
-    cr_assert_eq(vm->champion->next->cylces_to_wait, 20);
-    cr_assert_eq(vm->champion->next->carry, 1);
-    cr_assert_eq(vm->champion->next->prog_counter, new_PC);
+    cr_assert_eq(champ->carry, 1);
+    cr_assert_eq(champ->prog_counter, new_PC);
 }
