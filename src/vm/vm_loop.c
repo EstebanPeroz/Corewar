@@ -11,7 +11,7 @@
 
 int (* const funcs[INSTRUCTIONS_NB])
 (instructions_params_t *) = {
-    handle_live, handle_zjmp
+    handle_live, handle_zjmp, handle_fork,
 };
 
 static void call_instruction_functions(virtual_machine_t *vm,
