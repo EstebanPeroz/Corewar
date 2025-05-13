@@ -36,6 +36,10 @@ SRC 		= 	src/main.c									\
 				src/op.c									\
 				src/instructions/handle_live.c				\
 				src/instructions/handle_zjmp.c				\
+				src/champions/set_cycle_to_wait.c			\
+				src/vm/get_instructions.c 					\
+				src/struct/instructions_struct_process.c	\
+				src/vm/moove_prog_counter.c					\
 
 OBJ 		= 	$(SRC:.c=.o)
 

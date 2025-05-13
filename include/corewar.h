@@ -14,11 +14,13 @@
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
-    #define INSTRUCTIONS_NB 2
+    #define INSTRUCTIONS_NB 1
 // The printed line length is equal to 65
 // 32 bytes = 64 (2 chars for hexadecimal) + 1 for \n
     #define LINE_LENGTH     65
     #define BYTES_PER_LINE     32
+
+    #define NB_INSTRUCTIONS 16
 
     #include <stdlib.h>
 
@@ -54,6 +56,12 @@ bool is_cell_taken(champions_t *champ, int pos);
 bool compare_champ_cell(virtual_machine_t *vm, int pos);
 champions_t *get_champion_to_place(virtual_machine_t *vm);
 int vm_loop(virtual_machine_t *vm);
+const op_t *get_instruction(int opcode);
+instructions_params_t *init_instruction_params(
+    virtual_machine_t *vm, int cycles, champions_t *champ);
+void free_instruction_params(instructions_params_t *params);
+int update_prog_counter(virtual_machine_t *vm,
+    champions_t *champ, const op_t *op);
 
 // CHAMPIONS
 champions_t *get_champs_with_options(char **list);
@@ -64,6 +72,7 @@ int fill_struct_champions(char *file, champions_t **champ, int id,
 void sort_champs(champions_t **champ);
 void manage_adress(champions_t *champ);
 int get_total_champs(champions_t **head);
+void update_champs_cycle_to_wait(virtual_machine_t *vm);
 
 // PARSING
 int is_valid_magic(FILE *fd);
