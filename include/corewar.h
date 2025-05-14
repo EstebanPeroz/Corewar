@@ -64,6 +64,12 @@ int handle_or(instructions_params_t *params);
 
 bool valid_args(instructions_params_t *params);
 int get_value_with_type(instructions_params_t *params, int idx);
+int handle_xor(instructions_params_t *params);
+
+// INSTRUCTIONS TOOLS
+
+int get_value_with_type(instructions_params_t *params, int idx);
+bool valid_args(instructions_params_t *params);
 
 // VM
 
