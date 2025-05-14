@@ -39,6 +39,9 @@
     #define MAX_BIN_BYTES 0b11
     #define MAX_HEXA_BYTES 0xFF
 
+    #define SUBTRACTION_MARK -
+    #define ADDITION_MARK +
+
     #include <stdlib.h>
 
     #include "structs.h"
@@ -58,6 +61,7 @@ int handle_st(instructions_params_t *params);
 int handle_sti(instructions_params_t *params);
 int handle_and(instructions_params_t *params);
 int handle_aff(instructions_params_t *params);
+int handle_sub(instructions_params_t *params);
 int handle_or(instructions_params_t *params);
 
 // INSTRUCTIONS TOOLS

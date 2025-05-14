@@ -36,3 +36,16 @@ Test(corewar, test_handle_aff, .init = redirect_all_std)
     cr_assert_stdout_eq_str("0");
 }
 
+Test(corewar, invalid_registers_aff, .init = redirect_all_std)
+{
+    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    
+    fill_vm(5, av, vm);
+    vm->champion->prog_counter += aff_call;
+    instructions_params_t *params = init_instruction_params(vm, 0, vm->champion, AFF_ID + 1);
+    params->values[0] = -84;
+    vm->champion->registers[0] = 48;
+    int res = handle_aff(params);
+    cr_assert_eq(res, EXIT_FAILURE);
+}

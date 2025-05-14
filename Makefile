@@ -44,6 +44,7 @@ SRC 		= 	src/main.c									\
 				src/instructions/handle_sti.c				\
 				src/instructions/handle_and.c				\
 				src/instructions/handle_aff.c 				\
+				src/instructions/handle_sub.c				\
 				src/instructions/handle_or.c 				\
 				src/instructions/handle_xor.c				\
 				src/champions/set_cycle_to_wait.c			\
@@ -69,6 +70,7 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/tests_sti.c 							\
 				tests/tests_and.c 							\
 				tests/test_aff.c 							\
+				tests/tests_sub.c 							\
 				tests/tests_or.c 							\
 				tests/tests_xor.c 							\
 
