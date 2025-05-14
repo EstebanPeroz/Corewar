@@ -50,6 +50,8 @@ int handle_ld(instructions_params_t *params);
 int handle_zjmp(instructions_params_t *params);
 int handle_fork(instructions_params_t *params);
 int handle_lfork(instructions_params_t *params);
+int handle_add(instructions_params_t *params);
+int handle_st(instructions_params_t *params);
 
 // VM
 
