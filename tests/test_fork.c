@@ -47,7 +47,7 @@ Test(corewar, test_handle_lfork, .init = redirect_all_std)
     
     fill_vm(5, av, vm);
     vm->champion->prog_counter += fork_call;
-    instructions_params_t params = { vm, 1, vm->champion, 0x0c, 1 , {0}, {0} };
+    instructions_params_t params = { vm, 1, vm->champion, LFORK_ID + 1, 1 , {0}, {0} };
     if (vm->arena[vm->champion->prog_counter] != 0x0c) {
         printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
         fflush(NULL);
