@@ -22,7 +22,7 @@ int handle_sub(instructions_params_t *params)
         return EXIT_FAILURE;
     reg1_content = params->champ->registers[params->values[0] - 1];
     reg2_content = params->champ->registers[params->values[1] - 1];
-    result = reg1_content SUBSTRACTION_MARK reg2_content;
+    result = reg1_content SUBTRACTION_MARK reg2_content;
     params->champ->carry = (result == 0) ? 1 : 0;
     params->champ->registers[params->values[2] - 1] = result;
     return 0;
