@@ -26,7 +26,7 @@ Test(corewar, test_handle_xor_reg_dir)
     instructions_params_t params = {
         .vm = vm,
         .champ = vm->champion,
-        .instruction = AND_ID,
+        .instruction = XOR_ID,
         .nb_params = 3,
         .values = {2, dir_value, 1},
         .types = {T_REG, T_DIR, T_REG}
