@@ -10,8 +10,8 @@
 
 int handle_fork(instructions_params_t *params)
 {
-    short new_adress = bytes_to_short(params->vm->arena +
-        (params->champ->prog_counter + 1) % MEM_SIZE);
+    short new_adress = bytes_to_short(params->vm->arena,
+        params->champ->prog_counter);
 
     new_adress = params->champ->prog_counter + new_adress % IDX_MOD;
     fill_struct_champions(params->champ->file,
