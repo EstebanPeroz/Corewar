@@ -14,17 +14,12 @@ void free_instruction_params(instructions_params_t *params)
 
 int read_bytes(unsigned char *arena, int start, int size)
 {
-    unsigned char bytes[4] = {0};
-
-    for (int i = 0; i < size; i++) {
-        bytes[i] = arena[(start + i) % MEM_SIZE];
-    }
     if (size == 2)
-        return bytes_to_short(bytes);
+        return bytes_to_short(arena, start);
     if (size == 4)
-        return bytes_to_int(bytes);
+        return bytes_to_int(arena, start);
     if (size == 1)
-        return bytes[0];
+        return arena[start];
     return 0;
 }
 

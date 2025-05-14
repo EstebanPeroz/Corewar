@@ -5,12 +5,11 @@
 ** Handle lfork
 */
 #include "corewar.h"
-#include "op.h"
 #include "structs.h"
 
 int handle_lfork(instructions_params_t *params)
 {
-    short new_adress = bytes_to_short(params->vm->arena +
+    short new_adress = bytes_to_short(params->vm->arena,
         params->champ->prog_counter + 1);
 
     new_adress = params->champ->prog_counter + new_adress;

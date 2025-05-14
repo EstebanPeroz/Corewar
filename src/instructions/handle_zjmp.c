@@ -14,7 +14,7 @@ int handle_zjmp(instructions_params_t *params)
 
     if (params->champ->carry != 1)
         return 0;
-    index = bytes_to_short(params->vm->arena +
+    index = bytes_to_short(params->vm->arena,
         params->champ->prog_counter + 1);
     params->champ->prog_counter += index % IDX_MOD;
     params->champ->prog_counter %= MEM_SIZE;

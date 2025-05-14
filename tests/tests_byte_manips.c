@@ -18,7 +18,7 @@ Test(corewar, test_reverse_byte)
     bytes[1] = 0;
     bytes[2] = 0;
     bytes[3] = 1;
-    int result = bytes_to_int(bytes);
+    int result = bytes_to_int(bytes, 0);
 
     cr_assert_eq(result, 1);
 }
@@ -30,7 +30,7 @@ Test(corewar, test_reverse_byte2)
     bytes[1] = 0;
     bytes[2] = 1;
     bytes[3] = 2;
-    int result = bytes_to_int(bytes);
+    int result = bytes_to_int(bytes, 0);
 
     cr_assert_eq(result, 258);
 }
@@ -40,7 +40,7 @@ Test(corewar, test_bytes_to_short)
     unsigned char bytes[2];
     bytes[0] = 0xff;
     bytes[1] = 0xfb;
-    short result = bytes_to_short(bytes);
+    short result = bytes_to_short(bytes, 0);
 
     cr_assert_eq(result, -5);
 }
