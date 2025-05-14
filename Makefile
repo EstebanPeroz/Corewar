@@ -44,6 +44,7 @@ SRC 		= 	src/main.c									\
 				src/instructions/handle_sti.c				\
 				src/instructions/handle_and.c				\
 				src/instructions/handle_aff.c 				\
+				src/instructions/handle_or.c 				\
 				src/champions/set_cycle_to_wait.c			\
 				src/vm/get_instructions.c 					\
 				src/struct/instructions_struct_process.c	\
