@@ -39,7 +39,7 @@
     #define MAX_BIN_BYTES 0b11
     #define MAX_HEXA_BYTES 0xFF
 
-    #define SUBSTRACTION_MARK -
+    #define SUBTRACTION_MARK -
     #define ADDITION_MARK +
 
     #include <stdlib.h>
