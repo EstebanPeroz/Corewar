@@ -116,7 +116,7 @@ Test(corewar, invalid_register_first, .init = redirect_all_std)
     cr_assert_eq(value, 0);
 }
 
-Test(corewar, sti_nvalid_type, .init = redirect_all_std)
+Test(corewar, sti_invalid_type, .init = redirect_all_std)
 {
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     champions_t *champ = calloc(1, sizeof(champions_t));
