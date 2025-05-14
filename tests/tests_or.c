@@ -18,7 +18,7 @@ static void redirect_all_std(void)
 
 Test(corewar, test_handle_or_reg_di, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(3, av, vm);
     vm->champion->registers[1] = 50;
@@ -40,7 +40,7 @@ Test(corewar, test_handle_or_reg_di, .init = redirect_all_std)
 
 Test(corewar, test_handle_or_reg_ind, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(3, av, vm);
     vm->champion->registers[1] = 0b11110000;
@@ -66,7 +66,7 @@ Test(corewar, test_handle_or_reg_ind, .init = redirect_all_std)
 
 Test(corewar, invalid_register_first_parameter_or, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(3, av, vm);
     vm->champion->registers[1] = 50;
@@ -88,7 +88,7 @@ Test(corewar, invalid_register_first_parameter_or, .init = redirect_all_std)
 
 Test(corewar, invalid_register_others_parameters_or, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(3, av, vm);
     vm->champion->registers[1] = 50;
