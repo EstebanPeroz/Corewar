@@ -37,6 +37,7 @@
     #define NB_INSTRUCTIONS 16
 
     #define MAX_BIN_BYTES 0b11
+    #define MAX_HEXA_BYTES 0xFF
 
     #include <stdlib.h>
 
@@ -83,6 +84,8 @@ int update_prog_counter(virtual_machine_t *vm,
     champions_t *champ, const op_t *op);
 unsigned char get_coding_byte(virtual_machine_t *vm, int pc);
 int get_params_size(int params, const op_t *op);
+bool is_valid_register(int reg);
+void put_int_in_arena(unsigned char *arena, int adrs, int value);
 
 // CHAMPIONS
 champions_t *get_champs_with_options(char **list);
