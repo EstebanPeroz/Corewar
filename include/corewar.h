@@ -48,6 +48,7 @@
 int handle_live(instructions_params_t *params);
 int handle_ld(instructions_params_t *params);
 int handle_zjmp(instructions_params_t *params);
+int handle_lld(instructions_params_t *params);
 int handle_fork(instructions_params_t *params);
 int handle_lfork(instructions_params_t *params);
 
@@ -65,6 +66,7 @@ int handle_instructions(virtual_machine_t *vm, int cycles);
 int get_winner(virtual_machine_t *vm);
 int reset_cycles(virtual_machine_t *vm, int *cycles);
 int fill_vm(int ac, char **av, virtual_machine_t *vm);
+int read_bytes(unsigned char *arena, int start, int size);
 virtual_machine_t *init_virtual_machine(int cycle_to_tump,
     int nb_processus);
 void free_virtual_machine(virtual_machine_t *virtual_machine);
