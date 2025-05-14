@@ -49,7 +49,7 @@ fn parse_args() -> (String, String) {
 fn main() {
     let (test_file_or_directory, corewar_binary) = parse_args();
     let mut color_output = StandardStream::stdout(ColorChoice::Always);
-    let mut errors_file = open_errors_file("ERRORS.txt");
+    let mut errors_file = open_errors_file("errors.txt");
 
     let tests = collect_tests(&test_file_or_directory);
 
