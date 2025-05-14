@@ -2,7 +2,6 @@
 vgcore.*
 *.o
 *.a
-*.json
 *.gc*
 asm
 corewar
