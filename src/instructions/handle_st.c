@@ -21,7 +21,7 @@ int handle_st(instructions_params_t *params)
     int dest = params->values[1];
     int value = 0;
 
-    if (!is_valid_register(reg_src_content))
+    if (params->types[0] != T_REG || !is_valid_register(reg_src_content))
         return EXIT_FAILURE;
     value = params->champ->registers[reg_src_content - 1];
     if (params->types[1] == T_REG) {

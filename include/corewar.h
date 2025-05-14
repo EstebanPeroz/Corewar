@@ -52,6 +52,7 @@ int handle_fork(instructions_params_t *params);
 int handle_lfork(instructions_params_t *params);
 int handle_add(instructions_params_t *params);
 int handle_st(instructions_params_t *params);
+int handle_sti(instructions_params_t *params);
 
 // VM
 
@@ -88,6 +89,7 @@ unsigned char get_coding_byte(virtual_machine_t *vm, int pc);
 int get_params_size(int params, const op_t *op);
 bool is_valid_register(int reg);
 void put_int_in_arena(unsigned char *arena, int adrs, int value);
+int read_bytes(unsigned char *arena, int start, int size);
 
 // CHAMPIONS
 champions_t *get_champs_with_options(char **list);

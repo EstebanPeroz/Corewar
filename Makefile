@@ -40,11 +40,14 @@ SRC 		= 	src/main.c									\
 				src/instructions/handle_zjmp.c				\
 				src/instructions/handle_ld.c				\
 				src/instructions/handle_add.c 				\
+				src/instructions/handle_st.c				\
+				src/instructions/handle_sti.c				\
 				src/champions/set_cycle_to_wait.c			\
 				src/vm/get_instructions.c 					\
 				src/struct/instructions_struct_process.c	\
 				src/vm/moove_prog_counter.c					\
 				src/vm/is_valid_register.c 					\
+				src/vm/write_into_arena.c					\
 
 OBJ 		= 	$(SRC:.c=.o)
 
@@ -58,6 +61,8 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/test_ld.c 							\
 				tests/test_fork.c 							\
 				tests/tests_add.c 							\
+				tests/tests_st.c 							\
+				tests/tests_sti.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)
