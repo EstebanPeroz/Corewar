@@ -41,3 +41,42 @@ int handle_lld(instructions_params_t *params)
         params->champ->carry = 1;
     return 0;
 }
+
+// values[0] is the adress to read_bytes
+// values[1] is the value to add to the previous one
+// values[2] is the register
+int handle_ldi(instructions_params_t *params)
+{
+    int load_place = (params->champ->prog_counter +
+        params->values[0] % IDX_MOD) % MEM_SIZE;
+
+    if (load_place < 0)
+        load_place += MEM_SIZE;
+    params->champ->carry = 0;
+    if (params->values[2] <= 0 || params->values[2] > 16)
+        return 1;
+    params->champ->registers[params->values[2] - 1]
+        = read_bytes(params->vm->arena, load_place, IND_SIZE)
+        + params->values[1];
+    if (params->champ->registers[params->values[2] - 1] == 0)
+        params->champ->carry = 1;
+    return 0;
+}
+
+int handle_lldi(instructions_params_t *params)
+{
+    int load_place = (params->champ->prog_counter +
+        params->values[0]) % MEM_SIZE;
+
+    if (load_place < 0)
+        load_place += MEM_SIZE;
+    params->champ->carry = 0;
+    if (params->values[2] <= 0 || params->values[2] > 16)
+        return 1;
+    params->champ->registers[params->values[2] - 1]
+        = read_bytes(params->vm->arena, load_place, IND_SIZE)
+        + params->values[1];
+    if (params->champ->registers[params->values[2] - 1] == 0)
+        params->champ->carry = 1;
+    return 0;
+}

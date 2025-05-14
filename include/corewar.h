@@ -49,6 +49,8 @@ int handle_live(instructions_params_t *params);
 int handle_ld(instructions_params_t *params);
 int handle_zjmp(instructions_params_t *params);
 int handle_lld(instructions_params_t *params);
+int handle_ldi(instructions_params_t *params);
+int handle_lldi(instructions_params_t *params);
 int handle_fork(instructions_params_t *params);
 int handle_lfork(instructions_params_t *params);
 
