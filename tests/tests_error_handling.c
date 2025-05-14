@@ -17,6 +17,14 @@ static void redirect_all_std(void)
     cr_redirect_stderr();
 }
 
+Test(corewar, no_args, .init = redirect_all_std)
+{
+    char *av[] = { "./corewar", NULL};
+    
+    int ret = start_corewar(0, av);
+    cr_assert_eq(ret, 84);
+}
+
 Test(corewar, basic_parsing, .init = redirect_all_std)
 {
     char *av[] = { "./corewar", "tests/pdd.cor", "tests/abel.cor", NULL};
