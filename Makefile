@@ -55,6 +55,7 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/test_dump.c 							\
 				tests/tests_byte_manips.c 					\
 				tests/test_zjmp.c 							\
+				tests/test_ld.c 							\
 				tests/test_fork.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))

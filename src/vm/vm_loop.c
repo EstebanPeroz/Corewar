@@ -11,7 +11,7 @@
 #include <string.h>
 
 int (* const funcs[INSTRUCTIONS_NB])(instructions_params_t *) = {
-    handle_live
+    handle_live, handle_ld
 };
 
 static void call_instruction_functions(virtual_machine_t *vm,
@@ -23,7 +23,7 @@ static void call_instruction_functions(virtual_machine_t *vm,
     if (!op)
         return;
     params = init_instruction_params(vm, cycles, champ, opcode);
-    if (!params)
+    if (!params || opcode > INSTRUCTIONS_NB)
         return;
     funcs[opcode - 1](params);
     free_instruction_params(params);
