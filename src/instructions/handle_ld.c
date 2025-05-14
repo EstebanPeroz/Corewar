@@ -16,7 +16,7 @@ int handle_ld(instructions_params_t *params)
     if (load_place < 0)
         load_place += MEM_SIZE;
     params->champ->carry = 0;
-    if (params->values[1] <= 0 || params->values[1] > 16)
+    if (!is_valid_register(params->values[1]))
         return 1;
     params->champ->registers[params->values[1] - 1]
         = read_bytes(params->vm->arena, load_place, REG_SIZE);
@@ -33,7 +33,7 @@ int handle_lld(instructions_params_t *params)
     if (load_place < 0)
         load_place += MEM_SIZE;
     params->champ->carry = 0;
-    if (params->values[1] <= 0 || params->values[1] > 16)
+    if (!is_valid_register(params->values[1]))
         return 1;
     params->champ->registers[params->values[1] - 1] =
         read_bytes(params->vm->arena, load_place, REG_SIZE);
@@ -53,7 +53,7 @@ int handle_ldi(instructions_params_t *params)
     if (load_place < 0)
         load_place += MEM_SIZE;
     params->champ->carry = 0;
-    if (params->values[2] <= 0 || params->values[2] > 16)
+    if (!is_valid_register(params->values[2]))
         return 1;
     params->champ->registers[params->values[2] - 1]
         = read_bytes(params->vm->arena, load_place, IND_SIZE)
@@ -71,7 +71,7 @@ int handle_lldi(instructions_params_t *params)
     if (load_place < 0)
         load_place += MEM_SIZE;
     params->champ->carry = 0;
-    if (params->values[2] <= 0 || params->values[2] > 16)
+    if (!is_valid_register(params->values[2]))
         return 1;
     params->champ->registers[params->values[2] - 1]
         = read_bytes(params->vm->arena, load_place, IND_SIZE)
