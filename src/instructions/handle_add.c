@@ -16,8 +16,9 @@ int handle_add(instructions_params_t *params)
     if (params->types[0] != T_REG || params->types[1] != T_REG
         || params->types[2] != T_REG)
         return EXIT_FAILURE;
-    if (!is_valid_register(params->values[0] || params->values[1]
-        || params->values[2]))
+    if (!is_valid_register(params->values[0])
+        || !is_valid_register(params->values[1])
+        || !is_valid_register(params->values[2]))
         return EXIT_FAILURE;
     reg1_content = params->champ->registers[params->values[0] - 1];
     reg2_content = params->champ->registers[params->values[1] - 1];
