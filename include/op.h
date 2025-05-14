@@ -47,6 +47,7 @@
     #define DIR_SIZE 4
     #define REG_SIZE 1
     #define HEADER_SIZE 2
+    #define DEFAULT_SIZE -1
 
 /*
 ** header

@@ -22,7 +22,7 @@ static void call_instruction_functions(virtual_machine_t *vm,
 
     if (!op)
         return;
-    params = init_instruction_params(vm, cycles, champ);
+    params = init_instruction_params(vm, cycles, champ, opcode);
     if (!params || opcode > INSTRUCTIONS_NB)
         return;
     funcs[opcode - 1](params);
