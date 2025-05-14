@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "Test simple - deux champions valides",
+    "command": "./corewar champions/valid1.cor champions/valid2.cor",
+    "expected_return": 0,
+    "expected_output": "The game has ended"
+  },
+  {
+    "id": 2,
+    "name": "Test erreur - champion manquant",
+    "command": "./corewar champions/valid1.cor",
+    "expected_return": 84,
+    "expected_output": "Error: Not enough champions"
+  },
+  {
+    "id": 3,
+    "name": "Test erreur - fichier invalide",
+    "command": "./corewar champions/invalid_file.cor champions/valid2.cor",
+    "expected_return": 84,
+    "expected_output": "Invalid champion file format"
+  },
+  {
+    "id": 4,
+    "name": "Test avec sortie partielle ignorée",
+    "command": "./corewar champions/valid1.cor champions/valid2.cor",
+    "expected_return": 0
+  }
+]
