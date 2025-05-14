@@ -68,6 +68,7 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/tests_sti.c 							\
 				tests/tests_and.c 							\
 				tests/test_aff.c 							\
+				tests/tests_sub.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)
