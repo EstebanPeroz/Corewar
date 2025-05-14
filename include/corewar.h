@@ -55,6 +55,7 @@ int handle_fork(instructions_params_t *params);
 int handle_lfork(instructions_params_t *params);
 int handle_add(instructions_params_t *params);
 int handle_st(instructions_params_t *params);
+int handle_and(instructions_params_t *params);
 int handle_aff(instructions_params_t *params);
 
 // VM
