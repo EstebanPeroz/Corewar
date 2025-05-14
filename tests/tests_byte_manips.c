@@ -42,6 +42,5 @@ Test(corewar, test_bytes_to_short)
     bytes[1] = 0xfb;
     short result = bytes_to_short(bytes);
 
-    printf("\n\n%d\n\n", result);
     cr_assert_eq(result, -5);
 }
