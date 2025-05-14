@@ -20,7 +20,7 @@ fn log_error(test: &Test, output: &str, return_code: i32, errors_file: &mut File
 
 fn execute_program(program_path: &str, command: &str) -> std::process::Output {
     Command::new(program_path)
-        .arg(command)
+        .args(command.split_whitespace())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
