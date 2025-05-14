@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2025
 ** Corewar
 ** File description:
-** Handle ld instruction
+** Handle aff instruction
 */
 
 #include "corewar.h"
