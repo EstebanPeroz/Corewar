@@ -42,6 +42,7 @@ SRC 		= 	src/main.c									\
 				src/instructions/handle_add.c 				\
 				src/instructions/handle_st.c				\
 				src/instructions/handle_sti.c				\
+				src/instructions/handle_and.c				\
 				src/instructions/handle_aff.c 				\
 				src/champions/set_cycle_to_wait.c			\
 				src/vm/get_instructions.c 					\
@@ -64,6 +65,7 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/tests_add.c 							\
 				tests/tests_st.c 							\
 				tests/tests_sti.c 							\
+				tests/tests_and.c 							\
 				tests/test_aff.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))
