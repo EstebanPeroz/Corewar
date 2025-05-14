@@ -58,7 +58,7 @@ Test(corewar, test_handle_st_indirect, .init = redirect_all_std)
     cr_assert_eq(value, 0x12345678);
 }
 
-Test(corewar, not_a_registre_first_params, .init = redirect_all_std)
+Test(corewar, not_a_register_first_params, .init = redirect_all_std)
 {
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     champions_t *champ = calloc(1, sizeof(champions_t));
