@@ -33,7 +33,6 @@
 // 32 bytes = 64 (2 chars for hexadecimal) + 1 for \n
     #define LINE_LENGTH     65
     #define BYTES_PER_LINE     32
-
     #define NB_INSTRUCTIONS 16
 
     #define MAX_BIN_BYTES 0b11
