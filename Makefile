@@ -44,6 +44,7 @@ SRC 		= 	src/main.c									\
 				src/instructions/handle_sti.c				\
 				src/instructions/handle_and.c				\
 				src/instructions/handle_aff.c 				\
+				src/instructions/handle_xor.c				\
 				src/champions/set_cycle_to_wait.c			\
 				src/vm/get_instructions.c 					\
 				src/struct/instructions_struct_process.c	\
@@ -67,6 +68,7 @@ TESTS   	=	tests/tests_error_handling.c 				\
 				tests/tests_sti.c 							\
 				tests/tests_and.c 							\
 				tests/test_aff.c 							\
+				tests/tests_xor.c 							\
 
 TESTS += $(filter-out src/main.c, $(SRC))
 TEST_OBJ	=	$(TESTS:.c=.o)

@@ -58,6 +58,12 @@ int handle_st(instructions_params_t *params);
 int handle_sti(instructions_params_t *params);
 int handle_and(instructions_params_t *params);
 int handle_aff(instructions_params_t *params);
+int handle_xor(instructions_params_t *params);
+
+// INSTRUCTIONS TOOLS
+
+int get_value_with_type(instructions_params_t *params, int idx);
+bool valid_args(instructions_params_t *params);
 
 // VM
 

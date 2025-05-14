@@ -7,7 +7,7 @@
 
 #include "corewar.h"
 
-static int get_value_with_type(instructions_params_t *params, int idx)
+int get_value_with_type(instructions_params_t *params, int idx)
 {
     int final_value = 0;
     int adresse_to_print = 0;
@@ -25,7 +25,7 @@ static int get_value_with_type(instructions_params_t *params, int idx)
     return final_value;
 }
 
-static bool valid_args(instructions_params_t *params)
+bool valid_args(instructions_params_t *params)
 {
     if (!is_valid_register(params->values[2]) ||
         (params->types[0] == T_REG && !is_valid_register(params->values[0])) ||
