@@ -1,8 +1,8 @@
 use crate::Test;
+use ansi_term::Colour::{Green, Red};
 use std::fs::File;
 use std::io::Write;
 use std::process::{Command, Stdio};
-use termcolor::{Color, ColorSpec, StandardStream, WriteColor};
 
 fn log_error(test: &Test, output: &str, return_code: i32, errors_file: &mut File) {
     writeln!(errors_file, "===========Test ID {}===========", test.id).unwrap();
@@ -41,37 +41,29 @@ fn compare_results(output: &std::process::Output, test: &Test) -> (bool, bool) {
     (test_passed, test_failed)
 }
 
-fn display_result(
-    test: &Test,
-    test_passed: bool,
-    test_failed: bool,
-    color_output: &mut StandardStream,
-) {
+fn display_result(test: &Test, test_passed: bool, test_failed: bool) {
     if test_passed && !test_failed {
-        color_output
-            .set_color(ColorSpec::new().set_fg(Some(Color::Green)))
-            .unwrap();
-        println!("✓ Test passed: {}", test.name);
+        println!(
+            "\x1b[32m✓ Test {} {} {}\x1b[0m",
+            Green.bold().paint((test.id).to_string()),
+            Green.bold().paint(("passed : ").to_string()),
+            Green.paint((test.name).to_string())
+        );
     } else {
-        color_output
-            .set_color(ColorSpec::new().set_fg(Some(Color::Red)))
-            .unwrap();
-        println!("✗ Test failed: {}", test.name);
+        println!(
+            "\x1b[31m✗ Test {} {} {}\x1b[0m",
+            Red.bold().paint((test.id).to_string()),
+            Red.bold().paint(("failed: ").to_string()),
+            Red.paint((test.name).to_string())
+        );
     }
-    color_output.reset().unwrap();
 }
 
-fn run_test(
-    test: &Test,
-    program_path: &str,
-    color_output: &mut StandardStream,
-    errors_file: &mut File,
-) -> bool {
-
+fn run_test(test: &Test, program_path: &str, errors_file: &mut File) -> bool {
     let output = execute_program(program_path, &test.command);
     let (test_passed, test_failed) = compare_results(&output, test);
 
-    display_result(test, test_passed, test_failed, color_output);
+    display_result(test, test_passed, test_failed);
 
     if !test_passed || test_failed {
         log_error(
@@ -88,7 +80,6 @@ fn run_test(
 pub fn run_all_tests(
     tests: &[Test],
     corewar_binary: &str,
-    color_output: &mut StandardStream,
     errors_file: &mut File,
 ) -> (usize, usize, usize) {
     let mut total_tests = 0;
@@ -97,7 +88,7 @@ pub fn run_all_tests(
 
     for test in tests {
         total_tests += 1;
-        if run_test(test, corewar_binary, color_output, errors_file) {
+        if run_test(test, corewar_binary, errors_file) {
             passed_tests += 1;
         } else {
             failed_tests += 1;
