@@ -8,75 +8,92 @@
 #include "corewar.h"
 #include "op.h"
 
-int handle_ld(instructions_params_t *params)
+int handle_ld(instructions_params_t *pa)
 {
-    int load_place = (params->champ->prog_counter +
-        params->values[0] % IDX_MOD) % MEM_SIZE;
+    int value = 0;
+    int load_place = 0;
 
-    if (load_place < 0)
-        load_place += MEM_SIZE;
-    params->champ->carry = 0;
-    if (!is_valid_register(params->values[1]))
-        return 1;
-    params->champ->registers[params->values[1] - 1]
-        = read_bytes(params->vm->arena, load_place, REG_SIZE);
-    if (params->champ->registers[params->values[1] - 1] == 0)
-        params->champ->carry = 1;
+    if (!(pa->types[1] == REG_SIZE && is_valid_register(pa->values[1])))
+        return EXIT_FAILURE;
+    if (pa->types[0] == T_DIR)
+        value = pa->values[0];
+    else if (pa->types[0] == T_IND) {
+        load_place = (pa->champ->prog_counter
+            + (pa->values[0] % IDX_MOD)) % MEM_SIZE;
+        value = read_bytes(pa->vm->arena, load_place, REG_SIZE);
+    } else {
+        return EXIT_FAILURE;
+    }
+    pa->champ->registers[pa->values[1] - 1] = value;
+    pa->champ->carry = (value == 0) ? 1 : 0;
     return 0;
 }
 
-int handle_lld(instructions_params_t *params)
+int handle_lld(instructions_params_t *pa)
 {
-    int load_place = (params->champ->prog_counter +
-        params->values[0]) % MEM_SIZE;
+    int value = 0;
+    int load_place = 0;
 
-    if (load_place < 0)
-        load_place += MEM_SIZE;
-    params->champ->carry = 0;
-    if (!is_valid_register(params->values[1]))
-        return 1;
-    params->champ->registers[params->values[1] - 1] =
-        read_bytes(params->vm->arena, load_place, REG_SIZE);
-    if (params->champ->registers[params->values[1] - 1] == 0)
-        params->champ->carry = 1;
+    if (!(pa->types[1] == REG_SIZE && is_valid_register(pa->values[1])))
+        return EXIT_FAILURE;
+    if (pa->types[0] == T_DIR)
+        value = pa->values[0];
+    else if (pa->types[0] == T_IND) {
+        load_place = (pa->champ->prog_counter
+            + pa->values[0]) % MEM_SIZE;
+        value = read_bytes(pa->vm->arena, load_place, REG_SIZE);
+    } else {
+        return EXIT_FAILURE;
+    }
+    pa->champ->registers[pa->values[1] - 1] = value;
+    pa->champ->carry = (value == 0) ? 1 : 0;
     return 0;
 }
 
-// values[0] is the adress to read_bytes
-// values[1] is the value to add to the previous one
-// values[2] is the register
-int handle_ldi(instructions_params_t *params)
+int handle_ldi(instructions_params_t *p)
 {
-    int load_place = (params->champ->prog_counter +
-        params->values[0] % IDX_MOD) % MEM_SIZE;
+    int v1 = p->values[0];
+    int v2 = p->values[1];
+    int dest = p->values[2];
+    int load_address = 0;
+    int result = 0;
 
-    if (load_place < 0)
-        load_place += MEM_SIZE;
-    params->champ->carry = 0;
-    if (!is_valid_register(params->values[2]))
-        return 1;
-    params->champ->registers[params->values[2] - 1]
-        = read_bytes(params->vm->arena, load_place, IND_SIZE)
-        + params->values[1];
-    if (params->champ->registers[params->values[2] - 1] == 0)
-        params->champ->carry = 1;
+    if (!(dest == REG_SIZE && is_valid_register(dest)))
+        return EXIT_FAILURE;
+    if (p->types[0] == T_REG)
+        v1 = p->champ->registers[v1 - 1];
+    else if (p->types[0] == T_IND)
+        v1 = read_bytes(p->vm->arena,
+            (p->champ->prog_counter + (v1 % IDX_MOD)) % MEM_SIZE, REG_SIZE);
+    if (p->types[1] == T_REG)
+        v2 = p->champ->registers[v2 - 1];
+    load_address = (p->champ->prog_counter + ((v1 + v2) % IDX_MOD)) % MEM_SIZE;
+    result = read_bytes(p->vm->arena, load_address, REG_SIZE);
+    p->champ->registers[dest - 1] = result;
+    p->champ->carry = (result == 0);
     return 0;
 }
 
-int handle_lldi(instructions_params_t *params)
+int handle_lldi(instructions_params_t *p)
 {
-    int load_place = (params->champ->prog_counter +
-        params->values[0]) % MEM_SIZE;
+    int v1 = p->values[0];
+    int v2 = p->values[1];
+    int dest = p->values[2];
+    int load_address = 0;
+    int result = 0;
 
-    if (load_place < 0)
-        load_place += MEM_SIZE;
-    params->champ->carry = 0;
-    if (!is_valid_register(params->values[2]))
-        return 1;
-    params->champ->registers[params->values[2] - 1]
-        = read_bytes(params->vm->arena, load_place, IND_SIZE)
-        + params->values[1];
-    if (params->champ->registers[params->values[2] - 1] == 0)
-        params->champ->carry = 1;
+    if (!(dest == REG_SIZE && is_valid_register(dest)))
+        return EXIT_FAILURE;
+    if (p->types[0] == T_REG)
+        v1 = p->champ->registers[v1 - 1];
+    else if (p->types[0] == T_IND)
+        v1 = read_bytes(p->vm->arena,
+            (p->champ->prog_counter + v1) % MEM_SIZE, REG_SIZE);
+    if (p->types[1] == T_REG)
+        v2 = p->champ->registers[v2 - 1];
+    load_address = (p->champ->prog_counter + v1 + v2) % MEM_SIZE;
+    result = read_bytes(p->vm->arena, load_address, REG_SIZE);
+    p->champ->registers[dest - 1] = result;
+    p->champ->carry = (result == 0);
     return 0;
 }
