@@ -4,20 +4,76 @@
     "name": "Simple tests - 2 valid champions",
     "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor",
     "expected_return": 0,
-    "expected_output": ""
+    "expected_output": null
   },
   {
     "id": 102,
     "name": "Simple tests - 3 valid champions",
     "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor",
     "expected_return": 0,
-    "expected_output": ""
+    "expected_output": null
   },
   {
     "id": 103,
-    "name": "Simple tests - 4 valid champions",
+    "name": "Simple tests - 4 valid champions - abel, pdd, tyron, bill",
     "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor ../cor_files/bill.cor",
     "expected_return": 0,
-    "expected_output": ""
+    "expected_output": null
+  },
+  {
+    "id": 104,
+    "name": "Simple tests - 4 valid champions - reverse order",
+    "command": "./corewar ../cor_files/bill.cor ../cor_files/tyron.cor ../cor_files/pdd.cor ../cor_files/abel.cor",
+    "expected_return": 0,
+    "expected_output": null
+  },
+  {
+    "id": 105,
+    "name": "Simple tests - 4 valid champions - reverse order with spaces",
+    "command": "./corewar ../cor_files/bill.cor   ../cor_files/tyron.cor   ../cor_files/pdd.cor   ../cor_files/abel.cor",
+    "expected_return": 0,
+    "expected_output": null
+  },
+  {
+    "id": 106,
+    "name": "Simple tests - 4 valid champions - reverse order with spaces and tabs",
+    "command": "./corewar ../cor_files/bill.cor\t\t../cor_files/tyron.cor\t\t../cor_files/pdd.cor\t\t../cor_files/abel.cor",
+    "expected_return": 0,
+    "expected_output": null
+  },
+  {
+    "id": 107,
+    "name": "Simple tests - 4 valid champions - reverse order with tabs",
+    "command": "./corewar ../cor_files/bill.cor\t../cor_files/tyron.cor\t../cor_files/pdd.cor\t../cor_files/abel.cor",
+    "expected_return": 0,
+    "expected_output": null
+  },
+  {
+    "id": 108,
+    "name": "-h test without arguments",
+    "command": "./corewar -h",
+    "expected_return": 0,
+    "expected_output": "USAGE\n./corewar [-dump nbr_cycle] [[-n prog_number][-a load_adress] prog_name] ..."
+  },
+  {
+    "id": 109,
+    "name": "-h test with arguments",
+    "command": "./corewar -h ../cor_files/abel.cor ../cor_files/pdd.cor",
+    "expected_return": 84,
+    "expected_output": null
+  },
+  {
+    "id": 110,
+    "name": "-h test with spaces",
+    "command": "./corewar    -h   ",
+    "expected_return": 0,
+    "expected_output": "USAGE\n./corewar [-dump nbr_cycle] [[-n prog_number][-a load_adress] prog_name] ..."
+  },
+  {
+    "id": 111,
+    "name": "-h test with tabs",
+    "command": "./corewar \t\t-h\t\t",
+    "expected_return": 0,
+    "expected_output": "USAGE\n./corewar [-dump nbr_cycle] [[-n prog_number][-a load_adress] prog_name] ..."
   }
 ]
