@@ -39,7 +39,7 @@ static void handle_champion_instruction(virtual_machine_t *vm,
     const op_t *op = get_instruction(opcode);
     int new_offset = 0;
 
-    if (is_cooldown(&champ))
+    if (is_cooldown(&champ) || !champ->is_alive)
         return;
     if (!op) {
         champ->prog_counter = (champ->prog_counter + 1) % MEM_SIZE;
