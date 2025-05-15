@@ -19,8 +19,9 @@ fn log_error(test: &Test, output: &str, return_code: i32, errors_file: &mut File
 }
 
 fn execute_program(program_path: &str, command: &str) -> std::process::Output {
+    let command_to_ex = &command[10..];
     Command::new(program_path)
-        .args(command.split_whitespace())
+        .args(command_to_ex.split_whitespace())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped())
         .spawn()
@@ -29,16 +30,18 @@ fn execute_program(program_path: &str, command: &str) -> std::process::Output {
         .expect("Failed to wait on child")
 }
 
-fn compare_results(output: &std::process::Output, test: &Test) -> (bool, bool) {
-    let return_code = output.status.code().unwrap_or(-1);
-    let test_passed = return_code == test.expected_return;
+fn compare_results(output: &std::process::Output, test: &Test) -> bool {
+    let actual_return = output.status.code().unwrap_or(-1);
+    if actual_return != test.expected_return {
+        return false;
+    }
 
-    let output_str = String::from_utf8_lossy(&output.stdout);
-    let test_failed = test_passed
-        && test.expected_output.is_some()
-        && output_str != test.expected_output.as_deref().unwrap_or("");
+    if let Some(expected_output) = &test.expected_output {
+        let actual_output = String::from_utf8_lossy(&output.stdout);
+        return actual_output.trim() == expected_output.trim();
+    }
 
-    (test_passed, test_failed)
+    true
 }
 
 fn display_result(test: &Test, test_passed: bool, test_failed: bool) {
@@ -46,7 +49,7 @@ fn display_result(test: &Test, test_passed: bool, test_failed: bool) {
         println!(
             "\x1b[32m✓ Test {} {} {}\x1b[0m",
             Green.bold().paint((test.id).to_string()),
-            Green.bold().paint(("passed : ").to_string()),
+            Green.bold().paint(("passed: ").to_string()),
             Green.paint((test.name).to_string())
         );
     } else {
@@ -61,20 +64,21 @@ fn display_result(test: &Test, test_passed: bool, test_failed: bool) {
 
 fn run_test(test: &Test, program_path: &str, errors_file: &mut File) -> bool {
     let output = execute_program(program_path, &test.command);
-    let (test_passed, test_failed) = compare_results(&output, test);
+    let test_passed = compare_results(&output, test);
 
-    display_result(test, test_passed, test_failed);
+    display_result(test, test_passed, !test_passed);
 
-    if !test_passed || test_failed {
+    if !test_passed {
+        let stdout_str = String::from_utf8_lossy(&output.stdout);
         log_error(
             test,
-            &String::from_utf8_lossy(&output.stdout),
+            &stdout_str,
             output.status.code().unwrap_or(-1),
             errors_file,
         );
     }
 
-    test_passed && !test_failed
+    test_passed
 }
 
 pub fn run_all_tests(
