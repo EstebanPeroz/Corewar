@@ -17,11 +17,10 @@ int decrease_cycle_to_die(virtual_machine_t *vm)
     return 0;
 }
 
-int is_cooldown(champions_t **current)
+int is_cooldown(champions_t *current)
 {
-    if ((*current)->cylces_to_wait > 0) {
-        (*current)->cylces_to_wait--;
-        *current = (*current)->next;
+    if (current->cylces_to_wait > 0) {
+        current->cylces_to_wait -= 1;
         return 1;
     }
     return 0;

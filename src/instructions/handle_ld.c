@@ -22,9 +22,6 @@ int handle_ld(instructions_params_t *params)
         = read_bytes(params->vm->arena, load_place, REG_SIZE);
     if (params->champ->registers[params->values[1] - 1] == 0)
         params->champ->carry = 1;
-    printf("chamion: %s ", params->champ->name);
-    printf("prog c: %d ", params->champ->prog_counter);
-    printf("LD: %d\n\n", params->values[0]);
     return 0;
 }
 

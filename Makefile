@@ -81,7 +81,7 @@ TEST_GCNO	=	$(TESTS:.c=.gcno)
 
 INCLUDES	=	-I ./include
 
-CFLAGS 		= -Wall -Wextra -Wshadow $(INCLUDES)
+CFLAGS 		= -Wall -Wextra -Wshadow $(INCLUDES) -g
 
 LDFLAGS		= -Llib -lmy
 

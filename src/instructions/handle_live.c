@@ -32,10 +32,6 @@ int handle_live(instructions_params_t *params)
 
     champ_id = read_bytes(params->vm->arena,
         params->champ->prog_counter + 1, DIR_SIZE);
-    printf("champ_id: %d ", champ_id);
-    printf("chamion: %s ", params->champ->name);
-    printf("prog c: %d Cycles: %d\n\n", params->champ->prog_counter, 
-        params->cycles);
     if (champ_id == -1)
         return -1;
     while (cur != NULL) {

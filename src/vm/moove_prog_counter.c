@@ -12,7 +12,7 @@ unsigned char get_coding_byte(virtual_machine_t *vm, int pc)
     return vm->arena[(pc + 1) % MEM_SIZE];
 }
 
-int get_params_size(int params, const op_t *op)
+int get_params_size(int params, op_t *op)
 {
     if (params == TYPE_REG)
         return REG_SIZE;
@@ -24,7 +24,7 @@ int get_params_size(int params, const op_t *op)
 }
 
 int update_prog_counter(virtual_machine_t *vm,
-    champions_t *champ, const op_t *op)
+    champions_t *champ, op_t *op)
 {
     int new_offset = 1;
     unsigned char coding = get_coding_byte(vm, champ->prog_counter);

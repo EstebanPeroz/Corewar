@@ -79,7 +79,7 @@ int get_alive_champions(virtual_machine_t *vm, int cycles);
 int decrease_cycle_to_die(virtual_machine_t *vm);
 int reset_carry(champions_t *champ);
 void byte_to_hex(unsigned char byte, char *out);
-int is_cooldown(champions_t **current);
+int is_cooldown(champions_t *current);
 void print_live_and_win_message(champions_t *champ);
 int handle_dump(virtual_machine_t *vm, int *last);
 int check_cooldown(champions_t **champ);
@@ -99,14 +99,14 @@ bool is_cell_taken(champions_t *champ, int pos);
 bool compare_champ_cell(virtual_machine_t *vm, int pos);
 champions_t *get_champion_to_place(virtual_machine_t *vm);
 int vm_loop(virtual_machine_t *vm);
-const op_t *get_instruction(int opcode);
+op_t get_instruction(int opcode);
 instructions_params_t *init_instruction_params(
     virtual_machine_t *vm, int cycles, champions_t *champ, int opcode);
 void free_instruction_params(instructions_params_t *params);
 int update_prog_counter(virtual_machine_t *vm,
-    champions_t *champ, const op_t *op);
+    champions_t *champ, op_t *op);
 unsigned char get_coding_byte(virtual_machine_t *vm, int pc);
-int get_params_size(int params, const op_t *op);
+int get_params_size(int params, op_t *op);
 bool is_valid_register(int reg);
 void put_int_in_arena(unsigned char *arena, int adrs, int value);
 int read_bytes(unsigned char *arena, int start, int size);

@@ -20,15 +20,15 @@ int (* const funcs[INSTRUCTIONS_NB])(instructions_params_t *) = {
 static void call_instruction_functions(virtual_machine_t *vm,
     int cycles, champions_t *champ, int opcode)
 {
-    const op_t *op = get_instruction(opcode);
+    const op_t op = get_instruction(opcode);
     instructions_params_t *params = NULL;
 
-    if (!op)
+    if (op.code == 0)
         return;
     params = init_instruction_params(vm, cycles, champ, opcode);
     if (!params || opcode > INSTRUCTIONS_NB)
         return;
-    printf("Instruction: %s at cycles %d\n", op->mnemonique, cycles);
+    printf("%s: Instruction: %s at cycles %d\n", champ->header.prog_name, op.mnemonique, cycles);
     funcs[opcode - 1](params);
     free_instruction_params(params);
 }
@@ -37,19 +37,21 @@ static void handle_champion_instruction(virtual_machine_t *vm,
     champions_t *champ, int cycles)
 {
     unsigned char opcode = vm->arena[champ->prog_counter % MEM_SIZE];
-    const op_t *op = get_instruction(opcode + 1);
+    op_t op = get_instruction(opcode);
     int new_offset = 0;
 
-    if (is_cooldown(&champ) || !champ->is_alive)
+    if (is_cooldown(champ) || !champ->is_alive)
         return;
-    if (!op) {
+    if (op.code == 0) {
         champ->prog_counter = (champ->prog_counter + 1) % MEM_SIZE;
         return;
     }
     call_instruction_functions(vm, cycles, champ, opcode);
-    new_offset += update_prog_counter(vm, champ, op);
+    new_offset += update_prog_counter(vm, champ, &op);
     champ->prog_counter = (champ->prog_counter + new_offset) % MEM_SIZE;
-    champ->cylces_to_wait = op->nbr_cycles;
+    champ->cylces_to_wait = op.nbr_cycles;
+    if (champ->prog_id == 234)
+        printf("champ->cd: %d at cycle %d\n", champ->cylces_to_wait, cycles);
 }
 
 int handle_instructions(virtual_machine_t *vm, int cycles)
