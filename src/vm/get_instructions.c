@@ -10,7 +10,7 @@
 op_t get_instruction(int opcode)
 {
     op_t err = {0, 0, {0}, 0, 0, 0, 0};
-    
+
     if (opcode >= 1 && opcode <= INSTRUCTIONS_NB)
         return op_tab[opcode - 1];
     return err;

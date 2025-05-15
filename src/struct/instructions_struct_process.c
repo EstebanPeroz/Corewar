@@ -23,7 +23,7 @@ int read_bytes(unsigned char *arena, int start, int size)
     return 0;
 }
 
-static void init_types_and_values(virtual_machine_t *vm, champions_t *champ,
+static void fill_types_and_values(virtual_machine_t *vm, champions_t *champ,
     int opcode, instructions_params_t *params)
 {
     op_t op = get_instruction(opcode);
@@ -48,6 +48,14 @@ static void init_types_and_values(virtual_machine_t *vm, champions_t *champ,
     }
 }
 
+static void init_types_values(instructions_params_t *params)
+{
+    for (int i = 0; i < MAX_ARGS_NUMBER; i++) {
+        params->types[i] = 0;
+        params->values[i] = 0;
+    }
+}
+
 instructions_params_t *init_instruction_params(
     virtual_machine_t *vm, int cycles, champions_t *champ, int opcode)
 {
@@ -61,11 +69,12 @@ instructions_params_t *init_instruction_params(
         free(params);
         return NULL;
     }
+    init_types_values(params);
     params->vm = vm;
     params->cycles = cycles;
     params->champ = champ;
     params->instruction = opcode;
     params->nb_params = op.nbr_args;
-    init_types_and_values(vm, champ, opcode, params);
+    fill_types_and_values(vm, champ, opcode, params);
     return params;
 }

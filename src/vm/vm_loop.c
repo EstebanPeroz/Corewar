@@ -28,7 +28,6 @@ static void call_instruction_functions(virtual_machine_t *vm,
     params = init_instruction_params(vm, cycles, champ, opcode);
     if (!params || opcode > INSTRUCTIONS_NB)
         return;
-    printf("%s: Instruction: %s at cycles %d\n", champ->header.prog_name, op.mnemonique, cycles);
     funcs[opcode - 1](params);
     free_instruction_params(params);
 }
@@ -47,11 +46,12 @@ static void handle_champion_instruction(virtual_machine_t *vm,
         return;
     }
     call_instruction_functions(vm, cycles, champ, opcode);
-    new_offset += update_prog_counter(vm, champ, &op);
-    champ->prog_counter = (champ->prog_counter + new_offset) % MEM_SIZE;
+    if (op.code != ZJMP_ID + 1) {
+        new_offset += update_prog_counter(vm, champ, &op);
+        champ->prog_counter = (champ->prog_counter + new_offset) % MEM_SIZE;
+    }
+    op = get_instruction(vm->arena[champ->prog_counter % MEM_SIZE]);
     champ->cylces_to_wait = op.nbr_cycles;
-    if (champ->prog_id == 234)
-        printf("champ->cd: %d at cycle %d\n", champ->cylces_to_wait, cycles);
 }
 
 int handle_instructions(virtual_machine_t *vm, int cycles)

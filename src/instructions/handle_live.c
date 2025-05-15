@@ -26,7 +26,6 @@ static void change_variables(champions_t *cur, virtual_machine_t *vm,
 
 int handle_live(instructions_params_t *params)
 {
-    printf("handle_live: ");
     champions_t *cur = params->vm->champion;
     int champ_id;
 
