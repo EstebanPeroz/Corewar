@@ -6,6 +6,7 @@
 */
 #include "structs.h"
 #include "corewar.h"
+#include <stdbool.h>
 #include <stdio.h>
 
 int reset_cycles(virtual_machine_t *vm, int *cycles)
@@ -31,7 +32,7 @@ int get_alive_champions(virtual_machine_t *vm, int cycles)
         if (current->last_live != -1) {
             vm->alive_champions++;
         } else {
-            current->is_alive = 0;
+            current->is_alive = false;
         }
         current = current->next;
     }
