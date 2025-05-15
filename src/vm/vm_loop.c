@@ -11,7 +11,10 @@
 #include <string.h>
 
 int (* const funcs[INSTRUCTIONS_NB])(instructions_params_t *) = {
-    handle_live, handle_ld
+    handle_live, handle_ld, handle_st, handle_add,
+    handle_sub, handle_and, handle_or, handle_xor,
+    handle_zjmp, handle_ldi, handle_sti, handle_fork,
+    handle_lld, handle_lldi, handle_lfork, handle_aff
 };
 
 static void call_instruction_functions(virtual_machine_t *vm,

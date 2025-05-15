@@ -28,13 +28,11 @@
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
-    #define INSTRUCTIONS_NB 2
+    #define INSTRUCTIONS_NB 16
 // The printed line length is equal to 65
 // 32 bytes = 64 (2 chars for hexadecimal) + 1 for \n
     #define LINE_LENGTH     65
     #define BYTES_PER_LINE     32
-
-    #define NB_INSTRUCTIONS 16
 
     #define MAX_BIN_BYTES 0b11
     #define MAX_HEXA_BYTES 0xFF
