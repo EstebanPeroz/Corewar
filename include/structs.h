@@ -24,7 +24,7 @@ typedef struct champions_s {
     int prog_counter;
     int cylces_to_wait;
     int last_live;
-    int is_alive;
+    bool is_alive;
     bool is_placed;
     unsigned char *code;
     int registers[REG_NUMBER];
