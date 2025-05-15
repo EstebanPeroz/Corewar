@@ -67,7 +67,6 @@ fn run_test(
     color_output: &mut StandardStream,
     errors_file: &mut File,
 ) -> bool {
-    println!("Running test: {}", test.name);
 
     let output = execute_program(program_path, &test.command);
     let (test_passed, test_failed) = compare_results(&output, test);
