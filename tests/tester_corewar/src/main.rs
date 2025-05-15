@@ -18,10 +18,10 @@ pub struct Test {
 }
 
 fn print_summary(total: usize, passed: usize, failed: usize) {
-    println!("\n\x1b[1mTest Summary:\x1b[0m Total: {} | Passed: \x1b[32m{}\x1b[0m | Failed: \x1b[31m{}\x1b[0m", total, passed, failed);
+    println!("\n\x1b[1mTest Summary:\x1b[0m Total: {} | \x1b[32mPassed: {}\x1b[0m | \x1b[31mFailed: {}\x1b[0m", total, passed, failed);
 
     if failed > 0 {
-        println!("Check the errors log in 'errors.txt' for detailed error reports.");
+        println!("\x1b[1mCheck the errors log in 'errors.txt' for detailed error reports.\x1b[0m");
     }
 }
 
