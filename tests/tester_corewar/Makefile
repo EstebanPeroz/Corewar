@@ -9,6 +9,11 @@
 
 all: build
 
+execute:
+	@$(MAKE) --no-print-directory build
+	@./target/release/tester_corewar functional_tests/ ../../corewar
+	@$(MAKE) --no-print-directory clean > /dev/null 2>&1
+
 build:
 	cargo build --release
 
