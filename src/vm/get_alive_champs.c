@@ -30,6 +30,8 @@ int get_alive_champions(virtual_machine_t *vm, int cycles)
     while (current != NULL) {
         if (current->last_live != -1) {
             vm->alive_champions++;
+        } else {
+            current->is_alive = 0;
         }
         current = current->next;
     }

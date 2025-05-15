@@ -32,6 +32,7 @@ static int fill_basic_info(champions_t *champ, int id, int address, char *file)
     champ->next = NULL;
     champ->is_placed = false;
     champ->name = my_strdup(file);
+    champ->is_alive = 1;
     if (champ->name == NULL) {
         return EXIT_FAILURE;
     }
