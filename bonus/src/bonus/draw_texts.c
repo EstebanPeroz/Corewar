@@ -80,16 +80,34 @@ void draw_speed(virtual_machine_t *vm)
     sfRenderWindow_drawText(vm->display->window, vm->display->text, NULL);
 }
 
+static bool is_passed(champions_t *cur, int passed[4])
+{
+    int j = 0;
+
+    for (int i = 0; i < 4; i++) {
+        if (cur->prog_id == passed[i]) {
+            return true;
+        }
+    }
+    for (; passed[j] != 0; j++);
+    if (j < 4)
+        passed[j] = cur->prog_id;
+    return false;
+}
+
 void draw_text(virtual_machine_t *vm, int cycles)
 {
     champions_t *cur = vm->champion;
     sfVector2f pos = {1650, 220};
+    int passed[4] = {0, 0, 0, 0};
 
     draw_cycles(vm, cycles);
     for (int i = 1; cur != NULL; i++)
     {
-        draw_champ_status(vm, cur, pos, i);
-        pos.y += 150;
+        if (!is_passed(cur, passed)) {
+            draw_champ_status(vm, cur, pos, i);
+            pos.y += 150;
+        }
         cur = cur->next;
     }
     sfText_setColor(vm->display->text, sfWhite);
