@@ -51,6 +51,9 @@ SRC 		= 	src/main.c									\
 				src/vm/moove_prog_counter.c					\
 				src/vm/is_valid_register.c 					\
 				src/vm/write_into_arena.c					\
+				src/bonus/draw_arena.c 						\
+				src/bonus/analyse_events.c 						\
+				src/bonus/init_display.c 						\
 
 OBJ 		= 	$(SRC:.c=.o)
 
@@ -58,7 +61,7 @@ INCLUDES	=	-I ./include
 
 CFLAGS 		= -Wall -Wextra -Wshadow $(INCLUDES)
 
-LDFLAGS		= -Llib -lmy
+LDFLAGS		= -Llib -lmy -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
 
 all:	$(NAME)
 

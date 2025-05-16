@@ -4,6 +4,7 @@
 ** File description:
 ** Struc define
 */
+#include <SFML/Graphics.h>
 
 #ifndef STRUCT_H
     #define STRUCT_H
@@ -13,6 +14,24 @@
     #include <stdbool.h>
 
     #include "op.h"
+
+typedef struct clocks {
+    sfClock *clock;
+    sfTime time;
+    float seconds;
+    sfText *txt_timer;
+} clocks_t;
+
+typedef struct {
+    sfRenderWindow *window;
+    sfEvent event;
+    sfVideoMode mode;
+    int should_display_hitboxes;
+    int is_initialized;
+    int should_display_sprites;
+    float sim_timer;
+    clocks_t sim_clock;
+} display_t;
 
 typedef struct champions_s {
     char *name;
@@ -43,6 +62,7 @@ typedef struct virtual_machine_s {
     int alive_champions;
     unsigned char arena[MEM_SIZE];
     champions_t *champion;
+    display_t *display;
 } virtual_machine_t;
 
 typedef struct free_space_tracker_s {

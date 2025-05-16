@@ -44,6 +44,11 @@
 
     #include "structs.h"
 
+// Bonus
+int draw_arena(virtual_machine_t *vm, display_t *graphic);
+int init_display(virtual_machine_t *vm);
+void analyse_events(display_t *params, sfEvent event);
+
 // Instructions
 
 int handle_live(instructions_params_t *params);

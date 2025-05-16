@@ -25,5 +25,6 @@ virtual_machine_t *init_virtual_machine(int cycle_to_tump,
         virtual_machine->arena[i] = 0;
     }
     virtual_machine->champion = NULL;
+    init_display(virtual_machine);
     return virtual_machine;
 }
