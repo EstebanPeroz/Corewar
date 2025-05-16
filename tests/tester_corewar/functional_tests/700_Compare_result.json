@@ -1,0 +1,303 @@
+[
+    {
+        "id": 701,
+        "name": "Compare result - abel vs bill - no flags",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)is alive.\nThe player 1(Abel)has won."
+    },
+    {
+        "id": 702,
+        "name": "Compare result - abel vs pdd - no flags",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(pdd)is alive.\nThe player 2(pdd)has won."
+    },
+    {
+        "id": 703,
+        "name": "Compare result - abel vs tyron - no flags",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)has won."
+    },
+    {
+        "id": 704,
+        "name": "Compare result - pdd vs bill - no flags",
+        "command": "./corewar ../cor_files/pdd.cor ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(pdd)is alive.\nThe player 2(Bill)is alive.\nThe player 1(pdd)has won."
+    },
+    {
+        "id": 705,
+        "name": "Compare result - pdd vs tyron - no flags",
+        "command": "./corewar ../cor_files/pdd.cor ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(Tyron)is alive.\nThe player 2(Tyron)has won."
+    },
+    {
+        "id": 706,
+        "name": "Compare result - bill vs tyron - no flags",
+        "command": "./corewar ../cor_files/bill.cor ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Bill)is alive.\nThe player 1(Bill)has won."
+    },
+    {
+        "id": 707,
+        "name": "Compare result - abel vs bill - only address",
+        "command": "./corewar -a 40 ../cor_files/abel.cor -a 5000 ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)has won."
+    },
+    {
+        "id": 708,
+        "name": "Compare result - abel vs pdd - only address",
+        "command": "./corewar -a 40 ../cor_files/abel.cor -a 5000 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)has won."
+    },
+    {
+        "id": 709,
+        "name": "Compare result - abel vs tyron - only address",
+        "command": "./corewar -a 40 ../cor_files/abel.cor -a 5000 ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)has won."
+    },
+    {
+        "id": 710,
+        "name": "Compare result - pdd vs bill - only address",
+        "command": "./corewar -a 40 ../cor_files/pdd.cor -a 5000 ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(Bill)is alive.\nThe player 2(Bill)is alive.\nThe player 2(Bill)has won."
+    },
+    {
+        "id": 711,
+        "name": "Compare result - pdd vs tyron - only address",
+        "command": "./corewar -a 40 ../cor_files/pdd.cor -a 5000 ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(Tyron)is alive.\nThe player 2(Tyron)is alive.\nThe player 2(Tyron)has won."
+    },
+    {
+        "id": 712,
+        "name": "Compare result - bill vs tyron - only address",
+        "command": "./corewar -a 40 ../cor_files/bill.cor -a 5000 ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Bill)is alive.\nThe player 1(Bill)is alive.\nThe player 1(Bill)has won."
+    },
+    {
+        "id": 713,
+        "name": "Compare result - bill vs abel - no flags",
+        "command": "./corewar ../cor_files/bill.cor ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Bill)is alive.\nThe player 1(Bill)has won."
+    },
+    {
+        "id": 714,
+        "name": "Compare result - pdd vs abel - no flags",
+        "command": "./corewar ../cor_files/pdd.cor ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(Abel)is alive.\nThe player 2(Abel)has won."
+    },
+    {
+        "id": 715,
+        "name": "Compare result - tyron vs abel - no flags",
+        "command": "./corewar ../cor_files/tyron.cor ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Tyron)has won."
+    },
+    {
+        "id": 716,
+        "name": "Compare result - bill vs pdd - no flags",
+        "command": "./corewar ../cor_files/bill.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Bill)is alive.\nThe player 2(pdd)is alive.\nThe player 1(Bill)has won."
+    },
+    {
+        "id": 717,
+        "name": "Compare result - tyron vs pdd - no flags",
+        "command": "./corewar ../cor_files/tyron.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(pdd)is alive.\nThe player 2(pdd)has won."
+    },
+    {
+        "id": 718,
+        "name": "Compare result - tyron vs bill - no flags",
+        "command": "./corewar ../cor_files/tyron.cor ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Tyron)is alive.\nThe player 1(Tyron)has won."
+    },
+    {
+        "id": 719,
+        "name": "Compare result - bill vs abel - only address",
+        "command": "./corewar -a 40 ../cor_files/bill.cor -a 5000 ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Bill)is alive.\nThe player 1(Bill)is alive.\nThe player 1(Bill)has won."
+    },
+    {
+        "id": 720,
+        "name": "Compare result - pdd vs abel - only address",
+        "command": "./corewar -a 40 ../cor_files/pdd.cor -a 5000 ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(Abel)is alive.\nThe player 2(Abel)is alive.\nThe player 2(Abel)has won."
+    },
+    {
+        "id": 721,
+        "name": "Compare result - tyron vs abel - only address",
+        "command": "./corewar -a 40 ../cor_files/tyron.cor -a 5000 ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Tyron)has won."
+    },
+    {
+        "id": 722,
+        "name": "Compare result - bill vs pdd - only address",
+        "command": "./corewar -a 40 ../cor_files/bill.cor -a 5000 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Bill)is alive.\nThe player 1(Bill)is alive.\nThe player 1(Bill)has won."
+    },
+    {
+        "id": 723,
+        "name": "Compare result - tyron vs pdd - only address",
+        "command": "./corewar -a 40 ../cor_files/tyron.cor -a 5000 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Tyron)has won."
+    },
+    {
+        "id": 724,
+        "name": "Compare result - tyron vs bill - only address",
+        "command": "./corewar -a 40 ../cor_files/tyron.cor -a 5000 ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Tyron)has won."
+    },
+    {
+        "id": 725,
+        "name": "Compare result - abel vs bill vs tyron vs pdd - with not their ids",
+        "command": "./corewar -n 3 ../cor_files/abel.cor -n 4 ../cor_files/bill.cor -n 5 ../cor_files/tyron.cor -n 6 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 3(Abel)has won."
+    },
+    {
+        "id": 726,
+        "name": "Compare result - abel vs pdd vs bill vs tyron - with not their ids",
+        "command": "./corewar -n 3 ../cor_files/abel.cor -n 4 ../cor_files/pdd.cor -n 5 ../cor_files/bill.cor -n 6 ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": "The player 3(Abel)has won."
+    },
+    {
+        "id": 727,
+        "name": "Compare result - tyron vs bill vs abel vs pdd - with not their ids",
+        "command": "./corewar -n 3 ../cor_files/tyron.cor -n 4 ../cor_files/bill.cor -n 5 ../cor_files/abel.cor -n 6 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 3(Tyron)has won."
+    },
+    {
+        "id": 728,
+        "name": "Compare result - pdd vs bill vs tyron vs abel - with not their ids",
+        "command": "./corewar -n 3 ../cor_files/pdd.cor -n 4 ../cor_files/bill.cor -n 5 ../cor_files/tyron.cor -n 6 ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 3(pdd)has won."
+    },
+    {
+        "id": 729,
+        "name": "Compare result - pdd vs tyron vs bill vs abel - with not their ids",
+        "command": "./corewar -n 3 ../cor_files/pdd.cor -n 4 ../cor_files/bill.cor -n 5 ../cor_files/tyron.cor -n 6 ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 3(pdd)has won."
+    },
+    {
+        "id": 730,
+        "name": "Compare result - tyron vs bill vs pdd vs abel - with not their ids",
+        "command": "./corewar -n 3 ../cor_files/tyron.cor -n 4 ../cor_files/bill.cor -n 5 ../cor_files/pdd.cor -n 6 ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 3(Tyron)has won."
+    },
+    {
+        "id": 731,
+        "name": "Compare result - abel vs bill vs pdd - no flags",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/bill.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)is alive.\nThe player 2(Bill)is alive.\nThe player 1(Abel)is alive.\nThe player 2(Bill)is alive.\nThe player 2(Bill)is alive.\nThe player 2(Bill)has won."
+    },
+    {
+        "id": 732,
+        "name": "Compare result - bill vs tyron vs abel - no flags",
+        "command": "./corewar ../cor_files/bill.cor ../cor_files/tyron.cor ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Bill)is alive.\nThe player 1(Bill)has won."
+    },
+    {
+        "id": 733,
+        "name": "Compare result - tyron vs abel vs pdd - no flags",
+        "command": "./corewar ../cor_files/tyron.cor ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(Abel)is alive.\nThe player 2(Abel)has won."
+    },
+    {
+        "id": 734,
+        "name": "Compare result - abel vs bill vs pdd - address for first only",
+        "command": "./corewar -a 40 ../cor_files/abel.cor ../cor_files/bill.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)has won."
+    },
+    {
+        "id": 735,
+        "name": "Compare result - abel vs bill vs pdd - address for last only",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/bill.cor -a 3000 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 2(Bill)is alive.\nThe player 2(Bill)has won."
+    },
+    {
+        "id": 736,
+        "name": "Compare result - abel vs bill vs pdd - all addresses",
+        "command": "./corewar -a 100 ../cor_files/abel.cor -a 2000 ../cor_files/bill.cor -a 4000 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Abel)has won."
+    },
+    {
+        "id": 737,
+        "name": "Compare result - tyron vs bill vs pdd - mixed address 1",
+        "command": "./corewar ../cor_files/tyron.cor -a 3000 ../cor_files/bill.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Tyron)is alive.\nThe player 1(Tyron)has won."
+    },
+    {
+        "id": 738,
+        "name": "Compare result - tyron vs bill vs abel - mixed address 2",
+        "command": "./corewar -a 0 ../cor_files/tyron.cor ../cor_files/bill.cor -a 4000 ../cor_files/abel.cor",
+        "expected_return": 0,
+        "expected_output": "The player 1(Tyron)has won."
+    },
+    {
+        "id": 738,
+        "name": "Dump test - abel vs bill",
+        "command": "./corewar -dump 50 ../cor_files/abel.cor ../cor_files/bill.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 739,
+        "name": "Dump test - pdd vs tyron",
+        "command": "./corewar -dump 256 ../cor_files/pdd.cor ../cor_files/tyron.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 740,
+        "name": "Dump test - abel vs pdd with address",
+        "command": "./corewar -dump 100 -a 100 ../cor_files/abel.cor -a 3000 ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 741,
+        "name": "Dump test - three champions mixed",
+        "command": "./corewar -dump 512 ../cor_files/bill.cor ../cor_files/pdd.cor ../cor_files/abel.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 742,
+        "name": "Dump test - abel vs tyron with dump 0",
+        "command": "./corewar -dump 0 ../cor_files/abel.cor ../cor_files/tyron.cor",
+        "expected_return": 84,
+        "expected_output": null
+    }
+]
