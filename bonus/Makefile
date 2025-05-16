@@ -61,7 +61,9 @@ INCLUDES	=	-I ./include
 
 CFLAGS 		= -Wall -Wextra -Wshadow $(INCLUDES)
 
-LDFLAGS		= -L../lib -lmy -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
+CSFML		= -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
+
+LDFLAGS		= -L../lib -lmy $(CSFML)
 
 all:	$(NAME)
 

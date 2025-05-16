@@ -55,7 +55,8 @@ static void place_processus_auto(virtual_machine_t *virtual_machine)
         current->address = auto_adress;
         current->prog_counter = auto_adress;
         auto_adress += distance;
-        place_champion(virtual_machine, current, virtual_machine->placed_champs + 1);
+        place_champion(virtual_machine, current,
+            virtual_machine->placed_champs + 1);
         virtual_machine->placed_champs += 1;
         current = current->next;
     }
@@ -67,7 +68,8 @@ static void place_processus_with_address(virtual_machine_t *virtual_machine)
 
     while (current != NULL) {
         if (current->address != DEFAULT_ADRESS) {
-            place_champion(virtual_machine, current, virtual_machine->placed_champs + 1);
+            place_champion(virtual_machine, current,
+                virtual_machine->placed_champs + 1);
             virtual_machine->placed_champs += 1;
             virtual_machine->nbr_processus_to_place--;
         }
@@ -88,7 +90,8 @@ static void place_remaining_processus(virtual_machine_t *virtual_machine)
             break;
         adress = free_space.start + (free_space.size / 2);
         champ_to_place->address = adress;
-        place_champion(virtual_machine, champ_to_place, virtual_machine->placed_champs + 1);
+        place_champion(virtual_machine, champ_to_place,
+            virtual_machine->placed_champs + 1);
         virtual_machine->placed_champs += 1;
         virtual_machine->nbr_processus_to_place--;
     }

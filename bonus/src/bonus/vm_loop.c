@@ -66,7 +66,7 @@ int handle_instructions(virtual_machine_t *vm, int cycles)
 int vm_loop(virtual_machine_t *vm)
 {
     int last_dump = 1;
-    
+
     for (int cycles = 1; (cycles <= vm->cycle_to_die
     || vm->alive_champions > 1) &&
     sfRenderWindow_isOpen(vm->display->window); cycles++) {
