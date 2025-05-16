@@ -93,6 +93,7 @@ bool valid_args(instructions_params_t *params);
 
 // VM
 
+int get_t(int value);
 int get_alive_champions(virtual_machine_t *vm, int cycles);
 int coding_to_type(int value);
 int decrease_cycle_to_die(virtual_machine_t *vm);
