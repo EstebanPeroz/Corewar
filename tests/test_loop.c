@@ -132,7 +132,7 @@ Test(corewar, test_cooldown_verif_no_cooldown, .init = redirect_all_std)
     int verif = 1;
     
     fill_vm(7, av, vm);
-    verif = is_cooldown(&vm->champion);
+    verif = is_cooldown(vm->champion);
     cr_assert_eq(verif, 0);
 }
 
@@ -146,7 +146,7 @@ Test(corewar, test_cooldown_verif_with_cooldown, .init = redirect_all_std)
     fill_vm(7, av, vm);
     champ = vm->champion;
     champ->cylces_to_wait = 10;
-    verif = is_cooldown(&champ);
-    cr_assert_str_eq(champ->header.prog_name, "Mine2");
+    verif = is_cooldown(champ);
+    cr_assert_str_eq(champ->header.prog_name, "Mine");
     cr_assert_eq(verif, 1);
 }
