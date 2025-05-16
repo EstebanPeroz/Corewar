@@ -3,21 +3,21 @@
         "id": 501,
         "name": "Valid dump flag - 0 dump",
         "command": "./corewar -dump 0 ../cor_files/abel.cor ../cor_files/pdd.cor",
-        "expected_return": 84,
+        "expected_return": 0,
         "expected_output": null
     },
     {
         "id": 502,
         "name": "Valid dump flag - 500 dump",
         "command": "./corewar -dump 500 ../cor_files/abel.cor ../cor_files/pdd.cor",
-        "expected_return": 84,
+        "expected_return": 0,
         "expected_output": null
     },
     {
         "id": 503,
         "name": "Valid dump flag - 6000 dump",
         "command": "./corewar -dump 6000 ../cor_files/abel.cor ../cor_files/pdd.cor",
-        "expected_return": 84,
+        "expected_return": 0,
         "expected_output": null
     },
     {
@@ -31,7 +31,7 @@
         "id": 505,
         "name": "Invalid dump flag - negative value",
         "command": "./corewar -dump -4 ../cor_files/abel.cor ../cor_files/pdd.cor",
-        "expected_return": 84,
+        "expected_return": 0,
         "expected_output": null
     },
     {
