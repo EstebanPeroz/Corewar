@@ -21,11 +21,11 @@ void analyse_events(display_t *params, sfEvent event)
 {
     basic_events(params->window, event);
     if (event.type == sfEvtKeyPressed && event.key.code == sfKeyRight) {
-        params->sim_delay -= 0.01;
+        params->sim_delay -= 0.002;
         if (params->sim_delay < 0)
             params->sim_delay = 0;
     }
     if (event.type == sfEvtKeyPressed && event.key.code == sfKeyLeft) {
-        params->sim_delay += 0.01;
+        params->sim_delay += 0.002;
     }
 }
