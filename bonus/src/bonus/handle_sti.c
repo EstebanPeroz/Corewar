@@ -19,7 +19,7 @@ static int verify_type_and_return(instructions_params_t *params, int idx)
         || params->types[idx] == T_IND) {
         return value;
     }
-    return value;
+    return 0;
 }
 
 int handle_sti(instructions_params_t *params)
