@@ -29,6 +29,7 @@ typedef struct {
     int should_display_hitboxes;
     int is_initialized;
     int should_display_sprites;
+    float sim_delay;
     float sim_timer;
     clocks_t sim_clock;
     sfFont *font;

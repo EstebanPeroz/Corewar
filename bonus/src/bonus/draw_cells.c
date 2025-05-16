@@ -53,7 +53,7 @@ void draw_pc(virtual_machine_t *vm, sfRectangleShape *rect
     while (cur != NULL) {
         draw_cell(cur->prog_counter, text, vm, rect);
         new_color = sfRectangleShape_getFillColor(rect);
-        new_color = sfColor_add(new_color, sfColor_fromRGB(120, 120, 120));
+        new_color = sfColor_add(new_color, sfColor_fromRGB(125, 125, 125));
         sfRectangleShape_setFillColor(rect, new_color);
         sfRenderWindow_drawRectangleShape(vm->display->window, rect, NULL);
         sfRenderWindow_drawText(vm->display->window, text, NULL);

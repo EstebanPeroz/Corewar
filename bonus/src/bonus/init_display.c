@@ -15,10 +15,11 @@ int init_display(virtual_machine_t *vm)
     vm->display->mode.bitsPerPixel = 32;
     vm->display->window = sfRenderWindow_create(vm->display->mode,
         "Corewar", sfDefaultStyle, NULL);
-    sfRenderWindow_setFramerateLimit(vm->display->window, 60);
+    sfRenderWindow_setFramerateLimit(vm->display->window, 1000);
     vm->display->sim_clock.clock = sfClock_create();
     vm->display->sim_clock.seconds = 0;
     vm->display->sim_timer = 0;
+    vm->display->sim_delay = SIM_DELAY;
     vm->display->font = sfFont_createFromFile("assets/font.ttf");
     if (!vm->display->font) {
         printf("Missing fonts !\n");
