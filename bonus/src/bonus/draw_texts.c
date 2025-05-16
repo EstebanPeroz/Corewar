@@ -41,19 +41,42 @@ static sfColor set_color(int i)
 static void draw_champ_status(virtual_machine_t *vm, champions_t *cur,
     sfVector2f pos, int i)
 {
-    char status_str[200];
+    char status_str[300];
     sfVector2f status_pos = {pos.x - 50, pos.y + 40};
+    char *live = malloc(sizeof(char) * 10);
 
+    live = "Alive";
     sfText_setString(vm->display->text, cur->header.prog_name);
     sfText_setColor(vm->display->text, set_color(i));
     sfText_setPosition(vm->display->text, pos);
     sfText_setCharacterSize(vm->display->text, CELL_SIZE * 2 + 5);
     sfRenderWindow_drawText(vm->display->window, vm->display->text, NULL);
-    snprintf(status_str, sizeof(status_str), "Carry: %d     Cooldown: \t%d",
-        cur->carry, cur->cylces_to_wait);
+    sfText_setColor(vm->display->text, sfColor_fromRGB(204, 255, 204));
+    if (!cur->is_alive) {
+        live = "Dead";
+        sfText_setColor(vm->display->text, sfColor_fromRGB(50, 50, 50));
+    }
+    if (cur->is_alive && cur->last_live == -1) {
+        sfText_setColor(vm->display->text, sfWhite);
+        live = "Pending...";
+    }
+    snprintf(status_str, sizeof(status_str), "Carry: %d     Cooldown:\t%d\n"
+             "Status:\t%s",
+        cur->carry, cur->cylces_to_wait, live);
     sfText_setString(vm->display->text, status_str);
-    sfText_setColor(vm->display->text, sfWhite);
     sfText_setPosition(vm->display->text, status_pos);
+    sfRenderWindow_drawText(vm->display->window, vm->display->text, NULL);
+}
+
+void draw_speed(virtual_machine_t *vm)
+{
+    char cycles_str[50];
+    sfVector2f pos = {15, 1030};
+
+    snprintf(cycles_str, 50, "Speed:\t%.2f", 1.0 / vm->display->sim_delay);
+    sfText_setString(vm->display->text, cycles_str);
+    sfText_setPosition(vm->display->text, pos);
+    sfText_setCharacterSize(vm->display->text, CELL_SIZE * 2);
     sfRenderWindow_drawText(vm->display->window, vm->display->text, NULL);
 }
 
@@ -70,5 +93,6 @@ void draw_text(virtual_machine_t *vm, int cycles)
         cur = cur->next;
     }
     sfText_setColor(vm->display->text, sfWhite);
+    draw_speed(vm);
     sfText_setCharacterSize(vm->display->text, CELL_SIZE - 3);
 }
