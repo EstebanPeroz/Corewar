@@ -22,6 +22,7 @@ virtual_machine_t *init_virtual_machine(int cycle_to_tump,
     virtual_machine->cycle_delta = CYCLE_DELTA;
     virtual_machine->nbr_live = NBR_LIVE;
     for (int i = 0; i < MEM_SIZE; i++) {
+        virtual_machine->owner_map[i] = 0;
         virtual_machine->arena[i] = 0;
     }
     virtual_machine->champion = NULL;

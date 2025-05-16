@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+#include <SFML/Graphics/Font.h>
 int init_display(virtual_machine_t *vm)
 {
     vm->display = malloc(sizeof(display_t));
@@ -19,5 +20,10 @@ int init_display(virtual_machine_t *vm)
     vm->display->sim_clock.clock = sfClock_create();
     vm->display->sim_clock.seconds = 0;
     vm->display->sim_timer = 0;
+    vm->display->font = sfFont_createFromFile("assets/font.ttf");
+    if (!vm->display->font) {
+        printf("Missing fonts !\n");
+        exit(84);
+    }
     return 0;
 }

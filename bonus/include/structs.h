@@ -31,6 +31,7 @@ typedef struct {
     int should_display_sprites;
     float sim_timer;
     clocks_t sim_clock;
+    sfFont *font;
 } display_t;
 
 typedef struct champions_s {
@@ -53,6 +54,7 @@ typedef struct champions_s {
 
 typedef struct virtual_machine_s {
     int cycle;
+    int placed_champs;
     int nbr_processus;
     int nbr_processus_to_place;
     int cycle_to_dump;
@@ -61,6 +63,7 @@ typedef struct virtual_machine_s {
     int nbr_live;
     int alive_champions;
     unsigned char arena[MEM_SIZE];
+    unsigned char owner_map[MEM_SIZE];
     champions_t *champion;
     display_t *display;
 } virtual_machine_t;
