@@ -10,6 +10,7 @@
 all: build
 
 execute:
+	@cd ../.. ; make re > /dev/null 2>&1 ; cd tests/tester_corewar
 	@$(MAKE) --no-print-directory build
 	@./target/release/tester_corewar functional_tests/ ../../corewar
 	@$(MAKE) --no-print-directory clean > /dev/null 2>&1
