@@ -23,7 +23,7 @@ const int aff_call = 80;
 
 Test(corewar, test_handle_aff, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(5, av, vm);
@@ -38,7 +38,7 @@ Test(corewar, test_handle_aff, .init = redirect_all_std)
 
 Test(corewar, invalid_registers_aff, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(5, av, vm);
