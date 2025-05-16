@@ -33,6 +33,8 @@ typedef struct {
     float sim_timer;
     clocks_t sim_clock;
     sfFont *font;
+    sfRectangleShape *cell;
+    sfText *text;
 } display_t;
 
 typedef struct champions_s {
@@ -64,7 +66,9 @@ typedef struct virtual_machine_s {
     int nbr_live;
     int alive_champions;
     unsigned char arena[MEM_SIZE];
+    unsigned char last_arena[MEM_SIZE];
     unsigned char owner_map[MEM_SIZE];
+    unsigned char last_owner_map[MEM_SIZE];
     champions_t *champion;
     display_t *display;
 } virtual_machine_t;

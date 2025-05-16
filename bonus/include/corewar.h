@@ -53,11 +53,13 @@
 // Bonus
 void draw_cell(int i, sfText *text,
     virtual_machine_t *vm, sfRectangleShape *cell);
+void draw_text(virtual_machine_t *vm);
 void draw_pc(virtual_machine_t *vm, sfRectangleShape *rect, sfText
     *text);
 int draw_arena(virtual_machine_t *vm, display_t *graphic);
 int init_display(virtual_machine_t *vm);
 void analyse_events(display_t *params, sfEvent event);
+void destroy_graphic(display_t *display);
 
 // Instructions
 

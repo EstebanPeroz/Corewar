@@ -24,6 +24,8 @@ virtual_machine_t *init_virtual_machine(int cycle_to_tump,
     for (int i = 0; i < MEM_SIZE; i++) {
         virtual_machine->owner_map[i] = 0;
         virtual_machine->arena[i] = 0;
+        virtual_machine->last_arena[i] = -1;
+        virtual_machine->last_owner_map[i] = -1;
     }
     virtual_machine->champion = NULL;
     init_display(virtual_machine);

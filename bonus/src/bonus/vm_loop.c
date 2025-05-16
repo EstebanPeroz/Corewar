@@ -73,7 +73,6 @@ int vm_loop(virtual_machine_t *vm)
     for (int cycles = 1; (cycles <= vm->cycle_to_die
     || vm->alive_champions > 1) &&
     sfRenderWindow_isOpen(vm->display->window); cycles++) {
-        if (vm->display->sim_timer >= vm->display->sim_delay) {
             if (cycles > vm->cycle_to_die)
                 reset_cycles(vm, &cycles);
             handle_instructions(vm, cycles);
@@ -81,11 +80,11 @@ int vm_loop(virtual_machine_t *vm)
             handle_dump(vm, &last_dump);
             decrease_cycle_to_die(vm);
             vm->display->sim_timer = 0;
-        }
         draw_arena(vm, vm->display);
     }
     if (sfRenderWindow_isOpen(vm->display->window))
         sfRenderWindow_close(vm->display->window);
     get_winner(vm);
+    destroy_graphic(vm->display);
     return 0;
 }

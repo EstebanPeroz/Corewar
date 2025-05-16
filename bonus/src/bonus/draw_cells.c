@@ -38,10 +38,12 @@ void draw_cell(int i, sfText *text,
     color = set_color(vm->owner_map, i);
     sfRectangleShape_setFillColor(cell, color);
     sfRenderWindow_drawRectangleShape(vm->display->window, cell, NULL);
-    snprintf(hex_str, sizeof(hex_str), "%02X", vm->arena[i]);
-    sfText_setString(text, hex_str);
-    sfText_setPosition(text, text_pos);
-    sfRenderWindow_drawText(vm->display->window, text, NULL);
+    if (vm->arena[i] != 0) {
+        snprintf(hex_str, sizeof(hex_str), "%02X", vm->arena[i]);
+        sfText_setString(text, hex_str);
+        sfText_setPosition(text, text_pos);
+        sfRenderWindow_drawText(vm->display->window, text, NULL);
+    }
 }
 
 void draw_pc(virtual_machine_t *vm, sfRectangleShape *rect

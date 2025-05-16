@@ -55,6 +55,8 @@ SRC 		= 	../src/main.c									\
 				src/bonus/analyse_events.c 						\
 				src/bonus/init_display.c 						\
 				src/bonus/draw_cells.c 							\
+				src/bonus/draw_texts.c 							\
+				src/bonus/destroy_graphic.c 							\
 
 OBJ 		= 	$(SRC:.c=.o)
 
@@ -64,7 +66,7 @@ CFLAGS 		= -Wall -Wextra -Wshadow $(INCLUDES)
 
 CSFML		= -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
 
-LDFLAGS		= -L../lib -lmy $(CSFML)
+LDFLAGS		= -L../lib -lmy $(CSFML) -g
 
 all:	$(NAME)
 
