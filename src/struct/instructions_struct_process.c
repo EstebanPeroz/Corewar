@@ -21,7 +21,7 @@ int coding_to_type(int value)
             return TYPE_REG;
         case 0b10:
             return TYPE_DIR;
-        case 0b11: 
+        case 0b11:
             return TYPE_IND;
         default:
             return 0;
@@ -74,8 +74,6 @@ static void fill_types_and_values(virtual_machine_t *vm, champions_t *champ,
         size = get_params_size(params->types[i], &op);
         params->values[i] = read_bytes(vm->arena, champ->prog_counter
             + offset, size);
-        if (params->values[i] == 0 && params->champ->prog_id == 2)
-            printf("params: %d %d\n", params->types[i], size);
         offset += size;
     }
 }
