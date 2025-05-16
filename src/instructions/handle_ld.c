@@ -13,7 +13,7 @@ int handle_ld(instructions_params_t *pa)
     int value = 0;
     int load_place = 0;
 
-    if (!(pa->types[1] == REG_SIZE && is_valid_register(pa->values[1])))
+    if (!is_valid_register(pa->values[1]))
         return EXIT_FAILURE;
     if (pa->types[0] == T_DIR)
         value = pa->values[0];
@@ -34,7 +34,7 @@ int handle_lld(instructions_params_t *pa)
     int value = 0;
     int load_place = 0;
 
-    if (!(pa->types[1] == REG_SIZE && is_valid_register(pa->values[1])))
+    if (!is_valid_register(pa->values[1]))
         return EXIT_FAILURE;
     if (pa->types[0] == T_DIR)
         value = pa->values[0];
