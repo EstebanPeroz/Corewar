@@ -9,6 +9,8 @@
 #include <SFML/Graphics/Color.h>
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Text.h>
+#include <SFML/System/Sleep.h>
+#include <SFML/System/Time.h>
 #include "corewar.h"
 #include "op.h"
 
