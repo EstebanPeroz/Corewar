@@ -70,6 +70,7 @@ int vm_loop(virtual_machine_t *vm)
 {
     int last_dump = 1;
 
+    set_dev_ids(vm);
     for (int cycles = 1; (cycles <= vm->cycle_to_die
     || vm->alive_champions > 1) &&
     sfRenderWindow_isOpen(vm->display->window);) {

@@ -21,6 +21,16 @@ static sfText *init_text(sfFont *font)
     return text;
 }
 
+void set_dev_ids(virtual_machine_t *vm)
+{
+    champions_t *champ = vm->champion;
+
+    for (int i = 1; champ != NULL; i++) {
+        champ->dev_id = i;
+        champ = champ->next;
+    }
+}
+
 int init_display(virtual_machine_t *vm)
 {
     sfVector2f size = {CELL_SIZE - 1, CELL_SIZE - 1};

@@ -35,8 +35,8 @@ SRC 		= 	../src/main.c									\
 				../src/instructions/handle_zjmp.c				\
 				../src/instructions/handle_ld.c				\
 				../src/instructions/handle_add.c 				\
-				../src/instructions/handle_st.c				\
-				../src/instructions/handle_sti.c				\
+				src/bonus/handle_st.c				\
+				src/bonus/handle_sti.c				\
 				../src/instructions/handle_and.c				\
 				../src/instructions/handle_aff.c 				\
 				../src/instructions/handle_sub.c				\

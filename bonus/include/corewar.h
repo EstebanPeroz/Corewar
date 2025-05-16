@@ -60,6 +60,7 @@ int draw_arena(virtual_machine_t *vm, display_t *graphic, int cycles);
 int init_display(virtual_machine_t *vm);
 void analyse_events(display_t *params, sfEvent event);
 void destroy_graphic(display_t *display);
+void set_dev_ids(virtual_machine_t *vm);
 
 // Instructions
 
