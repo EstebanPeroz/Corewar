@@ -20,7 +20,7 @@ static void redirect_all_std(void)
 
 Test(corewar, test_dump, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-dump", "500", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
+    char *av[] = {"./corewar", "-dump", "500", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     int ret;
     int last = 0;

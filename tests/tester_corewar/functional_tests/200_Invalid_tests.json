@@ -1,0 +1,100 @@
+[
+    {
+        "id": 201,
+        "name": "Invalid number of arguments - 0 arguments",
+        "command": "./corewar ",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 202,
+        "name": "Invalid number of arguments - 1 argument",
+        "command": "./corewar ../cor_files/abel.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 203,
+        "name": "Invalid arguments - 2 arguments",
+        "command": "./corewar error ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 204,
+        "name": "Invalid arguments - 3 arguments",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor error",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 205,
+        "name": "Invalid number of arguments - 5 arguments",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor ../cor_files/bill.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 206,
+        "name": "Not existent file - 1st argument",
+        "command": "./corewar ../cor_files/invalid.cor ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 207,
+        "name": "Not existent file - 2nd argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 208,
+        "name": "Not existent file - 3rd argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 209,
+        "name": "Not existent file - 4th argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 210,
+        "name": "Not existent file  and two many champions",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor ../cor_files/bill.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 211,
+        "name": "invalid champion - 1st argument",
+        "command": "./corewar ../cor_files/invalid.cor ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 212,
+        "name": "invalid champion - 2nd argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 213,
+        "name": "invalid champion - 3rd argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 214,
+        "name": "invalid champion - 4th argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor ../cor_files/invalid.cor",
+        "expected_return": 84,
+        "expected_output": null
+    }
+]

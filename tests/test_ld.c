@@ -29,7 +29,7 @@ void put_short_in_arena(unsigned char *arena, int adrs, short value)
 
 Test(corewar, test_handle_ld_reset_carry)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;
@@ -57,7 +57,7 @@ Test(corewar, test_handle_ld_reset_carry)
 }
 
 Test(corewar, test_handle_lld_reset_carry) {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;
@@ -85,7 +85,7 @@ Test(corewar, test_handle_lld_reset_carry) {
 }
 
 Test(corewar, test_handle_ld_set_carry_to_1) {
-    char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/ld_carry.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;
@@ -113,7 +113,7 @@ Test(corewar, test_handle_ld_set_carry_to_1) {
 }
 
 Test(corewar, test_handle_lld_set_carry_to_1) {
-    char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/ld_carry.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;
@@ -141,7 +141,7 @@ Test(corewar, test_handle_lld_set_carry_to_1) {
 }
 
 Test(corewar, test_handle_ldi_set_carry_to_1) {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;
@@ -167,7 +167,7 @@ Test(corewar, test_handle_ldi_set_carry_to_1) {
 }
 
 Test(corewar, test_handle_ldi) {
-    char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/ld_carry.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;
@@ -195,7 +195,7 @@ Test(corewar, test_handle_ldi) {
 }
 
 Test(corewar, test_handle_lldi) {
-    char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/ld_carry.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;
@@ -223,7 +223,7 @@ Test(corewar, test_handle_lldi) {
 }
 
 Test(corewar, test_handle_lldi_set_carry_to_1) {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     fill_vm(5, av, vm);
     champions_t *champ = vm->champion;

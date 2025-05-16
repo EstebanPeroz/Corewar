@@ -23,7 +23,7 @@ const int fork_call = 7;
 
 Test(corewar, test_handle_fork, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(5, av, vm);
@@ -36,13 +36,12 @@ Test(corewar, test_handle_fork, .init = redirect_all_std)
     }
     handle_fork(&params);
     cr_assert_eq(vm->champion->carry, 0);
-    // Checking the forked champ
     cr_assert_eq(vm->champion->next->next->carry, 0);
 }
 
 Test(corewar, test_handle_lfork, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(5, av, vm);
@@ -55,6 +54,5 @@ Test(corewar, test_handle_lfork, .init = redirect_all_std)
     }
     handle_lfork(&params);
     cr_assert_eq(vm->champion->carry, 0);
-    // Checking the forked champ
     cr_assert_eq(vm->champion->next->next->carry, 0);
 }

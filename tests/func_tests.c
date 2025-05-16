@@ -20,7 +20,7 @@ static void redirect_all_std(void)
 
 Test(corewar, all_basic, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/mine.cor", "tests/mine2.cor", NULL};
+    char *av[] = {"./corewar", "tests/cor_files/mine.cor", "tests/cor_files/mine2.cor", NULL};
 
     start_corewar(3, av);
     cr_assert_stdout_eq_str("The player 1(Mine)is alive.\nThe player 2(Mine2)is alive.\nThe player 1(Mine)has won.\n");

@@ -1,0 +1,156 @@
+[
+    {
+        "id": 601,
+        "name": "Simple combination tests - 2 valid champions - -n 1 -d 1",
+        "command": "./corewar -dump 1 -n 1 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 602,
+        "name": "4 champions with -n and -dump",
+        "command": "./corewar -dump 50 -n 1 ../cor_files/abel.cor -n 2 ../cor_files/pdd.cor -n 3 ../cor_files/tyron.cor -n 4 ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 603,
+        "name": "4 champions with -n and -a",
+        "command": "./corewar -n 1 -a 0 ../cor_files/abel.cor -n 2 -a 1024 ../cor_files/pdd.cor -n 3 -a 2048 ../cor_files/tyron.cor -n 4 -a 3072 ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 604,
+        "name": "2 champions with -a and -dump",
+        "command": "./corewar -dump 10 -a 1000 -n 1 ../cor_files/abel.cor -a 2000 -n 2 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 605,
+        "name": "Only dump with 4 champions",
+        "command": "./corewar -dump 100 ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 606,
+        "name": "No flags, 3 valid champions",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/bill.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 607,
+        "name": "Champions placed in different order with -n and -dump",
+        "command": "./corewar -dump 42 -n 3 ../cor_files/tyron.cor ../cor_files/abel.cor -n 2 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 608,
+        "name": "Spaces and tabs in arguments",
+        "command": "./corewar \t -n 1 \t ../cor_files/abel.cor   \t  ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 609,
+        "name": "Champions with dump",
+        "command": "./corewar -dump 42 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 610,
+        "name": "Valid -n reuse in natural order",
+        "command": "./corewar -n 1 ../cor_files/abel.cor -n 2 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 611,
+        "name": "3 players with interleaved -n and -a",
+        "command": "./corewar -n 1 -a 512 ../cor_files/abel.cor -n 2 -a 1024 ../cor_files/pdd.cor -n 3 -a 2048 ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 612,
+        "name": "4 champions -mix -n and -a and -dump middle but dump badly placed",
+        "command": "./corewar -n 1 -a 0 ../cor_files/abel.cor -dump 256 -n 2 -a 512 ../cor_files/pdd.cor -n 3 -a 1024 ../cor_files/tyron.cor -n 4 -a 1536 ../cor_files/bill.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 613,
+        "name": "Missing champion file after -n",
+        "command": "./corewar -n 1",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 614,
+        "name": "Missing argument after -a",
+        "command": "./corewar -n 1 -a",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 615,
+        "name": "Invalid value for -n",
+        "command": "./corewar -n abc ../cor_files/abel.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 616,
+        "name": "Invalid value for -a",
+        "command": "./corewar -n 1 -a xyz ../cor_files/abel.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 617,
+        "name": "Champion file does not exist",
+        "command": "./corewar -n 1 ../cor_files/missing.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 618,
+        "name": "Duplicate a invalid -n number",
+        "command": "./corewar -n inv ../cor_files/abel.cor -n inv ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 619,
+        "name": "Too many players (5)",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/bill.cor ../cor_files/tyron.cor ../cor_files/abel.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 620,
+        "name": "Unknown option",
+        "command": "./corewar -banana ../cor_files/abel.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 621,
+        "name": "Only -dump without argument",
+        "command": "./corewar -dump",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 622,
+        "name": "-dump with non-numeric value",
+        "command": "./corewar -dump potato ../cor_files/abel.cor",
+        "expected_return": 84,
+        "expected_output": null
+    }      
+]
