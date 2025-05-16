@@ -75,7 +75,8 @@ int vm_loop(virtual_machine_t *vm)
             reset_cycles(vm, &cycles);
         handle_instructions(vm, cycles);
         get_alive_champions(vm, cycles);
-        handle_dump(vm, &last_dump);
+        if (handle_dump(vm, &last_dump))
+            return 0;
         decrease_cycle_to_die(vm);
     }
     get_winner(vm);
