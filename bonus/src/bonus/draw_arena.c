@@ -23,7 +23,7 @@ void draw_champs(display_t *graphic, virtual_machine_t *vm)
     draw_pc(vm, graphic->cell, vm->display->text);
 }
 
-int draw_arena(virtual_machine_t *vm, display_t *graphic)
+int draw_arena(virtual_machine_t *vm, display_t *graphic, int cycles)
 {
     while (sfRenderWindow_pollEvent(graphic->window, &graphic->event)) {
             analyse_events(graphic, graphic->event);
@@ -33,7 +33,7 @@ int draw_arena(virtual_machine_t *vm, display_t *graphic)
         graphic->sim_clock.seconds = sfClock_restart(graphic->
             sim_clock.clock).microseconds / 1000000.0;
         draw_champs(graphic, vm);
-        draw_text(vm);
+        draw_text(vm, cycles);
     sfRenderWindow_display(graphic->window);
     return 0;
 }

@@ -83,7 +83,7 @@ int vm_loop(virtual_machine_t *vm)
             cycles++;
             vm->display->sim_timer = 0;
         }
-        draw_arena(vm, vm->display);
+        draw_arena(vm, vm->display, cycles);
     }
     if (sfRenderWindow_isOpen(vm->display->window))
         sfRenderWindow_close(vm->display->window);
