@@ -14,6 +14,20 @@ void free_instruction_params(instructions_params_t *params)
     free(params);
 }
 
+int coding_to_type(int value)
+{
+    switch (value) {
+        case 0b01:
+            return TYPE_REG;
+        case 0b10:
+            return TYPE_DIR;
+        case 0b11: 
+            return TYPE_IND;
+        default:
+            return 0;
+    }
+}
+
 int read_bytes(unsigned char *arena, int start, int size)
 {
     if (size == 2)
@@ -60,6 +74,8 @@ static void fill_types_and_values(virtual_machine_t *vm, champions_t *champ,
         size = get_params_size(params->types[i], &op);
         params->values[i] = read_bytes(vm->arena, champ->prog_counter
             + offset, size);
+        if (params->values[i] == 0 && params->champ->prog_id == 2)
+            printf("params: %d %d\n", params->types[i], size);
         offset += size;
     }
 }

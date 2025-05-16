@@ -9,7 +9,8 @@
     #define COREWAR_H
 
 // Instructions ids
-    #define LIVE_ID 0
+    #include <SFML/Graphics/Types.h>
+#define LIVE_ID 0
     #define LD_ID 1
     #define ST_ID 2
     #define ADD_ID 3
@@ -25,6 +26,11 @@
     #define LLDI_ID 13
     #define LFORK_ID 14
     #define AFF_ID 15
+
+// Graphic
+    #define CELL_SIZE 16
+    #define GRID_WIDTH 96
+    #define SIM_DELAY 0.05
 
     #define READ_FILE_ARG "r"
     #define DEFAULT_ADRESS -1
@@ -43,6 +49,18 @@
     #include <stdlib.h>
 
     #include "structs.h"
+
+// Bonus
+void draw_cell(int i, sfText *text,
+    virtual_machine_t *vm, sfRectangleShape *cell);
+void draw_text(virtual_machine_t *vm, int cycles);
+void draw_pc(virtual_machine_t *vm, sfRectangleShape *rect, sfText
+    *text);
+int draw_arena(virtual_machine_t *vm, display_t *graphic, int cycles);
+int init_display(virtual_machine_t *vm);
+void analyse_events(display_t *params, sfEvent event);
+void destroy_graphic(display_t *display);
+void set_dev_ids(virtual_machine_t *vm);
 
 // Instructions
 
@@ -75,6 +93,7 @@ bool valid_args(instructions_params_t *params);
 
 // VM
 
+int get_t(int value);
 int get_alive_champions(virtual_machine_t *vm, int cycles);
 int coding_to_type(int value);
 int decrease_cycle_to_die(virtual_machine_t *vm);
@@ -95,7 +114,7 @@ void free_virtual_machine(virtual_machine_t *virtual_machine);
 free_space_t find_largest_free_space(virtual_machine_t *vm);
 void place_all_processus(virtual_machine_t *virtual_machine);
 void place_champion(virtual_machine_t *virtual_machine,
-    champions_t *champion);
+    champions_t *champion, int id);
 bool is_cell_taken(champions_t *champ, int pos);
 bool compare_champ_cell(virtual_machine_t *vm, int pos);
 champions_t *get_champion_to_place(virtual_machine_t *vm);
@@ -111,7 +130,6 @@ int get_params_size(int params, op_t *op);
 bool is_valid_register(int reg);
 void put_int_in_arena(unsigned char *arena, int adrs, int value);
 int read_bytes(unsigned char *arena, int start, int size);
-int get_t(int value);
 
 // CHAMPIONS
 champions_t *get_champs_with_options(char **list);
