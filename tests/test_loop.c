@@ -19,7 +19,7 @@ static void redirect_all_std(void)
 
 Test(corewar, test_reset_cycles)
 {
-    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "tests/cor_files/abel.cor", NULL};
+    char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     int cycle;
     
@@ -34,7 +34,7 @@ Test(corewar, test_reset_cycles)
 
 Test(corewar, test_find_winner, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "tests/cor_files/abel.cor", NULL};
+    char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(3, av, vm);
@@ -45,7 +45,7 @@ Test(corewar, test_find_winner, .init = redirect_all_std)
 
 Test(corewar, test_find_winner2, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/cor_files/pdd.cor", "tests/cor_files/abel.cor", NULL};
+    char *av[] = {"./corewar", "tests/pdd.cor", "tests/abel.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(3, av, vm);
@@ -56,7 +56,7 @@ Test(corewar, test_find_winner2, .init = redirect_all_std)
 
 Test(corewar, test_find_winner_no_live_calls, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "56", "tests/cor_files/pdd.cor", "-n", "299", "tests/cor_files/abel.cor", NULL};
+    char *av[] = {"./corewar", "-n", "56", "tests/pdd.cor", "-n", "299", "tests/abel.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(7, av, vm);
@@ -66,7 +66,7 @@ Test(corewar, test_find_winner_no_live_calls, .init = redirect_all_std)
 
 Test(corewar, test_get_alive_champs, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/mine2.cor", NULL};
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(7, av, vm);
@@ -78,7 +78,7 @@ Test(corewar, test_get_alive_champs, .init = redirect_all_std)
 
 Test(corewar, test_find_living_champs, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/abel.cor", NULL};
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/abel.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     int cycles = 1;
     
@@ -90,7 +90,7 @@ Test(corewar, test_find_living_champs, .init = redirect_all_std)
 
 Test(corewar, test_find_living_champs2, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/mine2.cor", NULL};
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     int cycles = 1;
     
@@ -101,7 +101,7 @@ Test(corewar, test_find_living_champs2, .init = redirect_all_std)
 
 Test(corewar, test_handle_live, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/mine2.cor", NULL};
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     
     fill_vm(7, av, vm);
@@ -114,7 +114,7 @@ Test(corewar, test_handle_live, .init = redirect_all_std)
 
 Test(corewar, test_find_living_champs3, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/mine2.cor", NULL};
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     int cycles = 1;
     
@@ -127,7 +127,7 @@ Test(corewar, test_find_living_champs3, .init = redirect_all_std)
 
 Test(corewar, test_cooldown_verif_no_cooldown, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/mine2.cor", NULL};
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     int verif = 1;
     
@@ -138,7 +138,7 @@ Test(corewar, test_cooldown_verif_no_cooldown, .init = redirect_all_std)
 
 Test(corewar, test_cooldown_verif_with_cooldown, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "-n", "1", "tests/cor_files/mine.cor", "-n", "2", "tests/cor_files/mine2.cor", NULL};
+    char *av[] = {"./corewar", "-n", "1", "tests/mine.cor", "-n", "2", "tests/mine2.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
     int verif = 1;
     champions_t *champ;

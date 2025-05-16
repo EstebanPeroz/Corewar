@@ -15,7 +15,7 @@ static void redirect_all_std(void)
 
 Test(corewar, test_handle_zjmp_no_carry, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/cor_files/mine.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/mine.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
 
     fill_vm(5, av, vm);
@@ -38,7 +38,7 @@ Test(corewar, test_handle_zjmp_no_carry, .init = redirect_all_std)
 
 Test(corewar, test_handle_zjmp, .init = redirect_all_std)
 {
-    char *av[] = {"./corewar", "tests/cor_files/mine.cor", "-n", "3", "tests/cor_files/zjmper.cor", NULL};
+    char *av[] = {"./corewar", "tests/mine.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
 
     fill_vm(5, av, vm);
