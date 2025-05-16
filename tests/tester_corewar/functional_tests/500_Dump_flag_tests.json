@@ -1,0 +1,65 @@
+[
+    {
+        "id": 501,
+        "name": "Valid dump flag - 0 dump",
+        "command": "./corewar -dump 0 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 502,
+        "name": "Valid dump flag - 500 dump",
+        "command": "./corewar -dump 500 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 503,
+        "name": "Valid dump flag - 6000 dump",
+        "command": "./corewar -dump 6000 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 504,
+        "name": "Valid dump flag - max int + 1 dump",
+        "command": "./corewar -dump 2147483648 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 505,
+        "name": "Invalid dump flag - negative value",
+        "command": "./corewar -dump -4 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 506,
+        "name": "Invalid dump flag - not numeric value",
+        "command": "./corewar -dump not_a_number ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 506,
+        "name": "Invalid dump flag - no value",
+        "command": "./corewar -dump ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 507,
+        "name": "badly placed dump flag - middle of arguments",
+        "command": "./corewar ../cor_files/abel.cor -dump 0 ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 508,
+        "name": "badly placed dump flag - last argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor -dump 0",
+        "expected_return": 84,
+        "expected_output": null
+    }
+]

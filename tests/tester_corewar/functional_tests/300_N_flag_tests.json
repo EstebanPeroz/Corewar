@@ -1,0 +1,100 @@
+[
+    {
+        "id": 301,
+        "name": "-n flag - 1st argument",
+        "command": "./corewar -n 1 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 302,
+        "name": "-n flag - 2nd argument",
+        "command": "./corewar ../cor_files/abel.cor -n 1 ../cor_files/pdd.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 303,
+        "name": "-n flag - 3rd argument but last",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor -n 1",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 304,
+        "name": "-n flag - 4th argument but last",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor -n 1",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 305,
+        "name": "multiple -n flags but differents numbers",
+        "command": "./corewar -n 1 ../cor_files/abel.cor -n 2 ../cor_files/pdd.cor -n 3 ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 306,
+        "name": "multiple -n flags but same numbers",
+        "command": "./corewar -n 1 ../cor_files/abel.cor -n 1 ../cor_files/pdd.cor -n 1 ../cor_files/tyron.cor",
+        "expected_return": 0,
+        "expected_output": null
+    },
+    {
+        "id": 307,
+        "name": "-n without number - 1st argument",
+        "command": "./corewar -n ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 308,
+        "name": "-n without number - 2nd argument",
+        "command": "./corewar ../cor_files/abel.cor -n ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 309,
+        "name": "-n without number - 3rd argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor -n",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 310,
+        "name": "-n without number - 4th argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor -n",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 311,
+        "name": "-n with inalid number - 1st argument",
+        "command": "./corewar -n 1.5 ../cor_files/abel.cor ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 312,
+        "name": "-n with inalid number - 2nd argument",
+        "command": "./corewar ../cor_files/abel.cor -n 1.5 ../cor_files/pdd.cor",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 313,
+        "name": "-n with inalid number - 3rd argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor -n 1dzdez5",
+        "expected_return": 84,
+        "expected_output": null
+    },
+    {
+        "id": 314,
+        "name": "-n with inalid number - 4th argument",
+        "command": "./corewar ../cor_files/abel.cor ../cor_files/pdd.cor ../cor_files/tyron.cor -n not_valid_number",
+        "expected_return": 84,
+        "expected_output": null
+    }
+]

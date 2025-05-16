@@ -36,7 +36,6 @@ Test(corewar, test_handle_fork, .init = redirect_all_std)
     }
     handle_fork(&params);
     cr_assert_eq(vm->champion->carry, 0);
-    // Checking the forked champ
     cr_assert_eq(vm->champion->next->next->carry, 0);
 }
 
@@ -55,6 +54,5 @@ Test(corewar, test_handle_lfork, .init = redirect_all_std)
     }
     handle_lfork(&params);
     cr_assert_eq(vm->champion->carry, 0);
-    // Checking the forked champ
     cr_assert_eq(vm->champion->next->next->carry, 0);
 }
