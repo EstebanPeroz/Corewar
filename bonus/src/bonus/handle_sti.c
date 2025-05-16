@@ -19,7 +19,7 @@ static int verify_type_and_return(instructions_params_t *params, int idx)
         || params->types[idx] == T_IND) {
         return value;
     }
-    return 0;
+    return value;
 }
 
 int handle_sti(instructions_params_t *params)
@@ -40,7 +40,7 @@ int handle_sti(instructions_params_t *params)
     adresse_to_put =
         (params->champ->prog_counter + offset + MEM_SIZE) % MEM_SIZE;
     put_int_in_arena(params->vm->arena, adresse_to_put, final_value);
-    put_int_in_arena(params->vm->owner_map, adresse_to_put,
-        params->champ->dev_id);
+    for (int i = 0; i < 4; i++)
+        params->vm->owner_map[(adresse_to_put + i) % MEM_SIZE] = params->champ->dev_id;
     return 0;
 }

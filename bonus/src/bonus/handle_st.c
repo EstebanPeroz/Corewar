@@ -6,6 +6,7 @@
 */
 
 #include "corewar.h"
+#include "op.h"
 
 static void st_with_number(int dest, instructions_params_t *params, int value)
 {
@@ -13,7 +14,8 @@ static void st_with_number(int dest, instructions_params_t *params, int value)
     int addr = (params->champ->prog_counter + offset + MEM_SIZE) % MEM_SIZE;
 
     put_int_in_arena(params->vm->arena, addr, value);
-    put_int_in_arena(params->vm->owner_map, addr, params->champ->dev_id);
+    for (int i = 0; i < 4; i++)
+        params->vm->owner_map[(addr + i) % MEM_SIZE] = params->champ->dev_id;
 }
 
 int handle_st(instructions_params_t *params)
@@ -29,9 +31,7 @@ int handle_st(instructions_params_t *params)
         if (!is_valid_register(dest))
             return EXIT_FAILURE;
         params->champ->registers[dest - 1] = value;
-    } else if (params->types[1] == T_IND) {
-        st_with_number(dest, params, value);
     } else
-        return EXIT_FAILURE;
+        st_with_number(dest, params, value);
     return 0;
 }
