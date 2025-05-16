@@ -15,163 +15,237 @@
 
 const int ld_call = 10;
 
+void put_short_in_arena(unsigned char *arena, int adrs, short value)
+{
+    int offset = 0;
+
+    for (int i = 0; i < 2; i++) {
+        offset = (adrs + i) % MEM_SIZE;
+        if (offset < 0)
+            offset += MEM_SIZE;
+        arena[offset] = (value >> (8 * (1 - i))) & 0xFF;
+    }
+}
+
 Test(corewar, test_handle_ld_reset_carry)
 {
     char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    vm->champion->prog_counter += ld_call;
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = vm->arena[(vm->champion->prog_counter + 76 % IDX_MOD) % MEM_SIZE];
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    handle_ld(params);
-    cr_assert_eq(vm->champion->carry, 0);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    vm->arena[champ->prog_counter] = LD_ID + 1;
+    int ind_offset = 76 % IDX_MOD;
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = 0x42;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 2,
+        .types = {T_IND, T_REG},
+        .values = {76, 1}
+    };
+
+    cr_assert_eq(vm->arena[champ->prog_counter], LD_ID + 1);
+    handle_ld(&params);
+    cr_assert_eq(champ->registers[0], test_value);
+    cr_assert_eq(champ->carry, 0);
 }
 
-Test(corewar, test_handle_lld_reset_carry)
-{
+Test(corewar, test_handle_lld_reset_carry) {
     char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    vm->champion->prog_counter += ld_call;
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = vm->arena[(vm->champion->prog_counter + 76 % IDX_MOD) % MEM_SIZE];
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    handle_lld(params);
-    cr_assert_eq(vm->champion->carry, 0);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    vm->arena[champ->prog_counter] = LD_ID + 1;
+    int ind_offset = 76;
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = 0x42;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 2,
+        .types = {T_IND, T_REG},
+        .values = {76, 1}
+    };
+
+    cr_assert_eq(vm->arena[champ->prog_counter], LD_ID + 1);
+    handle_lld(&params);
+    cr_assert_eq(champ->registers[0], test_value);
+    cr_assert_eq(champ->carry, 0);
 }
 
-Test(corewar, test_handle_ld_set_carry_to_1)
-{
+Test(corewar, test_handle_ld_set_carry_to_1) {
     char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = 0;
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    handle_ld(params);
-    fflush(NULL);
-    cr_assert_eq(vm->champion->carry, 1);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    vm->arena[champ->prog_counter] = LD_ID + 1;
+    int ind_offset = 76 % IDX_MOD;
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = 0;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 2,
+        .types = {T_IND, T_REG},
+        .values = {76, 1}
+    };
+
+    cr_assert_eq(vm->arena[champ->prog_counter], LD_ID + 1);
+    handle_ld(&params);
+    cr_assert_eq(champ->registers[0], test_value);
+    cr_assert_eq(champ->carry, 1);
 }
 
-Test(corewar, test_handle_lld_set_carry_to_1)
-{
+Test(corewar, test_handle_lld_set_carry_to_1) {
     char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = 0;
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    handle_lld(params);
-    fflush(NULL);
-    cr_assert_eq(vm->champion->carry, 1);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    vm->arena[champ->prog_counter] = LD_ID + 1;
+    int ind_offset = 76;
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = 0;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 2,
+        .types = {T_IND, T_REG},
+        .values = {76, 1}
+    };
+
+    cr_assert_eq(vm->arena[champ->prog_counter], LD_ID + 1);
+    handle_lld(&params);
+    cr_assert_eq(champ->registers[0], test_value);
+    cr_assert_eq(champ->carry, 1);
 }
 
-Test(corewar, test_handle_ldi_set_carry_to_1)
-{
+Test(corewar, test_handle_ldi_set_carry_to_1) {
     char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    vm->champion->prog_counter += ld_call;
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = read_bytes(vm->arena, (vm->champion->prog_counter + 76 % IDX_MOD) % MEM_SIZE, IND_SIZE) - 1799;
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    params->values[2] = params->values[1];
-    params->values[1] = -1799;
-    handle_ldi(params);
-    cr_assert_eq(vm->champion->carry, 1);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    int ind_offset = (76) % IDX_MOD;
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = 4;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 3,
+        .types = {T_IND, T_DIR, T_REG},
+        .values = {76, 50, 2}
+    };
+
+    handle_ldi(&params);
+    cr_assert_eq(champ->registers[1], test_value + 50);
+    cr_assert_eq(champ->carry, 0);
 }
 
-Test(corewar, test_handle_ldi)
-{
+Test(corewar, test_handle_ldi) {
     char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = 0 - 5;
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    params->values[2] = params->values[1];
-    params->values[1] = -5;
-    handle_ldi(params);
-    fflush(NULL);
-    cr_assert_eq(vm->champion->carry, 0);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    vm->arena[champ->prog_counter] = LD_ID + 1;
+    int ind_offset = (-5 + -5) % IDX_MOD;
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = -10;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 3,
+        .types = {T_DIR, T_DIR, T_REG},
+        .values = {-5, -5, 1}
+    };
+
+    cr_assert_eq(vm->arena[champ->prog_counter], LD_ID + 1);
+    handle_ldi(&params);
+    cr_assert_eq(champ->registers[0], test_value);
+    cr_assert_eq(champ->carry, 0);
 }
 
-
-Test(corewar, test_handle_lldi)
-{
+Test(corewar, test_handle_lldi) {
     char *av[] = {"./corewar", "tests/ld_carry.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = 0 - 5;
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    params->values[2] = params->values[1];
-    params->values[1] = -5;
-    handle_lldi(params);
-    fflush(NULL);
-    cr_assert_eq(vm->champion->carry, 0);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    vm->arena[champ->prog_counter] = LD_ID + 1;
+    int ind_offset = (-5 + -5);
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = -10;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 3,
+        .types = {T_DIR, T_DIR, T_REG},
+        .values = {-5, -5, 1}
+    };
+
+    cr_assert_eq(vm->arena[champ->prog_counter], LD_ID + 1);
+    handle_lldi(&params);
+    cr_assert_eq(champ->registers[0], test_value);
+    cr_assert_eq(champ->carry, 0);
 }
 
-Test(corewar, test_handle_lldi_set_carry_to_1)
-{
+Test(corewar, test_handle_lldi_set_carry_to_1) {
     char *av[] = {"./corewar", "tests/pdd.cor", "-n", "3", "tests/zjmper.cor", NULL};
     virtual_machine_t *vm = init_virtual_machine(0, 0);
-    
     fill_vm(5, av, vm);
-    vm->champion->prog_counter += ld_call;
-    instructions_params_t *params = init_instruction_params(vm, 1, vm->champion, LD_ID + 1);
-    int expected_loaded_value = read_bytes(vm->arena, (vm->champion->prog_counter + 76 % IDX_MOD) % MEM_SIZE, IND_SIZE) - 1799;
-    if (vm->arena[vm->champion->prog_counter] != LD_ID + 1) {
-        printf("Current instruction: %i\n", vm->arena[vm->champion->prog_counter]);
-        fflush(NULL);
-        cr_assert_fail("Wrong instruction\n");
-    }
-    params->values[2] = params->values[1];
-    params->values[1] = -1799;
-    handle_lldi(params);
-    cr_assert_eq(vm->champion->carry, 1);
-    cr_assert_eq(vm->champion->registers[0], expected_loaded_value);
+    champions_t *champ = vm->champion;
+
+    champ->prog_counter = 100;
+    vm->arena[champ->prog_counter] = LD_ID + 1;
+    int ind_offset = (76 + 0);
+    int addr = (champ->prog_counter + ind_offset) % MEM_SIZE;
+    int test_value = 0;
+    put_short_in_arena(vm->arena, addr, test_value);
+    instructions_params_t params = {
+        .vm = vm,
+        .cycles = 1,
+        .champ = champ,
+        .instruction = LD_ID + 1,
+        .nb_params = 3,
+        .types = {T_IND, T_REG, T_REG},
+        .values = {76, 1, 1}
+    };
+
+    cr_assert_eq(vm->arena[champ->prog_counter], LD_ID + 1);
+    handle_lldi(&params);
+    cr_assert_eq(champ->registers[0], test_value + 1);
+    cr_assert_eq(champ->carry, 0);
 }
