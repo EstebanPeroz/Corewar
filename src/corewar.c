@@ -9,7 +9,7 @@
 
 int start_corewar(int ac, char **av)
 {
-    virtual_machine_t *vm = init_virtual_machine(0, 0);
+    virtual_machine_t *vm = NULL;
 
     if (ac == 2 && my_strcmp(av[1], "-h") == 0)
         return help();
@@ -20,8 +20,10 @@ int start_corewar(int ac, char **av)
         free_virtual_machine(vm);
         return 84;
     }
-    if (vm->champion == NULL || vm->champion->next == NULL)
+    if (vm->champion == NULL || vm->champion->next == NULL) {
+        free_virtual_machine(vm);
         return 84;
+    }
     update_champs_cycle_to_wait(vm);
     vm_loop(vm);
     free_virtual_machine(vm);

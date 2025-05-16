@@ -29,12 +29,12 @@ int handle_live(instructions_params_t *params)
     champions_t *cur = params->vm->champion;
     int champ_id;
 
-    champ_id = bytes_to_int(params->vm->arena,
-        params->champ->prog_counter + 1);
+    champ_id = read_bytes(params->vm->arena,
+        params->champ->prog_counter + 1, DIR_SIZE);
     if (champ_id == -1)
         return -1;
     while (cur != NULL) {
-        if (champ_id == cur->prog_id) {
+        if (champ_id == cur->prog_id && cur->is_alive) {
             print_live_and_win_message(cur);
             my_putstr("is alive.\n");
             change_variables(cur, params->vm,
