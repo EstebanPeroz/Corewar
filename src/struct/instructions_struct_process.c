@@ -7,6 +7,8 @@
 
 #include "corewar.h"
 
+#include <string.h>
+
 void free_instruction_params(instructions_params_t *params)
 {
     free(params);
@@ -23,6 +25,20 @@ int read_bytes(unsigned char *arena, int start, int size)
     return 0;
 }
 
+int get_t(int value)
+{
+    switch (value) {
+        case 0b01:
+            return TYPE_REG;
+        case 0b10:
+            return TYPE_DIR;
+        case 0b11:
+            return TYPE_IND;
+        default:
+            return 0;
+    }
+}
+
 static void fill_types_and_values(virtual_machine_t *vm, champions_t *champ,
     int opcode, instructions_params_t *params)
 {
@@ -31,8 +47,8 @@ static void fill_types_and_values(virtual_machine_t *vm, champions_t *champ,
     int offset = 1;
     int size = DEFAULT_SIZE;
 
-    if (op.nbr_args > 0 && op.code != LIVE_ID && op.code != ZJMP_ID
-        && op.code != FORK_ID && op.code != LFORK_ID) {
+    if (op.nbr_args > 0 && op.code != LIVE_ID + 1 && op.code != ZJMP_ID + 1
+        && op.code != FORK_ID + 1 && op.code != LFORK_ID + 1) {
         coding = get_coding_byte(vm, champ->prog_counter);
         offset++;
     } else
@@ -40,7 +56,7 @@ static void fill_types_and_values(virtual_machine_t *vm, champions_t *champ,
             params->types[i] = op.type[i];
     for (int i = 0; i < op.nbr_args; i++) {
         if (coding)
-            params->types[i] = (coding >> (6 - 2 * i)) & MAX_BIN_BYTES;
+            params->types[i] = get_t((coding >> (6 - 2 * i)) & MAX_BIN_BYTES);
         size = get_params_size(params->types[i], &op);
         params->values[i] = read_bytes(vm->arena, champ->prog_counter
             + offset, size);

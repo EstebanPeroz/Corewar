@@ -39,7 +39,7 @@ int update_prog_counter(virtual_machine_t *vm,
         || op->code == LFORK_ID + 1)
         return new_offset + IND_SIZE;
     for (int i = 0; i < op->nbr_args; i++) {
-        params_type = (coding >> (6 - 2 * i)) & MAX_BIN_BYTES;
+        params_type = get_t(coding >> (6 - 2 * i) & MAX_BIN_BYTES);
         new_offset += get_params_size(params_type, op);
     }
     return new_offset;

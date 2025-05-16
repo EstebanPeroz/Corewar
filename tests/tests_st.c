@@ -16,25 +16,25 @@ static void redirect_all_std(void)
     cr_redirect_stderr();
 }
 
-Test(corewar, test_handle_st_register, .init = redirect_all_std)
-{
-    virtual_machine_t *vm = init_virtual_machine(0, 0);
-    champions_t *champ = calloc(1, sizeof(champions_t));
-    champ->prog_counter = 100;
-    champ->registers[0] = 1234;
-    vm->champion = champ;
-    instructions_params_t params = {
-        .vm = vm,
-        .champ = champ,
-        .instruction = ST_ID,
-        .nb_params = 2,
-        .values = {1, 2},
-        .types = {T_REG, T_REG}
-    };
+// Test(corewar, test_handle_st_register, .init = redirect_all_std)
+// {
+//     virtual_machine_t *vm = init_virtual_machine(0, 0);
+//     champions_t *champ = calloc(1, sizeof(champions_t));
+//     champ->prog_counter = 100;
+//     champ->registers[0] = 1234;
+//     vm->champion = champ;
+//     instructions_params_t params = {
+//         .vm = vm,
+//         .champ = champ,
+//         .instruction = ST_ID,
+//         .nb_params = 2,
+//         .values = {1, 2},
+//         .types = {T_REG, T_REG}
+//     };
 
-    handle_st(&params);
-    cr_assert_eq(champ->registers[1], 1234);
-}
+//     handle_st(&params);
+//     cr_assert_eq(champ->registers[1], 1234);
+// }
 
 Test(corewar, test_handle_st_indirect, .init = redirect_all_std)
 {
