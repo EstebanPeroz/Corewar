@@ -9,6 +9,7 @@
 #include <SFML/Graphics/Color.h>
 #include <SFML/Graphics/RenderWindow.h>
 #include <SFML/Graphics/Text.h>
+#include <SFML/Graphics/Types.h>
 #include <SFML/System/Sleep.h>
 #include <SFML/System/Time.h>
 #include "corewar.h"
@@ -24,41 +25,6 @@ static sfText *init_text(sfFont *font)
     return text;
 }
 
-static sfColor set_color(unsigned char *owner_map, int i)
-{
-    sfColor color = sfColor_fromRGB(50, 50, 50);
-
-    if (owner_map[i] == 1)
-        color = sfColor_fromRGB(150, 0, 0);
-    if (owner_map[i] == 2)
-        color = sfColor_fromRGB(0, 132, 0);
-    if (owner_map[i] == 3)
-        color = sfBlue;
-    if (owner_map[i] == 4)
-        color = sfColor_fromRGB(117, 0, 135);
-    return color;
-}
-
-void draw_cell(int i, sfText *text,
-    virtual_machine_t *vm, sfRectangleShape *cell)
-{
-    int x = (i % GRID_WIDTH) * CELL_SIZE;
-    int y = (i / GRID_WIDTH) * CELL_SIZE;
-    sfColor color;
-    char hex_str[4];
-    sfVector2f pos = {x, y};
-    sfVector2f text_pos = {x + 2, y - 1};
-
-    sfRectangleShape_setPosition(cell, pos);
-    color = set_color(vm->owner_map, i);
-    sfRectangleShape_setFillColor(cell, color);
-    sfRenderWindow_drawRectangleShape(vm->display->window, cell, NULL);
-    snprintf(hex_str, sizeof(hex_str), "%02X", vm->arena[i]);
-    sfText_setString(text, hex_str);
-    sfText_setPosition(text, text_pos);
-    sfRenderWindow_drawText(vm->display->window, text, NULL);
-}
-
 void draw_champs(display_t *graphic, virtual_machine_t *vm)
 {
     sfRectangleShape *cell = sfRectangleShape_create();
@@ -69,6 +35,7 @@ void draw_champs(display_t *graphic, virtual_machine_t *vm)
     for (int i = 0; i < MEM_SIZE; i++) {
         draw_cell(i, text, vm, cell);
     }
+    draw_pc(vm, cell, text);
     sfText_destroy(text);
     sfRectangleShape_destroy(cell);
 }

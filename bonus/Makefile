@@ -54,6 +54,7 @@ SRC 		= 	../src/main.c									\
 				src/bonus/draw_arena.c 							\
 				src/bonus/analyse_events.c 						\
 				src/bonus/init_display.c 						\
+				src/bonus/draw_cells.c 							\
 
 OBJ 		= 	$(SRC:.c=.o)
 

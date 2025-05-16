@@ -9,7 +9,8 @@
     #define COREWAR_H
 
 // Instructions ids
-    #define LIVE_ID 0
+    #include <SFML/Graphics/Types.h>
+#define LIVE_ID 0
     #define LD_ID 1
     #define ST_ID 2
     #define ADD_ID 3
@@ -50,6 +51,10 @@
     #include "structs.h"
 
 // Bonus
+void draw_cell(int i, sfText *text,
+    virtual_machine_t *vm, sfRectangleShape *cell);
+void draw_pc(virtual_machine_t *vm, sfRectangleShape *rect, sfText
+    *text);
 int draw_arena(virtual_machine_t *vm, display_t *graphic);
 int init_display(virtual_machine_t *vm);
 void analyse_events(display_t *params, sfEvent event);
