@@ -34,3 +34,14 @@ format:
 
 lint:
 	cargo clippy -- -D warnings
+
+showtest:
+	@echo "Usage: make showtest ID=504"
+
+TEST_ID = $(subst showtest-,,$@)
+
+showtest-%:
+	@awk 'BEGIN {bold = "\033[1m"; reset = "\033[0m"} \
+	     /=+Test ID $(TEST_ID)=+/ {flag=1; print bold $$0 reset; next} \
+	     /=+Test ID/ {flag=0} \
+	     flag' errors.txt | head -n -2
